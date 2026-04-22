@@ -152,17 +152,88 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
 @media (max-width: 991px) { .navbar .logo-brand img { max-height: 72px; } }
 @media (max-width: 479px) { .navbar .logo-brand img { max-height: 58px; } }
 
-/* Footer newsletter form — dark footer bg requires high-contrast field.
-   The Webflow base renders a white input but strips the border at body scope. */
+/* ==========================================================================
+   FOOTER — premium dark-mode treatment
+   ========================================================================== */
+.footer {
+  background: linear-gradient(180deg, var(--gw-navy-2) 0%, var(--gw-navy) 60%);
+  position: relative;
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.45), transparent);
+}
+
+/* --- Footer column headers --- */
+.footer .paragraph.bold-white {
+  color: var(--gw-gold) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  margin-bottom: 18px !important;
+  position: relative;
+  padding-bottom: 10px;
+}
+.footer .paragraph.bold-white::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 28px; height: 2px;
+  background: var(--gw-gold);
+  opacity: 0.7;
+}
+
+/* --- Footer logo — light variant, full size, with subtle gold glow --- */
+.company-description img {
+  height: auto;
+  max-height: 140px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 18px rgba(201, 169, 97, 0.18));
+}
+
+/* --- Head Office / P.O. Box block --- */
+.company-description .paragraph {
+  color: #d5d9e2;
+  line-height: 1.7;
+  font-size: 14px;
+}
+.company-description .paragraph strong {
+  color: var(--gw-ivory);
+  font-weight: 700;
+}
+
+/* --- Newsletter / Request Catalogue form — refined pill --- */
+.footer-newsletter > label,
+.footer-newsletter .paragraph {
+  display: block;
+  color: #bfc2cc !important;
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
 .footer .newsletter-form-field {
   display: flex;
   align-items: stretch;
-  gap: 8px;
-  background: #fff;
-  padding: 4px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  gap: 0;
+  background: rgba(250, 246, 236, 0.06);
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  padding: 5px;
+  border-radius: 999px;
   max-width: 320px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  transition: border-color 0.2s var(--gw-ease), background 0.2s var(--gw-ease);
+}
+.footer .newsletter-form-field:focus-within {
+  border-color: var(--gw-gold);
+  background: rgba(250, 246, 236, 0.10);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.18);
 }
 .footer .newsletter-field.w-input,
 .footer .newsletter-field {
@@ -170,42 +241,77 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   min-width: 0;
   border: none !important;
   background: transparent !important;
-  padding: 10px 12px;
+  padding: 8px 14px !important;
   font-size: 14px;
-  color: var(--gw-navy) !important;
+  color: var(--gw-ivory) !important;
   font-family: inherit;
-  border-radius: 6px;
   outline: none;
+  box-shadow: none !important;
+  height: auto !important;
 }
-.footer .newsletter-field::placeholder { color: var(--gw-muted); opacity: 0.8; }
+.footer .newsletter-field::placeholder { color: #8a93a6; opacity: 1; font-size: 13px; }
 .footer .newsletter-button.w-button,
 .footer .newsletter-button {
   flex-shrink: 0;
   background: var(--gw-gold) !important;
   color: var(--gw-navy) !important;
   border: none !important;
-  padding: 0 18px !important;
-  border-radius: 7px;
+  padding: 0 20px !important;
+  border-radius: 999px !important;
   font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s var(--gw-ease), transform 0.1s var(--gw-ease);
-  min-width: 72px;
+  transition: background 0.25s var(--gw-ease), transform 0.1s var(--gw-ease), box-shadow 0.2s var(--gw-ease);
+  min-width: 86px;
+  height: 36px !important;
+  line-height: 36px !important;
 }
-.footer .newsletter-button:hover { background: #d5b777 !important; transform: translateY(-1px); }
+.footer .newsletter-button:hover {
+  background: #d5b777 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(201, 169, 97, 0.35);
+}
 
-/* Footer logo — uses the dark-mode variant (ivory wordmark + gold teardrop),
-   swapped in at runtime by the image hygiene module. Sits directly on the
-   navy footer with no plate. */
-.company-description img {
-  height: auto;
-  max-height: 120px;
-  width: auto;
-  object-fit: contain;
-  margin-bottom: 16px;
+/* --- Quick links list --- */
+.menu-quick-links .footer-link {
+  display: block;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #d5d9e2;
+  transition: color 0.2s var(--gw-ease), padding-left 0.2s var(--gw-ease);
+  position: relative;
+  text-decoration: none;
 }
+.menu-quick-links .footer-link:hover {
+  color: var(--gw-gold);
+  padding-left: 6px;
+}
+.menu-quick-links .footer-link::before {
+  content: "→";
+  position: absolute;
+  left: -16px;
+  opacity: 0;
+  transition: opacity 0.2s var(--gw-ease);
+  color: var(--gw-gold);
+}
+.menu-quick-links .footer-link:hover::before { opacity: 1; }
+
+/* --- Contact block polish --- */
+.footer-contact .contact-footer {
+  color: #d5d9e2;
+  font-size: 14px;
+  padding: 6px 0;
+  transition: color 0.2s var(--gw-ease);
+}
+.footer-contact .contact-footer a { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(201, 169, 97, 0.35); }
+.footer-contact .contact-footer a:hover { color: var(--gw-gold); border-bottom-color: var(--gw-gold); }
+.footer-contact .contact-footer svg path { fill: var(--gw-gold) !important; opacity: 0.85; }
+
+/* --- Social icons --- */
+.footer-socmed { display: flex; gap: 10px; }
+.socmed-link svg path { fill: var(--gw-gold) !important; }
 
 /* Hero / benefit placeholders that carry the logo centerpiece —
    treat the whole container as a framed brand mark, not a photo placeholder */

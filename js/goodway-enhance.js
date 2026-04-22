@@ -21,7 +21,7 @@
      after replacing any file under /images/ or /assets/images/ to force
      a one-shot refresh. Applies to <img src>, <img data-src>, and
      <source srcset> within <picture>. */
-  var IMG_VER  = '2026-04-22-official-logo';
+  var IMG_VER  = '2026-04-22-footer-polish';
   var IMG_BASE = window.GW_IMG_BASE || null;   // null means "use existing path as-is"
   window.GW_IMG_VER = IMG_VER;
 
