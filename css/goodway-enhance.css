@@ -1757,6 +1757,99 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 .faq-card { cursor: pointer; transition: background 0.2s var(--gw-ease); }
 .faq-card[aria-expanded="true"] .icon-faq .line-vertical { transform: rotate(90deg); opacity: 0; }
 .faq-card .icon-faq .line-vertical { transition: transform 0.25s var(--gw-ease), opacity 0.25s var(--gw-ease); }
+
+/* ==========================================================================
+   FAQ — native <details>/<summary> accordion styling.
+   Uses the same .faq-card / .faq-text visual language but driven by the
+   element's native open/close state (no ARIA polyfill needed).
+   ========================================================================== */
+.gw-faq .faq-card {
+  list-style: none;
+  padding: 0;
+  background: #fff;
+  border: 1px solid var(--gw-border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.25s var(--gw-ease), box-shadow 0.25s var(--gw-ease);
+}
+.gw-faq .faq-card:hover,
+.gw-faq .faq-card[open] { border-color: rgba(201, 169, 97, 0.55); }
+.gw-faq .faq-card[open] { box-shadow: 0 12px 28px rgba(14, 26, 43, 0.08); }
+.gw-faq .faq-card summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background 0.2s var(--gw-ease);
+}
+.gw-faq .faq-card summary::-webkit-details-marker,
+.gw-faq .faq-card summary::marker { display: none; content: ""; }
+.gw-faq .faq-card summary:hover { background: var(--gw-linen); }
+.gw-faq .faq-card summary:focus-visible {
+  outline: 2px solid var(--gw-gold);
+  outline-offset: -2px;
+}
+.gw-faq .faq-card .h6-default {
+  margin: 0;
+  color: var(--gw-navy) !important;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.35;
+  flex: 1;
+}
+.gw-faq .faq-card .icon-faq {
+  width: 32px; height: 32px;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(201, 169, 97, 0.12);
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  display: grid;
+  place-items: center;
+  transition: background 0.25s var(--gw-ease), transform 0.3s var(--gw-ease);
+}
+.gw-faq .faq-card[open] .icon-faq {
+  background: var(--gw-gold);
+  transform: rotate(135deg);
+}
+.gw-faq .faq-card .line-horizontal,
+.gw-faq .faq-card .line-vertical {
+  position: absolute;
+  background: var(--gw-gold-ink);
+  transition: background 0.25s var(--gw-ease);
+}
+.gw-faq .faq-card[open] .line-horizontal,
+.gw-faq .faq-card[open] .line-vertical { background: var(--gw-navy); }
+.gw-faq .faq-card .line-horizontal { width: 12px; height: 2px; }
+.gw-faq .faq-card .line-vertical   { width: 2px; height: 12px; }
+/* Keep the + → × animation symmetric — override the old aria-expanded rule */
+.gw-faq .faq-card[open] .line-vertical { transform: none; opacity: 1; }
+.gw-faq .faq-card .faq-answer {
+  padding: 0 24px 22px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--gw-text);
+  margin: 0;
+  max-width: 760px;
+  animation: gw-faq-fade 0.3s var(--gw-ease);
+}
+.gw-faq .faq-card .faq-answer a { color: var(--gw-gold-ink); text-decoration: underline; }
+.gw-faq .faq-card .faq-answer a:hover { color: var(--gw-navy); }
+.gw-faq .faq-card .faq-answer strong { color: var(--gw-navy); font-weight: 700; }
+@keyframes gw-faq-fade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gw-faq .faq-card .faq-answer,
+  .gw-faq .faq-card .icon-faq { animation: none !important; transition: none !important; transform: none !important; }
+}
 .faq-card .faq-body {
   max-height: 0;
   overflow: hidden;

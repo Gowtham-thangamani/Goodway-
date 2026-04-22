@@ -520,60 +520,40 @@
           <div class="paragraph bold-lime-green">// FAQ</div>
           <h3 class="h3-default dark-grey">Frequently Asked Questions</h3>
         </div>
-        <!-- Framer FAQ component mount — falls back to the static list below if JS fails -->
-        <div id="gw-framer-faq" class="gw-framer-mount gw-framer-mount--faq" role="region" aria-label="Frequently Asked Questions">
-          <noscript>
-            <p>Enable JavaScript to view the interactive FAQ, or read the plain-text answers below.</p>
-          </noscript>
-        </div>
-        <div class="faq-content gw-faq-fallback" hidden>
-          <div class="faq-card">
-            <div class="faq-text">
+        <!-- FAQ accordion — vanilla, zero-dep, WCAG-compliant. The JS
+             accordion toggles `aria-expanded` on each card on click/tap/
+             keyboard Enter. Schema injector in goodway-enhance.js reads
+             the Q&A text from these .faq-card nodes for FAQPage JSON-LD. -->
+        <div class="faq-content gw-faq">
+          <details class="faq-card">
+            <summary class="faq-text">
               <div class="h6-default bold-lime-green">Where is Goodway based?</div>
-              <div class="paragraph">We are an Abu Dhabi&ndash;based national establishment. Our postal address is P.O. Box 10422, Abu Dhabi, UAE.</div>
-            </div>
-            <div class="icon-faq"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
-          </div>
-          <div class="faq-card">
-            <div class="faq-text">
+              <div class="icon-faq" aria-hidden="true"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
+            </summary>
+            <div class="paragraph faq-answer">We are an Abu Dhabi&ndash;based national establishment. Our postal address is P.O. Box 10422, Abu Dhabi, UAE.</div>
+          </details>
+          <details class="faq-card">
+            <summary class="faq-text">
               <div class="h6-default bold-lime-green">Are you VAT-registered?</div>
-              <div class="paragraph">Yes. Our Tax Registration Number is <strong>100464283900003</strong>, effective from 01 February 2018.</div>
-            </div>
-            <div class="icon-faq"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
-          </div>
-          <div class="faq-card">
-            <div class="faq-text">
+              <div class="icon-faq" aria-hidden="true"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
+            </summary>
+            <div class="paragraph faq-answer">Yes. Our Tax Registration Number is <strong>100464283900003</strong>, effective from 01 February 2018.</div>
+          </details>
+          <details class="faq-card">
+            <summary class="faq-text">
               <div class="h6-default bold-lime-green">Which industries do you serve?</div>
-              <div class="paragraph">Oil &amp; gas, petrochemical, power, water, construction, manufacturing and government procurement across the UAE.</div>
-            </div>
-            <div class="icon-faq"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
-          </div>
-          <div class="faq-card">
-            <div class="faq-text">
+              <div class="icon-faq" aria-hidden="true"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
+            </summary>
+            <div class="paragraph faq-answer">Oil &amp; gas, petrochemical, power, water, construction, manufacturing and government procurement across the UAE.</div>
+          </details>
+          <details class="faq-card">
+            <summary class="faq-text">
               <div class="h6-default bold-lime-green">How do I request a quote?</div>
-              <div class="paragraph">Use our <a href="request-a-quote.html">Request a Quote</a> form, email <strong>gwayuae@outlook.com</strong>, or call <strong>+971 2 245 0497</strong> (office) / <strong>+971 56 442 3539</strong> (mobile).</div>
-            </div>
-            <div class="icon-faq"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
-          </div>
+              <div class="icon-faq" aria-hidden="true"><div class="line-horizontal"></div><div class="line-vertical"></div></div>
+            </summary>
+            <div class="paragraph faq-answer">Use our <a href="request-a-quote.html">Request a Quote</a> form, email <strong>gwayuae@outlook.com</strong>, or call <strong>+971 2 245 0497</strong> (office) / <strong>+971 56 442 3539</strong> (mobile).</div>
+          </details>
         </div>
-
-        <!-- Framer FAQ mount script — ES module, loads after page paint -->
-        <script type="module">
-          try {
-            const [FAQModule, React, ReactDOM] = await Promise.all([
-              import('https://framer.com/m/FAQ-vCoC.js@cfOy7dW5O34bPIU4H0Vn'),
-              import('https://esm.sh/react@18'),
-              import('https://esm.sh/react-dom@18/client')
-            ]);
-            const FAQ = FAQModule.default || FAQModule;
-            const root = ReactDOM.createRoot(document.getElementById('gw-framer-faq'));
-            root.render(React.createElement(FAQ));
-          } catch (e) {
-            console.warn('Framer FAQ failed to load — showing fallback', e);
-            document.querySelector('.gw-faq-fallback')?.removeAttribute('hidden');
-            document.getElementById('gw-framer-faq')?.setAttribute('hidden', '');
-          }
-        </script>
       </div>
     </div>
   </section>

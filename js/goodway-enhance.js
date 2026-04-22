@@ -1195,7 +1195,7 @@
       var qs = [];
       faqCards.forEach(function (card) {
         var q = card.querySelector('.h6-default, h3, h4');
-        var a = card.querySelector('.faq-body .paragraph, .faq-text .paragraph');
+        var a = card.querySelector('.faq-answer, .faq-body .paragraph, .faq-text .paragraph');
         if (q && a) {
           qs.push({
             '@type': 'Question', name: q.textContent.trim(),
