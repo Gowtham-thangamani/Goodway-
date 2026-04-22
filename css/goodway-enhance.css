@@ -3545,6 +3545,83 @@ h1.h2-default {
   font-weight: 600;
 }
 .gw-article-cta__back:hover { color: var(--gw-navy); }
+
+/* ==========================================================================
+   Testimonial quote card — replaces the empty avatar placeholder in the
+   homepage "Client Voices" slider with a proper branded visual tile.
+   Overrides the Webflow base .testimonial-img (654×418 fixed) with a
+   balanced 1:1 card that carries a large gold quote mark + sector tag.
+   ========================================================================== */
+.testimonial-img.gw-quote-card {
+  width: clamp(220px, 32%, 340px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(201, 169, 97, 0.14), transparent 60%),
+    linear-gradient(135deg, var(--gw-linen) 0%, var(--gw-linen-2) 100%);
+  border: 1px solid rgba(201, 169, 97, 0.28);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: clamp(20px, 3vw, 32px);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 12px 30px rgba(14, 26, 43, 0.06);
+}
+.testimonial-img.gw-quote-card::before {
+  content: "";
+  position: absolute;
+  inset: auto -14px -14px auto;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(201, 169, 97, 0.22), transparent 70%);
+  pointer-events: none;
+}
+.gw-quote-card__mark {
+  width: clamp(44px, 6vw, 64px);
+  height: clamp(44px, 6vw, 64px);
+  color: var(--gw-gold);
+  opacity: 0.85;
+  flex-shrink: 0;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 12px rgba(201, 169, 97, 0.22));
+}
+.gw-quote-card__eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gw-gold-ink);
+  font-weight: 700;
+  margin-top: auto;
+}
+.gw-quote-card__sector {
+  font-family: var(--gw-display);
+  font-size: clamp(16px, 1.6vw, 20px);
+  font-weight: 500;
+  color: var(--gw-navy);
+  letter-spacing: -0.01em;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+.testimonial-img.gw-quote-card--alt {
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(201, 169, 97, 0.18), transparent 60%),
+    linear-gradient(135deg, var(--gw-ivory) 0%, var(--gw-linen) 100%);
+}
+
+/* Stack the card above the text on narrow viewports so neither gets crushed */
+@media (max-width: 860px) {
+  .testimonial-card { flex-direction: column; }
+  .testimonial-img.gw-quote-card {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 16 / 9;
+    margin-bottom: 4px;
+  }
+}
 .gw-journal-item__date {
   font-family: ui-monospace, monospace;
   font-size: 11px; color: var(--gw-gold-ink);
