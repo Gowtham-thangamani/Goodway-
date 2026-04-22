@@ -43,7 +43,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-.paragraph { color: var(--gw-text); }
+.paragraph { color: var(--gw-text); line-height: 1.65; }
+/* Smaller text — footer copy, form hints, metadata — consistent readability */
+.gw-form-note, .paragraph.regular-gainsboro, .paragraph.regular-light-grey { line-height: 1.6; }
 .paragraph.regular-light-grey { color: #d9dbe2 !important; } /* lifted from muted grey */
 .paragraph.regular-gainsboro  { color: #e6e7ec !important; }
 
