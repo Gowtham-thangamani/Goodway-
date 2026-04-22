@@ -681,6 +681,52 @@ summary:focus-visible,
 .service-card svg { color: var(--gw-gold-ink); transition: color 0.3s var(--gw-ease); }
 .service-card:hover svg { color: var(--gw-gold); }
 
+/* ------------------------------------------------------------------
+   Image-led service cards — replaces the small SVG icon with a
+   full-bleed illustrated division header image (480×320). The image
+   sits above the text block, bleeds edge-to-edge at the top, and
+   scales slightly on card hover to add depth.
+   Drop-in upgrade: if the client supplies a real photograph at
+   assets/images/sections/divisions/<slug>/card-hero.png the same
+   markup renders it cleanly.
+   ------------------------------------------------------------------ */
+.service-card--image {
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  height: 100%;
+}
+.service-card__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.5s var(--gw-ease), filter 0.3s var(--gw-ease);
+  background: var(--gw-navy);
+}
+.service-card--image:hover .service-card__image {
+  transform: scale(1.04);
+}
+.service-card--image .service-text {
+  padding: 20px 22px 6px;
+  flex: 1;
+}
+.service-card--image .text-block-5,
+.service-card--image .text-block-6,
+.service-card--image .text-block-7,
+.service-card--image .text-block-8,
+.service-card--image .text-block-9,
+.service-card--image .text-block-10,
+.service-card--image .text-block-11,
+.service-card--image .text-block-12,
+.service-card--image .text-block-13 {
+  padding: 0 22px 20px;
+}
+
 /* Benefit icon on navy — the circle stays gold (sand), but the
    icon itself renders in deep navy so it actually contrasts against
    the gold disc (previously the SVG inherited the same gold and
