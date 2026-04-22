@@ -21,7 +21,7 @@
      after replacing any file under /images/ or /assets/images/ to force
      a one-shot refresh. Applies to <img src>, <img data-src>, and
      <source srcset> within <picture>. */
-  var IMG_VER  = '2026-04-22-seo-polish';
+  var IMG_VER  = '2026-04-22-footer-unify';
 
   /* ---------- SEO / marketing hook-ups ---------------------------------
      Paste tokens here once the client registers each service. Empty
@@ -1400,7 +1400,7 @@
     var logos = doc.querySelectorAll('img[src*="goodway-logo"]');
     logos.forEach(function (img, i) {
       var aboveFold = !!img.closest('.navbar, .logo-brand, .w-nav-brand, header');
-      var onDarkSurface = !!img.closest('.footer, .cta-section, .benefit-section, .gallery-section, .our-work-section, .section-2');
+      var onDarkSurface = !!img.closest('.footer, .footer-section, .cta-section, .benefit-section, .gallery-section, .our-work-section, .section-2');
       if (aboveFold) {
         img.setAttribute('loading', 'eager');
         img.setAttribute('fetchpriority', 'high');

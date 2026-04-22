@@ -192,11 +192,13 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
 /* ==========================================================================
    FOOTER — premium dark-mode treatment
    ========================================================================== */
-.footer {
+.footer,
+.footer-section {
   background: linear-gradient(180deg, var(--gw-navy-2) 0%, var(--gw-navy) 60%);
   position: relative;
 }
-.footer::before {
+.footer::before,
+.footer-section::before {
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
@@ -205,7 +207,8 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
 }
 
 /* --- Footer column headers --- */
-.footer .paragraph.bold-white {
+.footer .paragraph.bold-white,
+.footer-section .paragraph.bold-white {
   color: var(--gw-gold) !important;
   font-size: 11px !important;
   letter-spacing: 0.18em !important;
@@ -215,7 +218,8 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   position: relative;
   padding-bottom: 10px;
 }
-.footer .paragraph.bold-white::after {
+.footer .paragraph.bold-white::after,
+.footer-section .paragraph.bold-white::after {
   content: "";
   position: absolute;
   bottom: 0; left: 0;
@@ -254,7 +258,8 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   line-height: 1.55;
   margin-bottom: 12px;
 }
-.footer .newsletter-form-field {
+.footer .newsletter-form-field,
+.footer-section .newsletter-form-field {
   display: flex;
   align-items: stretch;
   gap: 0;
@@ -267,13 +272,16 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   backdrop-filter: blur(2px);
   transition: border-color 0.2s var(--gw-ease), background 0.2s var(--gw-ease);
 }
-.footer .newsletter-form-field:focus-within {
+.footer .newsletter-form-field:focus-within,
+.footer-section .newsletter-form-field:focus-within {
   border-color: var(--gw-gold);
   background: rgba(250, 246, 236, 0.10);
   box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.18);
 }
 .footer .newsletter-field.w-input,
-.footer .newsletter-field {
+.footer .newsletter-field,
+.footer-section .newsletter-field.w-input,
+.footer-section .newsletter-field {
   flex: 1;
   min-width: 0;
   border: none !important;
@@ -286,9 +294,12 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   box-shadow: none !important;
   height: auto !important;
 }
-.footer .newsletter-field::placeholder { color: #8a93a6; opacity: 1; font-size: 13px; }
+.footer .newsletter-field::placeholder,
+.footer-section .newsletter-field::placeholder { color: #8a93a6; opacity: 1; font-size: 13px; }
 .footer .newsletter-button.w-button,
-.footer .newsletter-button {
+.footer .newsletter-button,
+.footer-section .newsletter-button.w-button,
+.footer-section .newsletter-button {
   flex-shrink: 0;
   background: var(--gw-gold) !important;
   color: var(--gw-navy) !important;
@@ -305,7 +316,8 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   height: 36px !important;
   line-height: 36px !important;
 }
-.footer .newsletter-button:hover {
+.footer .newsletter-button:hover,
+.footer-section .newsletter-button:hover {
   background: #d5b777 !important;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(201, 169, 97, 0.35);
