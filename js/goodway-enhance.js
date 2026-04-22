@@ -21,7 +21,15 @@
      after replacing any file under /images/ or /assets/images/ to force
      a one-shot refresh. Applies to <img src>, <img data-src>, and
      <source srcset> within <picture>. */
-  var IMG_VER  = '2026-04-22-footer-polish';
+  var IMG_VER  = '2026-04-22-seo-polish';
+
+  /* ---------- SEO / marketing hook-ups ---------------------------------
+     Paste tokens here once the client registers each service. Empty
+     string = feature is skipped. All three propagate to every page
+     through the runtime head injector in Section 16b. */
+  var GSC_TOKEN       = '';    // Google Search Console "HTML tag" method — paste the content="..." value
+  var GA_MEASUREMENT_ID = '';  // Google Analytics 4, format "G-XXXXXXXX"
+  var GTM_ID          = '';    // Google Tag Manager, format "GTM-XXXXXX" (optional — only if using GTM instead of GA4 direct)
   var IMG_BASE = window.GW_IMG_BASE || null;   // null means "use existing path as-is"
   window.GW_IMG_VER = IMG_VER;
 
@@ -588,7 +596,8 @@
        • Page-view fires automatically on consent grant + SPA route
          changes (for future PWA navigation).
      ============================================================ */
-  var GA_MEASUREMENT_ID = ''; // <-- paste G-XXXXXXXXXX here when provisioned
+  /* GA_MEASUREMENT_ID is declared once at the top of the file (line ~30).
+     The GA4 bootstrap below reads that outer-scope constant. */
 
   (function gwGA4() {
     /* Bootstrap the gtag queue even before the script loads.
@@ -923,6 +932,34 @@
       tcDark.setAttribute('media', '(prefers-color-scheme: dark)');
       tcDark.setAttribute('content', '#0e1a2b');
       doc.head.appendChild(tcDark);
+    }
+
+    /* ------------------------------------------------------------
+       Upgrade og:image to the proper 1200×630 share card on every
+       page. The static <meta og:image> points to the 516×484 logo,
+       which social platforms (LinkedIn, Twitter, WhatsApp) render
+       awkwardly. Swap to the dedicated share card if present.
+       ------------------------------------------------------------ */
+    var SHARE_CARD = 'https://goodway.ae/images/favicon/og-image-1200x630.png';
+    var ogImg = doc.head.querySelector('meta[property="og:image"]');
+    if (ogImg) ogImg.setAttribute('content', SHARE_CARD);
+    else       ensureMeta('og:image', SHARE_CARD, 'property');
+    /* Dimensions let Facebook/LinkedIn avoid a probe request */
+    ensureMeta('og:image:width',  '1200', 'property');
+    ensureMeta('og:image:height', '630',  'property');
+    ensureMeta('og:image:alt',    'Good Way General Trading — authorised UAE distributor', 'property');
+    /* Twitter large-card image alongside og:image */
+    ensureMeta('twitter:image',   SHARE_CARD);
+    ensureMeta('twitter:image:alt', 'Good Way General Trading — authorised UAE distributor');
+
+    /* ------------------------------------------------------------
+       Google Search Console verification — reads from the GSC_TOKEN
+       constant at the top of this file. Once the client pastes the
+       token there, the meta is injected on every page automatically.
+       Empty string = no meta (GSC ignores empty values cleanly).
+       ------------------------------------------------------------ */
+    if (GSC_TOKEN && GSC_TOKEN.length > 8) {
+      ensureMeta('google-site-verification', GSC_TOKEN);
     }
   })();
 

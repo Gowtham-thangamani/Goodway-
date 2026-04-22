@@ -32,8 +32,14 @@
   <!-- Google Analytics 4 — replace G-XXXXXXXX with real measurement ID, or remove -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied'});gtag('js',new Date());gtag('config','G-XXXXXXXX');</script> -->
-  <!-- Google Search Console verification placeholder -->
-  <!-- <meta name="google-site-verification" content="REPLACE_WITH_TOKEN"> -->
+  <!-- Google Search Console verification is injected site-wide by
+       goodway-enhance.js. To activate: register the site at
+       https://search.google.com/search-console, pick "HTML tag" method,
+       copy the token, and paste it into GSC_TOKEN in js/goodway-enhance.js.
+       Changes propagate to all 22 pages automatically. -->
+
+  <!-- Google Analytics 4 measurement ID goes in js/goodway-enhance.js
+       (GA_MEASUREMENT_ID). Consent-gated via the cookie banner. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
