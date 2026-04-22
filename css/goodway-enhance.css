@@ -681,8 +681,22 @@ summary:focus-visible,
 .service-card svg { color: var(--gw-gold-ink); transition: color 0.3s var(--gw-ease); }
 .service-card:hover svg { color: var(--gw-gold); }
 
-/* Benefit icon on navy → sand */
-.benefit-section .benefit-icon svg { color: var(--gw-sand); }
+/* Benefit icon on navy — the circle stays gold (sand), but the
+   icon itself renders in deep navy so it actually contrasts against
+   the gold disc (previously the SVG inherited the same gold and
+   rendered as a blank circle). Also shrink the inner SVG so it sits
+   as a proper 32 px badge centred in the 64 px circle. */
+.benefit-section .benefit-icon {
+  background: var(--gw-sand);
+  box-shadow: 0 4px 14px rgba(201, 169, 97, 0.22);
+  border: 1px solid rgba(201, 169, 97, 0.4);
+}
+.benefit-section .benefit-icon svg {
+  color: var(--gw-navy);
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
 
 /* ---------- Buttons ---------- */
 .main-button-white {
