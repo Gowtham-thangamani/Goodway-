@@ -1,0 +1,72 @@
+# Goodway — repo ignore rules
+
+# ---------- OS artefacts ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+**/.Spotlight-V100
+**/.Trashes
+
+# ---------- Editor state ----------
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.sublime-*
+*.swp
+*~
+
+# ---------- Node toolchain (for scripts/) ----------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+package-lock.json.bak
+
+# ---------- Build output ----------
+dist/
+build/
+.tmp/
+.cache/
+
+# ---------- Image pipeline scratch ----------
+assets/images/_source/raw/
+**/*.original.*
+**/*.master.*
+**/.squoosh-cache/
+
+# ---------- Secrets / env ----------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ---------- OS: Windows ----------
+$RECYCLE.BIN/
+*.lnk
+
+# ---------- Project scratch ----------
+.pdfpages/
+.pdfpages-oe/
+images/_originals/
+assets/images/_source/ai/
+assets/images/_source/figma-exports/
+assets/images/_source/psd/
+
+# ---------- Admin server ----------
+server/.env
+server/data/*.db
+server/data/*.db-journal
+server/data/*.db-wal
+server/data/*.db-shm
+server/data/backups/
+server/data/leads-inbox.log
+
+# ---------- Misc ----------
+*.log
+coverage/
+/tmp/

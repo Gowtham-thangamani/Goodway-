@@ -1,0 +1,25 @@
+<aside class="gwa-sidebar">
+  <div class="gwa-brand">
+    <div class="gwa-brand__mark">GW</div>
+    <div class="gwa-brand__name">Goodway Admin</div>
+  </div>
+  <nav class="gwa-nav" aria-label="Admin sections">
+    <a href="/admin"            class="gwa-nav__link <%= active === 'dashboard'  ? 'is-active' : '' %>">Dashboard</a>
+    <a href="/admin/principals" class="gwa-nav__link <%= active === 'principals' ? 'is-active' : '' %>">Principals</a>
+    <a href="/admin/sectors"    class="gwa-nav__link <%= active === 'sectors'    ? 'is-active' : '' %>">Sectors</a>
+    <a href="/admin/quotes"     class="gwa-nav__link <%= active === 'quotes'     ? 'is-active' : '' %>">
+      Leads
+      <% if (typeof newLeads !== 'undefined' && newLeads > 0) { %><span class="gwa-badge"><%= newLeads %></span><% } %>
+    </a>
+    <a href="/admin/publish"    class="gwa-nav__link <%= active === 'publish'    ? 'is-active' : '' %>">Publish</a>
+  </nav>
+  <div class="gwa-sidebar__foot">
+    <% if (user) { %>
+      <span class="gwa-sidebar__user"><%= user.username %></span>
+      <form method="post" action="/admin/logout" class="gwa-inline-form">
+        <button type="submit" class="gwa-link">Sign out</button>
+      </form>
+    <% } %>
+    <small class="gwa-sidebar__version">Phase 1 · SQLite</small>
+  </div>
+</aside>

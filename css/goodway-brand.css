@@ -1,0 +1,25 @@
+/* Goodway brand palette override.
+   Loaded AFTER green-crescent-consultant.webflow.css so these variables win. */
+:root {
+  --dark-green: #0e1a2b;        /* gw-navy — primary dark */
+  --olive-green: #0a1322;       /* deeper navy */
+  --army-green: #14243d;        /* navy mid */
+  --moss-green: #1b2f4c;        /* navy light */
+
+  --lime-green: #c9a961;        /* gw-gold — primary accent */
+  --light-lime-green: #d7ba76;  /* gold light */
+  --avocado-green: #8a6c2c;     /* gold deep */
+  --key-lime: #e9d7a5;          /* gw-sand — secondary accent */
+
+  --pale-lime: #faf6ec;         /* gw-ivory — soft-light surface */
+}
+
+/* SVG fills that were hard-coded to reference dark-green */
+svg rect[stroke="#243D2F"] { stroke: #0e1a2b; }
+svg rect[fill="#243D2F"] { fill: #0e1a2b; }
+svg path[fill="#243D2F"] { fill: #0e1a2b; }
+svg path[fill="#F8FEE7"] { fill: #faf6ec; }
+svg path[fill="#6CA40C"] { fill: #c9a961; }
+
+/* Body bg stays ivory so light sections match the new palette */
+body { background-color: var(--pale-lime); }

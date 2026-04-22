@@ -1,0 +1,200 @@
+# Goodway Image Licensing Register
+# Mandatory entry per image. Drives compliance audits and future replacements.
+#
+# Fields:
+#   file:                path relative to /assets/images/
+#   source:              commissioned | authorised-distributor | stock-unsplash | stock-pexels | stock-adobe | brand-guidelines | internal
+#   photographer|author: name (or organisation)
+#   date:                ISO-8601 YYYY-MM-DD
+#   licence:             exclusive-transfer | unsplash-licence | pexels-licence | adobe-std | authorised-distributor-use | internal-use
+#   attribution:         required-on-use | not-required
+#   model-release:       yes | no | n/a
+#   notes:               free-form (optional)
+
+version: 1
+updated: 2026-04-21
+
+# ======================================================================
+# LOGO — the live Good Way mark
+# ======================================================================
+credits:
+  - file: logo/goodway-logo.png
+    source: internal
+    author: Good Way General Trading
+    date: 2014-01-01
+    licence: internal-use
+    attribution: not-required
+    model-release: n/a
+
+  # ====================================================================
+  # HERO — commissioned photography, exclusive licence
+  # Add one entry per file when commissioned. Template rows below.
+  # ====================================================================
+  - file: hero/hero-home-catalogue-shelf.webp
+    source: commissioned           # TO BE COMMISSIONED
+    photographer: TBC
+    date: null
+    licence: exclusive-transfer
+    attribution: not-required
+    model-release: n/a
+    notes: "LCP image — prioritise AVIF quality"
+
+  # ... duplicate the pattern for the other 11 hero files.
+  # See README-ASSETS.md § 7 for the naming convention.
+
+  # ====================================================================
+  # BRAND MARKS — authorised distributor use, attribution required
+  # ====================================================================
+  - file: brands/brand-brother.svg
+    source: brand-guidelines
+    author: Brother Industries Ltd
+    date: 2026-04-21
+    licence: authorised-distributor-use
+    attribution: required-on-use
+    model-release: n/a
+    notes: "Sourced from Brother brand portal; do not recolour."
+
+  - file: brands/brand-3m.svg
+    source: brand-guidelines
+    author: 3M Company
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-amesi.svg
+    source: brand-guidelines
+    author: Amesi
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-avery.svg
+    source: brand-guidelines
+    author: Avery Products Corporation
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-casio.svg
+    source: brand-guidelines
+    author: Casio Computer Co. Ltd
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-durable.svg
+    source: brand-guidelines
+    author: Durable Hunke & Jochheim GmbH
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-elba.svg
+    source: brand-guidelines
+    author: Elba (Hamelin Group)
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-elco-switzerland.svg
+    source: brand-guidelines
+    author: ELCO AG
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-fellowes.svg
+    source: brand-guidelines
+    author: Fellowes Brands
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-gbc.svg
+    source: brand-guidelines
+    author: ACCO Brands (GBC)
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-grandluxe.svg
+    source: brand-guidelines
+    author: Grandluxe
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-helix.svg
+    source: brand-guidelines
+    author: Helix
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-kangaro.svg
+    source: brand-guidelines
+    author: Kangaro Industries
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-leitz.svg
+    source: brand-guidelines
+    author: Leitz (ACCO Brands)
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-omega.svg
+    source: brand-guidelines
+    author: Omega
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-paperone.svg
+    source: brand-guidelines
+    author: PaperOne (APRIL Group)
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-pukka-pad.svg
+    source: brand-guidelines
+    author: Pukka Pads Ltd
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-rexel.svg
+    source: brand-guidelines
+    author: Rexel (ACCO Brands)
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-sax.svg
+    source: brand-guidelines
+    author: SAX
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-sinanline.svg
+    source: brand-guidelines
+    author: SinAnLine
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-tecnostyl.svg
+    source: brand-guidelines
+    author: Tecnostyl
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-uhu.svg
+    source: brand-guidelines
+    author: UHU (Bolton Adhesives)
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  - file: brands/brand-zebra.svg
+    source: brand-guidelines
+    author: Zebra Pen Corporation
+    licence: authorised-distributor-use
+    attribution: required-on-use
+
+  # ====================================================================
+  # PRODUCT TILES, CATEGORY FEATURES, DISPLAY STANDS, PRINTING, COMPANY,
+  # TEAM, TESTIMONIALS, BACKGROUNDS, CATALOGUE — to be populated as each
+  # asset is commissioned / sourced. Template row:
+  # ====================================================================
+  # - file: office-supplies/stationery-essentials/tile-calculators-casio.webp
+  #   source: commissioned
+  #   photographer: TBC
+  #   date: 2026-05-15
+  #   licence: exclusive-transfer
+  #   attribution: not-required
+  #   model-release: n/a

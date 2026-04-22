@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /server/
+Disallow: /images/_originals/
+Disallow: /401.html
+Disallow: /404.html
+Disallow: /*?*
+
+# Slow down aggressive crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+User-agent: SemrushBot
+Crawl-delay: 10
+User-agent: MJ12bot
+Crawl-delay: 10
+
+Sitemap: https://goodway.ae/sitemap.xml

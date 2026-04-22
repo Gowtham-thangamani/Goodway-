@@ -1,0 +1,83 @@
+<%
+  var isNew = !row.id;
+  var action = isNew ? '/admin/sectors/new' : '/admin/sectors/' + row.id + '/edit';
+%>
+<%- include('../partials/head', { title: (isNew ? 'New' : 'Edit') + ' sector' }) %>
+<div class="gwa-shell">
+  <%- include('../partials/nav') %>
+  <main class="gwa-main">
+    <header class="gwa-pagehead">
+      <div>
+        <a href="/admin/sectors" class="gwa-crumb">← Sectors</a>
+        <h1><%= isNew ? 'New sector' : row.title %></h1>
+      </div>
+    </header>
+    <%- include('../partials/flash') %>
+    <form method="post" action="<%= action %>" class="gwa-form gwa-card">
+      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <div class="gwa-form__grid">
+        <label class="gwa-field gwa-col-6">
+          <span>Title *</span>
+          <input type="text" name="title" value="<%= row.title %>" required maxlength="120">
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>Slug</span>
+          <input type="text" name="slug" value="<%= row.slug %>" maxlength="60" pattern="[a-z0-9-]*" placeholder="oil-gas">
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>Tier</span>
+          <select name="tier">
+            <% tiers.forEach(function (t) { %>
+              <option value="<%= t.key %>" <%= t.key === row.tier ? 'selected' : '' %>><%= t.label %></option>
+            <% }); %>
+          </select>
+        </label>
+        <label class="gwa-field gwa-col-12">
+          <span>Subtitle</span>
+          <input type="text" name="subtitle" value="<%= row.subtitle || '' %>" maxlength="160" placeholder="onshore & offshore">
+        </label>
+        <label class="gwa-field gwa-col-12">
+          <span>Lede *</span>
+          <textarea name="lede" rows="2" required maxlength="500"><%= row.lede %></textarea>
+          <small class="gwa-hint">One–two sentences. Shown as card body copy.</small>
+        </label>
+        <label class="gwa-field gwa-col-6">
+          <span>Products supplied</span>
+          <textarea name="products" rows="2" placeholder="Specialty chemicals · compressor spares · Ex fixtures"><%= row.products %></textarea>
+        </label>
+        <label class="gwa-field gwa-col-6">
+          <span>Key principals</span>
+          <textarea name="principals_list" rows="2" placeholder="AEES · REP · Cooper Crouse-Hinds"><%= row.principals_list %></textarea>
+        </label>
+        <label class="gwa-field gwa-col-12">
+          <span>Icon SVG</span>
+          <textarea name="icon_svg" rows="3" class="gwa-mono" placeholder="<svg viewBox=&quot;0 0 24 24&quot;>...</svg>"><%= row.icon_svg %></textarea>
+          <small class="gwa-hint">Inline SVG for the card icon. Use <code>viewBox="0 0 24 24"</code>, stroke-based.</small>
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>CTA label</span>
+          <input type="text" name="cta_label" value="<%= row.cta_label %>" maxlength="40">
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>Sort order</span>
+          <input type="number" name="sort_order" value="<%= row.sort_order %>" min="0" max="9999">
+        </label>
+        <label class="gwa-field gwa-col-3 gwa-field--inline">
+          <input type="checkbox" name="is_published" value="1" <%= row.is_published ? 'checked' : '' %>>
+          <span>Publish on site</span>
+        </label>
+      </div>
+      <div class="gwa-form__actions">
+        <% if (!isNew) { %>
+          <button type="submit" formaction="/admin/sectors/<%= row.id %>/delete"
+                  formmethod="post"
+                  onclick="return confirm('Delete &quot;<%= row.title %>&quot;? This cannot be undone.')"
+                  class="gwa-btn gwa-btn--danger">Delete</button>
+        <% } %>
+        <a href="/admin/sectors" class="gwa-btn gwa-btn--ghost">Cancel</a>
+        <button type="submit" class="gwa-btn gwa-btn--primary"><%= isNew ? 'Create' : 'Save' %></button>
+      </div>
+    </form>
+  </main>
+</div>
+</body></html>

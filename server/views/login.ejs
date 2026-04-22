@@ -1,0 +1,25 @@
+<%- include('partials/head', { title: 'Sign in' }) %>
+<main class="gwa-login">
+  <form method="post" action="/admin/login" class="gwa-login__card">
+    <div class="gwa-login__brand">
+      <div class="gwa-brand__mark">GW</div>
+      <div>
+        <div class="gwa-login__title">Goodway Admin</div>
+        <div class="gwa-login__subtitle">Sign in to manage principals, sectors and leads.</div>
+      </div>
+    </div>
+    <%- include('partials/flash') %>
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <label class="gwa-field">
+      <span>Username</span>
+      <input type="text" name="username" autocomplete="username" required autofocus>
+    </label>
+    <label class="gwa-field">
+      <span>Password</span>
+      <input type="password" name="password" autocomplete="current-password" required>
+    </label>
+    <button type="submit" class="gwa-btn gwa-btn--primary">Sign in</button>
+    <p class="gwa-login__hint">First run? Set a password with <code>npm run set-password -- "your-password"</code>.</p>
+  </form>
+</main>
+</body></html>

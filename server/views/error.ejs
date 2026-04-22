@@ -1,0 +1,12 @@
+<%- include('partials/head', { title: code + ' · Error' }) %>
+<div class="gwa-shell">
+  <% if (user) { %><%- include('partials/nav') %><% } %>
+  <main class="gwa-main">
+    <header class="gwa-pagehead">
+      <h1><%= code %></h1>
+      <p class="gwa-sub"><%= msg %></p>
+    </header>
+    <a href="/admin" class="gwa-btn gwa-btn--primary">Back to dashboard</a>
+  </main>
+</div>
+</body></html>

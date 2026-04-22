@@ -1,0 +1,47 @@
+<%- include('../partials/head', { title: 'Principals' }) %>
+<div class="gwa-shell">
+  <%- include('../partials/nav') %>
+  <main class="gwa-main">
+    <header class="gwa-pagehead">
+      <div>
+        <h1>Principals</h1>
+        <p class="gwa-sub">Authorised international brands distributed by Goodway.</p>
+      </div>
+      <a href="/admin/principals/new" class="gwa-btn gwa-btn--primary">+ New principal</a>
+    </header>
+    <%- include('../partials/flash') %>
+    <section class="gwa-card">
+      <% if (rows.length === 0) { %>
+        <p class="gwa-muted">No principals yet. <a href="/admin/principals/new">Add the first one</a>.</p>
+      <% } else { %>
+        <table class="gwa-table gwa-table--sticky">
+          <thead>
+            <tr>
+              <th>#</th><th>Name</th><th>Country</th><th>Category</th>
+              <th>Order</th><th>Status</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% rows.forEach(function (r) { %>
+            <tr>
+              <td class="gwa-muted"><%= r.id %></td>
+              <td><a href="/admin/principals/<%= r.id %>/edit"><%= r.name %></a></td>
+              <td><%= r.country %></td>
+              <td><%= r.category_label %></td>
+              <td><%= r.sort_order %></td>
+              <td>
+                <% if (r.is_published) { %><span class="gwa-pill gwa-pill--live">live</span>
+                <% } else { %><span class="gwa-pill gwa-pill--draft">draft</span><% } %>
+              </td>
+              <td class="gwa-row-actions">
+                <a href="/admin/principals/<%= r.id %>/edit" class="gwa-link">Edit</a>
+              </td>
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+  </main>
+</div>
+</body></html>

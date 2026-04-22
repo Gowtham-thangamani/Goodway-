@@ -1,0 +1,325 @@
+# Goodway Alt-Text Registry
+# Single source of truth for accessibility + SEO image descriptions.
+# Keyed by file path (relative to /assets/images/).
+# Build scripts (sitemap-images.xml generator + any server-side template
+# layer) pull from this file. If you add a new image, add its alt here first.
+
+# Decorative images — use `alt: ""` and set `aria-hidden: true` in HTML.
+# Never start an alt with "image of" or "picture of".
+# Max 125 chars. Include brand where relevant.
+
+version: 1
+updated: 2026-04-21
+
+images:
+  # ==================================================================
+  # LOGO
+  # ==================================================================
+  - file: logo/goodway-logo.png
+    alt: "Good Way General Trading"
+
+  # ==================================================================
+  # HERO (12)
+  # ==================================================================
+  - file: hero/hero-home-catalogue-shelf.webp
+    alt: "Good Way General Trading catalogue — stationery and office equipment display"
+  - file: hero/hero-office-supplies-flatlay.webp
+    alt: "Office supplies flat-lay — Good Way General Trading Abu Dhabi"
+  - file: hero/hero-office-equipment-lineup.webp
+    alt: "Office equipment line-up — shredders, laminators and printers"
+  - file: hero/hero-printing-gifts-diaries.webp
+    alt: "Custom diaries and paper bags — professional printing services"
+  - file: hero/hero-brands-pantheon-wall.webp
+    alt: "Good Way General Trading brand pantheon — 23 authorised brands"
+  - file: hero/hero-about-warehouse-abudhabi.webp
+    alt: "Good Way General Trading Abu Dhabi warehouse and showroom"
+  - file: hero/hero-contact-abudhabi-map.webp
+    alt: "Contact Good Way General Trading — Abu Dhabi location"
+  - file: hero/hero-quote-clipboard-ledger.webp
+    alt: "Request a quote from Good Way General Trading"
+  - file: hero/hero-stationery-essentials-grid.webp
+    alt: "Stationery Essentials product grid"
+  - file: hero/hero-visual-communication-stands.webp
+    alt: "Tecnostyl display stands and brochure racks"
+  - file: hero/hero-404-paperclip.webp
+    alt: "Page not found — Good Way General Trading"
+  - file: hero/hero-401-filing-cabinet.webp
+    alt: "Access denied — Good Way General Trading"
+
+  # ==================================================================
+  # OFFICE SUPPLIES — CATEGORY FEATURES (14)
+  # ==================================================================
+  - file: office-supplies/_category/cat-stationery-essentials-macro.webp
+    alt: "Stationery essentials — pens, glue, clips"
+  - file: office-supplies/_category/cat-writing-instruments-lineup.webp
+    alt: "Writing instruments — pens, pencils and markers"
+  - file: office-supplies/_category/cat-desktop-organizers.webp
+    alt: "Desktop organizers — document trays and magazine racks"
+  - file: office-supplies/_category/cat-paper-pads-notebooks.webp
+    alt: "Paper, pads, notebooks and labels — office paper products"
+  - file: office-supplies/_category/cat-files-filing-envelopes.webp
+    alt: "Files, filing accessories and envelopes"
+  - file: office-supplies/_category/cat-badge-brochure-signs.webp
+    alt: "Badge, brochure and sign holders"
+  - file: office-supplies/_category/cat-boards-whiteboards-flipchart.webp
+    alt: "Whiteboards, glass boards and flipcharts"
+  - file: office-supplies/_category/cat-cutters-trimmers-guillotines.webp
+    alt: "Cutters, trimmers and guillotines"
+  - file: office-supplies/_category/cat-cash-handling-key-cabinets.webp
+    alt: "Cash handling products and key cabinets"
+  - file: office-supplies/_category/cat-mailroom-shipping.webp
+    alt: "Mailroom and shipping supplies"
+  - file: office-supplies/_category/cat-batteries-power-strips.webp
+    alt: "Batteries and power strip sockets"
+  - file: office-supplies/_category/cat-breakroom-firstaid.webp
+    alt: "Breakroom and first-aid supplies"
+  - file: office-supplies/_category/cat-janitorial-cleaning-trolleys.webp
+    alt: "Janitorial supplies and cleaning trolleys"
+  - file: office-supplies/_category/cat-gift-corner-flatlay.webp
+    alt: "Corporate gift corner — curated gift products"
+
+  # ==================================================================
+  # STATIONERY ESSENTIALS — 9 TILES (PDF page 4)
+  # ==================================================================
+  - file: office-supplies/stationery-essentials/tile-writing-instruments.webp
+    alt: "Writing instruments — pens lineup"
+  - file: office-supplies/stationery-essentials/tile-glue-adhesive.webp
+    alt: "Glue sticks and adhesive spray"
+  - file: office-supplies/stationery-essentials/tile-sharpeners-erasers.webp
+    alt: "Sharpeners and erasers"
+  - file: office-supplies/stationery-essentials/tile-clips-pins-bands.webp
+    alt: "Paper clips, pins and rubber bands"
+  - file: office-supplies/stationery-essentials/tile-stamps-numbering.webp
+    alt: "Stamps and numbering machines"
+  - file: office-supplies/stationery-essentials/tile-puncher-stapler.webp
+    alt: "Hole puncher, stapler and remover"
+  - file: office-supplies/stationery-essentials/tile-ruler-magnifier-opener.webp
+    alt: "Ruler, magnifier and letter opener"
+  - file: office-supplies/stationery-essentials/tile-tapes-dispensers.webp
+    alt: "Tapes, dispensers and tacks"
+  - file: office-supplies/stationery-essentials/tile-calculators-casio.webp
+    alt: "Casio office calculator"
+
+  # ==================================================================
+  # PAPER, PADS, NOTEBOOKS, LABELS — 9 TILES (PDF page 5)
+  # ==================================================================
+  - file: office-supplies/paper-pads-notebooks-labels/tile-paper-white-coloured-photo.webp
+    alt: "Office paper — white, coloured and photo, PaperOne"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-postit-3m.webp
+    alt: "Post-it notes — 3M"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-notepad-pukka.webp
+    alt: "Notepad — Pukka Pad A4 ruled"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-register-books-grandluxe.webp
+    alt: "Register books — Grandluxe"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-notebooks-pukka.webp
+    alt: "Notebooks — Pukka Pad spiral"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-plotter-rolls.webp
+    alt: "Plotter paper and tracing rolls"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-cash-rolls.webp
+    alt: "Thermal cash till rolls"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-labels-avery.webp
+    alt: "Avery office labels"
+  - file: office-supplies/paper-pads-notebooks-labels/tile-printable-marking-labels.webp
+    alt: "Printable and marking labels"
+
+  # ==================================================================
+  # FILES & FILING — 9 TILES (PDF page 6)
+  # ==================================================================
+  - file: office-supplies/files-filing-envelopes-labels/tile-project-files-spine.webp
+    alt: "Project files and spine bars"
+  - file: office-supplies/files-filing-envelopes-labels/tile-clear-bag-pockets.webp
+    alt: "Clear document bags and pockets"
+  - file: office-supplies/files-filing-envelopes-labels/tile-business-card-organizer.webp
+    alt: "Business card organizer"
+  - file: office-supplies/files-filing-envelopes-labels/tile-square-cut-folder.webp
+    alt: "Square cut folders — multi-colour"
+  - file: office-supplies/files-filing-envelopes-labels/tile-hanging-suspension-files.webp
+    alt: "Leitz hanging suspension files"
+  - file: office-supplies/files-filing-envelopes-labels/tile-envelopes-elco.webp
+    alt: "Envelopes — ELCO Switzerland"
+  - file: office-supplies/files-filing-envelopes-labels/tile-dividers-avery.webp
+    alt: "Avery coloured index dividers"
+  - file: office-supplies/files-filing-envelopes-labels/tile-lshape-folder.webp
+    alt: "L-shape folders"
+  - file: office-supplies/files-filing-envelopes-labels/tile-colour-clip-folders-leitz.webp
+    alt: "Leitz colour clip folders"
+
+  # ==================================================================
+  # BOARDS / DISPLAY / HOLDERS — 9 TILES (PDF page 7)
+  # ==================================================================
+  - file: office-supplies/boards-display-holders/tile-document-tray.webp
+    alt: "3-tier document tray"
+  - file: office-supplies/boards-display-holders/tile-magazine-racks.webp
+    alt: "Magazine racks"
+  - file: office-supplies/boards-display-holders/tile-cutters-guillotines.webp
+    alt: "Cutters, trimmers and guillotines"
+  - file: office-supplies/boards-display-holders/tile-whiteboards.webp
+    alt: "Whiteboards"
+  - file: office-supplies/boards-display-holders/tile-smart-board.webp
+    alt: "SMART Board interactive display"
+  - file: office-supplies/boards-display-holders/tile-felt-pin-boards.webp
+    alt: "Felt pin and notice boards"
+  - file: office-supplies/boards-display-holders/tile-cork-notice-board.webp
+    alt: "Cork notice board"
+  - file: office-supplies/boards-display-holders/tile-cash-key-cabinets.webp
+    alt: "Cash handling and key cabinets"
+  - file: office-supplies/boards-display-holders/tile-flipchart-easel.webp
+    alt: "Flip chart boards and easel pads"
+
+  # ==================================================================
+  # OFFICE EQUIPMENT — CATEGORY FEATURES (7)
+  # ==================================================================
+  - file: office-equipment/_category/equip-shredders-rexel.webp
+    alt: "Rexel office shredder — Good Way General Trading"
+  - file: office-equipment/_category/equip-labelling-brother-ptouch.webp
+    alt: "Brother P-touch labelling machine and supplies"
+  - file: office-equipment/_category/equip-binding-machine-combs.webp
+    alt: "Binding machine with comb binding supplies"
+  - file: office-equipment/_category/equip-laminator-a3-pouches.webp
+    alt: "A3 laminator and laminating pouches"
+  - file: office-equipment/_category/equip-printers-brother-mfp.webp
+    alt: "Brother multifunction printer with toner supplies"
+  - file: office-equipment/_category/equip-brother-fax-machine.webp
+    alt: "Brother fax machine"
+  - file: office-equipment/_category/equip-display-stands-tecnostyl.webp
+    alt: "Tecnostyl display stand and brochure rack"
+
+  # ==================================================================
+  # OFFICE EQUIPMENT — 5 TILES (PDF page 8)
+  # ==================================================================
+  - file: office-equipment/equipment-tiles/tile-brother-printers.webp
+    alt: "Brother office printers"
+  - file: office-equipment/equipment-tiles/tile-brother-fax.webp
+    alt: "Brother fax machines"
+  - file: office-equipment/equipment-tiles/tile-binding-machine.webp
+    alt: "Office binding machine"
+  - file: office-equipment/equipment-tiles/tile-shredders.webp
+    alt: "Office shredders"
+  - file: office-equipment/equipment-tiles/tile-laminator.webp
+    alt: "A4 office laminator"
+
+  # ==================================================================
+  # DISPLAY STANDS / VISUAL COMMUNICATION — TECNOSTYL (PDF page 9)
+  # ==================================================================
+  - file: office-equipment/display-stands/display-brochure-tower-silver.webp
+    alt: "Tecnostyl silver brochure tower"
+  - file: office-equipment/display-stands/display-wall-leaflet-holder.webp
+    alt: "Wall-mounted leaflet holder"
+  - file: office-equipment/display-stands/display-curved-floor-rack.webp
+    alt: "Curved floor-standing brochure rack"
+  - file: office-equipment/display-stands/display-modular-staggered.webp
+    alt: "Modular staggered brochure stand"
+  - file: office-equipment/display-stands/display-rotating-spinner.webp
+    alt: "Rotating leaflet carousel spinner"
+  - file: office-equipment/display-stands/display-multi-tier-mobile.webp
+    alt: "Multi-tier mobile display stand"
+
+  # ==================================================================
+  # PRINTING & GIFTS (8)
+  # ==================================================================
+  - file: printing-gifts/print-diary-embossed.webp
+    alt: "Customized diary with embossed cover"
+  - file: printing-gifts/print-diary-open.webp
+    alt: "Opened customized diary with branding"
+  - file: printing-gifts/print-paperbag-kraft.webp
+    alt: "Customized kraft paper bag with logo"
+  - file: printing-gifts/print-paperbag-luxury.webp
+    alt: "Luxury laminated corporate paper bag"
+  - file: printing-gifts/print-business-cards.webp
+    alt: "Custom business cards"
+  - file: printing-gifts/print-letterheads.webp
+    alt: "Custom branded letterheads"
+  - file: printing-gifts/print-brochure-trifold.webp
+    alt: "Custom trifold brochure"
+  - file: printing-gifts/print-envelopes-branded.webp
+    alt: "Custom branded envelopes"
+
+  # ==================================================================
+  # BRANDS (23) — the alt is the brand name + partnership label
+  # ==================================================================
+  - { file: brands/brand-3m.svg,               alt: "3M — Good Way partner brand" }
+  - { file: brands/brand-amesi.svg,            alt: "Amesi — Good Way partner brand" }
+  - { file: brands/brand-avery.svg,            alt: "Avery — Good Way partner brand" }
+  - { file: brands/brand-brother.svg,          alt: "Brother — Good Way partner brand" }
+  - { file: brands/brand-casio.svg,            alt: "Casio — Good Way partner brand" }
+  - { file: brands/brand-durable.svg,          alt: "Durable — Good Way partner brand" }
+  - { file: brands/brand-elba.svg,             alt: "Elba — Good Way partner brand" }
+  - { file: brands/brand-elco-switzerland.svg, alt: "ELCO Switzerland — Good Way partner brand" }
+  - { file: brands/brand-fellowes.svg,         alt: "Fellowes — Good Way partner brand" }
+  - { file: brands/brand-gbc.svg,              alt: "GBC — Good Way partner brand" }
+  - { file: brands/brand-grandluxe.svg,        alt: "Grandluxe — Good Way partner brand" }
+  - { file: brands/brand-helix.svg,            alt: "Helix — Good Way partner brand" }
+  - { file: brands/brand-kangaro.svg,          alt: "Kangaro — Good Way partner brand" }
+  - { file: brands/brand-leitz.svg,            alt: "Leitz — Good Way partner brand" }
+  - { file: brands/brand-omega.svg,            alt: "Omega — Good Way partner brand" }
+  - { file: brands/brand-paperone.svg,         alt: "PaperOne — Good Way partner brand" }
+  - { file: brands/brand-pukka-pad.svg,        alt: "Pukka Pad — Good Way partner brand" }
+  - { file: brands/brand-rexel.svg,            alt: "Rexel — Good Way partner brand" }
+  - { file: brands/brand-sax.svg,              alt: "SAX — Good Way partner brand" }
+  - { file: brands/brand-sinanline.svg,        alt: "SinAnLine — Good Way partner brand" }
+  - { file: brands/brand-tecnostyl.svg,        alt: "Tecnostyl — Good Way partner brand" }
+  - { file: brands/brand-uhu.svg,              alt: "UHU — Good Way partner brand" }
+  - { file: brands/brand-zebra.svg,            alt: "Zebra — Good Way partner brand" }
+
+  # ==================================================================
+  # COMPANY (2)
+  # ==================================================================
+  - file: company/company-warehouse-aisle.webp
+    alt: "Good Way General Trading warehouse aisle, Abu Dhabi"
+  - file: company/company-showroom-exterior.webp
+    alt: "Good Way General Trading showroom exterior, Abu Dhabi"
+
+  # ==================================================================
+  # TEAM (2)
+  # ==================================================================
+  - file: team/team-founder.webp
+    alt: "Founder — Good Way General Trading"
+  - file: team/team-sales-group.webp
+    alt: "Sales team — Good Way General Trading"
+
+  # ==================================================================
+  # CATALOGUE PAGE PREVIEWS (10)
+  # ==================================================================
+  - file: catalogue/catalogue-cover-thumb.webp
+    alt: "Good Way General Trading catalogue — cover preview"
+  - file: catalogue/catalogue-page-01.webp
+    alt: "Good Way catalogue page 1 preview"
+  - file: catalogue/catalogue-page-02.webp
+    alt: "Good Way catalogue page 2 preview — more about us"
+  - file: catalogue/catalogue-page-03.webp
+    alt: "Good Way catalogue page 3 preview — what we offer"
+  - file: catalogue/catalogue-page-04.webp
+    alt: "Good Way catalogue page 4 preview — stationery essentials"
+  - file: catalogue/catalogue-page-05.webp
+    alt: "Good Way catalogue page 5 preview — paper, pads, notebooks, labels"
+  - file: catalogue/catalogue-page-06.webp
+    alt: "Good Way catalogue page 6 preview — files and filing"
+  - file: catalogue/catalogue-page-07.webp
+    alt: "Good Way catalogue page 7 preview — boards, displays, holders"
+  - file: catalogue/catalogue-page-08.webp
+    alt: "Good Way catalogue page 8 preview — office equipment"
+  - file: catalogue/catalogue-page-09.webp
+    alt: "Good Way catalogue page 9 preview — visual communication"
+
+  # ==================================================================
+  # BACKGROUNDS (decorative — empty alt)
+  # ==================================================================
+  - { file: backgrounds/bg-ivory-paper-texture.webp, alt: "" }
+  - { file: backgrounds/bg-garnet-silk-tile.webp,    alt: "" }
+  - { file: backgrounds/bg-kraft-paper-macro.webp,   alt: "" }
+  - { file: backgrounds/bg-gold-foil-macro.webp,     alt: "" }
+  - { file: backgrounds/bg-ivory-radial-noise.webp,  alt: "" }
+
+  # ==================================================================
+  # SOCIAL / OPEN GRAPH (10) — alts match the page each card represents
+  # ==================================================================
+  - { file: social/og-home.jpg,             alt: "Home — Good Way General Trading" }
+  - { file: social/og-about.jpg,            alt: "About — Good Way General Trading" }
+  - { file: social/og-office-supplies.jpg,  alt: "Office Supplies — Good Way General Trading" }
+  - { file: social/og-office-equipment.jpg, alt: "Office Equipment — Good Way General Trading" }
+  - { file: social/og-printing-gifts.jpg,   alt: "Printing and Gifts — Good Way General Trading" }
+  - { file: social/og-brands.jpg,           alt: "Our Brands — Good Way General Trading" }
+  - { file: social/og-contact.jpg,          alt: "Contact — Good Way General Trading" }
+  - { file: social/og-quote.jpg,            alt: "Request a Quote — Good Way General Trading" }
+  - { file: social/og-privacy.jpg,          alt: "Privacy Policy — Good Way General Trading" }
+  - { file: social/og-default.jpg,          alt: "Good Way General Trading" }

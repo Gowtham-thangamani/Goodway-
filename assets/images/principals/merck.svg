@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120" role="img">
+
+    <title>Merck</title>
+    <rect x="24" y="40" width="6" height="40" fill="#ea5b2f"/>
+    <text x="44" y="77" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="42" font-weight="800" fill="#0093b2" letter-spacing="0.02em">MERCK</text>
+    <text x="44" y="96" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">GERMANY</text>
+  
+</svg>

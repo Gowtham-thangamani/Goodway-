@@ -1,0 +1,73 @@
+<%- include('partials/head', { title: 'Dashboard' }) %>
+<div class="gwa-shell">
+  <%- include('partials/nav') %>
+  <main class="gwa-main">
+    <header class="gwa-pagehead">
+      <h1>Dashboard</h1>
+      <p class="gwa-sub">Overview of content and recent activity.</p>
+    </header>
+    <%- include('partials/flash') %>
+    <section class="gwa-stat-grid">
+      <a href="/admin/principals" class="gwa-stat">
+        <div class="gwa-stat__n"><%= principals %></div>
+        <div class="gwa-stat__label">Principals</div>
+      </a>
+      <a href="/admin/sectors" class="gwa-stat">
+        <div class="gwa-stat__n"><%= sectors %></div>
+        <div class="gwa-stat__label">Sectors</div>
+      </a>
+      <a href="/admin/quotes?status=new" class="gwa-stat gwa-stat--accent">
+        <div class="gwa-stat__n"><%= newLeads %></div>
+        <div class="gwa-stat__label">New leads</div>
+      </a>
+      <a href="/admin/publish" class="gwa-stat">
+        <div class="gwa-stat__n">→</div>
+        <div class="gwa-stat__label">Publish changes</div>
+      </a>
+    </section>
+
+    <section class="gwa-card">
+      <div class="gwa-card__head">
+        <h2>Recent leads</h2>
+        <a href="/admin/quotes" class="gwa-link">View all</a>
+      </div>
+      <% if (recent.length === 0) { %>
+        <p class="gwa-muted">No leads yet.</p>
+      <% } else { %>
+        <table class="gwa-table">
+          <thead><tr><th>When</th><th>Name</th><th>Company</th><th>Email</th><th>Sector</th></tr></thead>
+          <tbody>
+          <% recent.forEach(function (r) { %>
+            <tr>
+              <td class="gwa-muted"><%= r.received_at %></td>
+              <td><a href="/admin/quotes/<%= r.id %>"><%= r.name %></a></td>
+              <td><%= r.company %></td>
+              <td><a href="mailto:<%= r.email %>"><%= r.email %></a></td>
+              <td><%= r.sector || '—' %></td>
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+
+    <section class="gwa-card">
+      <div class="gwa-card__head"><h2>Activity</h2></div>
+      <% if (log.length === 0) { %>
+        <p class="gwa-muted">No activity yet.</p>
+      <% } else { %>
+        <ul class="gwa-log">
+          <% log.forEach(function (l) { %>
+            <li>
+              <span class="gwa-log__time"><%= l.at %></span>
+              <span class="gwa-log__actor"><%= l.actor %></span>
+              <span class="gwa-log__action"><%= l.action %></span>
+              <span class="gwa-log__entity"><%= l.entity %><%= l.entity_id ? '#' + l.entity_id : '' %></span>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </section>
+  </main>
+</div>
+</body></html>

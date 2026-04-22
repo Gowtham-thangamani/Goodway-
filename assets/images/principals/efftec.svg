@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120" role="img">
+
+    <title>Efftec · Efficiency Technologies Australia</title>
+    <text x="160" y="62" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="42" font-weight="500" font-style="italic" fill="#b1832c" letter-spacing="-0.01em">efftec</text>
+    <line x1="100" y1="72" x2="220" y2="72" stroke="#b1832c" stroke-width="1.4"/>
+    <text x="160" y="90" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="9" font-weight="600" fill="#1a1a1a" letter-spacing="0.18em">EFFICIENCY TECHNOLOGIES</text>
+    <text x="160" y="108" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">AUSTRALIA</text>
+  
+</svg>

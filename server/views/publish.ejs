@@ -1,0 +1,27 @@
+<%- include('partials/head', { title: 'Publish' }) %>
+<div class="gwa-shell">
+  <%- include('partials/nav') %>
+  <main class="gwa-main">
+    <header class="gwa-pagehead">
+      <h1>Publish</h1>
+      <p class="gwa-sub">Regenerate <code>principals.html</code> and <code>industries.html</code> from the database.</p>
+    </header>
+    <%- include('partials/flash') %>
+
+    <section class="gwa-card">
+      <h2>What happens when you publish</h2>
+      <ul class="gwa-list">
+        <li>The brand grid inside <code>principals.html</code> is rewritten between the <code>&lt;!-- GW-PRINCIPALS-START --&gt;</code> markers.</li>
+        <li>The sector grid inside <code>industries.html</code> is rewritten between the <code>&lt;!-- GW-INDUSTRIES-START --&gt;</code> markers.</li>
+        <li>All other markup (hero, footer, scripts, meta tags) is preserved exactly.</li>
+        <li>Only rows with <strong>Publish on site</strong> checked are emitted. Drafts are skipped.</li>
+        <li>If something looks wrong on the live page, just fix the draft in admin and Publish again.</li>
+      </ul>
+      <form method="post" action="/admin/publish" class="gwa-form">
+        <input type="hidden" name="_csrf" value="<%= csrf %>">
+        <button type="submit" class="gwa-btn gwa-btn--primary gwa-btn--lg">Publish now</button>
+      </form>
+    </section>
+  </main>
+</div>
+</body></html>

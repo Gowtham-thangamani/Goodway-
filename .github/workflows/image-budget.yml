@@ -1,0 +1,104 @@
+name: image-budget
+
+on:
+  pull_request:
+    paths:
+      - 'assets/images/**'
+      - '.github/workflows/image-budget.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/images/**'
+
+jobs:
+  check-sizes:
+    name: Image size budgets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false   # image budgets apply only to served assets, not LFS masters
+
+      - name: Enforce per-format size budgets
+        shell: bash
+        run: |
+          set -euo pipefail
+          FAIL=0
+          echo "::group::Checking AVIF (<= 200 KB)"
+          while IFS= read -r f; do
+            size=$(stat -c %s "$f")
+            if [ "$size" -gt 204800 ]; then
+              echo "::error file=$f::AVIF over budget ($size bytes > 200 KB)"
+              FAIL=1
+            fi
+          done < <(find assets/images -type f -name '*.avif' ! -path '*/_source/*' 2>/dev/null || true)
+          echo "::endgroup::"
+
+          echo "::group::Checking WebP (<= 240 KB)"
+          while IFS= read -r f; do
+            size=$(stat -c %s "$f")
+            if [ "$size" -gt 245760 ]; then
+              echo "::error file=$f::WebP over budget ($size bytes > 240 KB)"
+              FAIL=1
+            fi
+          done < <(find assets/images -type f -name '*.webp' ! -path '*/_source/*' 2>/dev/null || true)
+          echo "::endgroup::"
+
+          echo "::group::Checking JPG (<= 280 KB)"
+          while IFS= read -r f; do
+            size=$(stat -c %s "$f")
+            if [ "$size" -gt 286720 ]; then
+              echo "::error file=$f::JPG over budget ($size bytes > 280 KB)"
+              FAIL=1
+            fi
+          done < <(find assets/images -type f \( -name '*.jpg' -o -name '*.jpeg' \) ! -path '*/_source/*' 2>/dev/null || true)
+          echo "::endgroup::"
+
+          echo "::group::Checking PNG (<= 180 KB, logo + favicons exempt)"
+          while IFS= read -r f; do
+            case "$f" in
+              *goodway-logo*|*favicon/*|*apple-touch*|*icon-192*|*icon-512*) continue ;;
+            esac
+            size=$(stat -c %s "$f")
+            if [ "$size" -gt 184320 ]; then
+              echo "::error file=$f::PNG over budget ($size bytes > 180 KB)"
+              FAIL=1
+            fi
+          done < <(find assets/images -type f -name '*.png' ! -path '*/_source/*' 2>/dev/null || true)
+          echo "::endgroup::"
+
+          echo "::group::Checking SVG (<= 4 KB brands, <= 2 KB icons)"
+          while IFS= read -r f; do
+            size=$(stat -c %s "$f")
+            limit=4096
+            if [[ "$f" == *"/icons/"* ]]; then
+              limit=2048
+            fi
+            if [ "$size" -gt "$limit" ]; then
+              echo "::error file=$f::SVG over budget ($size bytes > $limit)"
+              FAIL=1
+            fi
+          done < <(find assets/images -type f -name '*.svg' ! -path '*/_source/*' 2>/dev/null || true)
+          echo "::endgroup::"
+
+          if [ "$FAIL" -ne 0 ]; then
+            echo ""
+            echo "One or more images exceed the size budget."
+            echo "See README-ASSETS.md § 5 for the full budget table."
+            exit 1
+          fi
+          echo "All images within budget."
+
+  regenerate-sitemap:
+    name: Regenerate sitemap-images.xml (dry-run)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run generator
+        run: |
+          node scripts/build-sitemap-images.js > /tmp/sitemap-images.generated.xml
+          echo "Generator completed without error."
+          head -30 /tmp/sitemap-images.generated.xml

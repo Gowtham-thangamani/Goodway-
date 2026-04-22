@@ -1,0 +1,40 @@
+<%- include('../partials/head', { title: 'Sectors' }) %>
+<div class="gwa-shell">
+  <%- include('../partials/nav') %>
+  <main class="gwa-main">
+    <header class="gwa-pagehead">
+      <div>
+        <h1>Sectors</h1>
+        <p class="gwa-sub">Industries Goodway serves — displayed on the industries page.</p>
+      </div>
+      <a href="/admin/sectors/new" class="gwa-btn gwa-btn--primary">+ New sector</a>
+    </header>
+    <%- include('../partials/flash') %>
+    <section class="gwa-card">
+      <% if (rows.length === 0) { %>
+        <p class="gwa-muted">No sectors yet. <a href="/admin/sectors/new">Add the first one</a>.</p>
+      <% } else { %>
+        <table class="gwa-table gwa-table--sticky">
+          <thead><tr><th>#</th><th>Title</th><th>Tier</th><th>Slug</th><th>Order</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+          <% rows.forEach(function (r) { %>
+            <tr>
+              <td class="gwa-muted"><%= r.id %></td>
+              <td><a href="/admin/sectors/<%= r.id %>/edit"><%= r.title %></a></td>
+              <td><span class="gwa-pill gwa-pill--<%= r.tier %>"><%= r.tier_label %></span></td>
+              <td class="gwa-mono"><%= r.slug %></td>
+              <td><%= r.sort_order %></td>
+              <td>
+                <% if (r.is_published) { %><span class="gwa-pill gwa-pill--live">live</span>
+                <% } else { %><span class="gwa-pill gwa-pill--draft">draft</span><% } %>
+              </td>
+              <td class="gwa-row-actions"><a href="/admin/sectors/<%= r.id %>/edit" class="gwa-link">Edit</a></td>
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+  </main>
+</div>
+</body></html>

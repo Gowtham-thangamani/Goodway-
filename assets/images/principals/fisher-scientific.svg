@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120" role="img">
+
+    <title>Fisher Scientific</title>
+    <g transform="translate(34,38)">
+      <circle cx="22" cy="22" r="22" fill="none" stroke="#0c4da2" stroke-width="2.4"/>
+      <text x="22" y="31" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="28" font-weight="700" font-style="italic" fill="#0c4da2">f</text>
+    </g>
+    <text x="90" y="62" font-family="'Fraunces', Georgia, serif" font-size="22" font-weight="700" font-style="italic" fill="#0c4da2" letter-spacing="0.01em">Fisher Scientific</text>
+    <text x="90" y="80" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#fbc02d" letter-spacing="0.22em">UNITED KINGDOM</text>
+  
+</svg>

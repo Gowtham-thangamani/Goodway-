@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120" role="img">
+
+    <title>REP · Recherche Exploitation Produits</title>
+    <g transform="translate(24,18)">
+      <circle cx="36" cy="36" r="34" fill="none" stroke="#1a2a4a" stroke-width="2"/>
+      <text x="36" y="50" text-anchor="middle" font-family="'Fraunces', Georgia, serif" font-size="34" font-weight="700" font-style="italic" fill="#c0392b">rep</text>
+    </g>
+    <g transform="translate(115,30)">
+      <text font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1a2a4a" letter-spacing="0.04em">Recherche</text>
+      <text y="20" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1a2a4a" letter-spacing="0.04em">Exploitation</text>
+      <text y="40" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="15" font-weight="700" fill="#1a2a4a" letter-spacing="0.04em">Produits</text>
+      <text y="62" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">FRANCE</text>
+    </g>
+  
+</svg>

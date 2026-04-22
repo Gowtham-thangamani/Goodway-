@@ -1,0 +1,7 @@
+# Netlify / Cloudflare Pages style redirects
+/home       /index.html      301
+/about-us   /about.html      301
+/quote      /request-a-quote.html  301
+
+# Catch-all 404
+/*          /404.html        404

@@ -1,0 +1,35 @@
+# Goodway — Git LFS + line-ending rules
+# Masters go through LFS; served derivatives go through normal Git.
+
+# ---------- Line endings ----------
+*                               text=auto eol=lf
+*.bat                           text eol=crlf
+*.cmd                           text eol=crlf
+*.ps1                           text eol=crlf
+
+# ---------- Large binary masters → LFS ----------
+*.psd                           filter=lfs diff=lfs merge=lfs -text
+*.psb                           filter=lfs diff=lfs merge=lfs -text
+*.ai                            filter=lfs diff=lfs merge=lfs -text
+*.eps                           filter=lfs diff=lfs merge=lfs -text
+*.pdf                           filter=lfs diff=lfs merge=lfs -text
+*.raw                           filter=lfs diff=lfs merge=lfs -text
+*.nef                           filter=lfs diff=lfs merge=lfs -text
+*.cr2                           filter=lfs diff=lfs merge=lfs -text
+*.arw                           filter=lfs diff=lfs merge=lfs -text
+*.dng                           filter=lfs diff=lfs merge=lfs -text
+*.tif                           filter=lfs diff=lfs merge=lfs -text
+*.tiff                          filter=lfs diff=lfs merge=lfs -text
+
+# Everything inside _source/ goes to LFS regardless of extension
+assets/images/_source/**        filter=lfs diff=lfs merge=lfs -text
+
+# ---------- Keep web-served files in plain Git ----------
+# AVIF / WebP / optimised JPG / minified SVG are small and diff-friendly
+*.avif                          binary
+*.webp                          binary
+*.jpg                           binary
+*.jpeg                          binary
+*.png                           binary
+*.svg                           text
+*.ico                           binary

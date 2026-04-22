@@ -1,0 +1,81 @@
+<%
+  var chips = [];
+  try { chips = JSON.parse(row.chips_json || '[]'); } catch (e) { chips = []; }
+  var isNew = !row.id;
+  var action = isNew ? '/admin/principals/new' : '/admin/principals/' + row.id + '/edit';
+%>
+<%- include('../partials/head', { title: (isNew ? 'New' : 'Edit') + ' principal' }) %>
+<div class="gwa-shell">
+  <%- include('../partials/nav') %>
+  <main class="gwa-main">
+    <header class="gwa-pagehead">
+      <div>
+        <a href="/admin/principals" class="gwa-crumb">← Principals</a>
+        <h1><%= isNew ? 'New principal' : row.name %></h1>
+      </div>
+    </header>
+    <%- include('../partials/flash') %>
+    <form method="post" action="<%= action %>" class="gwa-form gwa-card">
+      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <div class="gwa-form__grid">
+        <label class="gwa-field gwa-col-6">
+          <span>Name *</span>
+          <input type="text" name="name" value="<%= row.name %>" required maxlength="120">
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>Country *</span>
+          <input type="text" name="country" value="<%= row.country %>" required maxlength="60">
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>Country lang code</span>
+          <input type="text" name="country_lang" value="<%= row.country_lang || '' %>" maxlength="8" placeholder="fr">
+        </label>
+        <label class="gwa-field gwa-col-4">
+          <span>Category *</span>
+          <select name="category">
+            <% categories.forEach(function (c) { %>
+              <option value="<%= c.key %>" <%= c.key === row.category ? 'selected' : '' %>><%= c.label %></option>
+            <% }); %>
+          </select>
+        </label>
+        <label class="gwa-field gwa-col-5">
+          <span>Division link</span>
+          <input type="text" name="division_href" value="<%= row.division_href %>" maxlength="200" placeholder="divisions/chemicals-power.html">
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>Slug (auto if blank)</span>
+          <input type="text" name="slug" value="<%= row.slug %>" maxlength="60" pattern="[a-z0-9-]*">
+        </label>
+        <label class="gwa-field gwa-col-12">
+          <span>Description *</span>
+          <textarea name="description" rows="3" required maxlength="600"><%= row.description %></textarea>
+          <small class="gwa-hint">One-line positioning. Shown on the card. Plain text; no HTML.</small>
+        </label>
+        <label class="gwa-field gwa-col-12">
+          <span>Category chips</span>
+          <textarea name="chips" rows="2" placeholder="DC Power, UPS, Ex Lighting"><%= chips.join(', ') %></textarea>
+          <small class="gwa-hint">Comma or newline separated. Max 8 chips.</small>
+        </label>
+        <label class="gwa-field gwa-col-3">
+          <span>Sort order</span>
+          <input type="number" name="sort_order" value="<%= row.sort_order %>" min="0" max="9999">
+        </label>
+        <label class="gwa-field gwa-col-3 gwa-field--inline">
+          <input type="checkbox" name="is_published" value="1" <%= row.is_published ? 'checked' : '' %>>
+          <span>Publish on site</span>
+        </label>
+      </div>
+      <div class="gwa-form__actions">
+        <% if (!isNew) { %>
+          <button type="submit" formaction="/admin/principals/<%= row.id %>/delete"
+                  formmethod="post"
+                  onclick="return confirm('Delete &quot;<%= row.name %>&quot;? This cannot be undone.')"
+                  class="gwa-btn gwa-btn--danger">Delete</button>
+        <% } %>
+        <a href="/admin/principals" class="gwa-btn gwa-btn--ghost">Cancel</a>
+        <button type="submit" class="gwa-btn gwa-btn--primary"><%= isNew ? 'Create' : 'Save' %></button>
+      </div>
+    </form>
+  </main>
+</div>
+</body></html>

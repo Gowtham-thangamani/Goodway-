@@ -1,0 +1,25 @@
+{
+  "name": "goodway-admin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Goodway content admin — principals, sectors, quotes. Phase 1.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node scripts/seed.js",
+    "build-site": "node scripts/build-pages.js",
+    "backup": "node scripts/backup.js",
+    "set-password": "node scripts/set-password.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.0",
+    "better-sqlite3": "^12.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.0.0",
+    "ejs": "^3.1.10",
+    "express": "^5.0.0",
+    "express-session": "^1.18.0"
+  }
+}

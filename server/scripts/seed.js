@@ -1,0 +1,145 @@
+/**
+ * One-shot seed: parses the existing principals.html + industries.html
+ * and loads the DB with current content. Idempotent — clears + re-inserts
+ * when run again. Run with: `npm run seed`.
+ */
+require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const { db } = require('../db');
+
+const SITE_ROOT = path.resolve(__dirname, '..', process.env.SITE_ROOT || '..');
+
+/* Decode HTML entities for fields stored as plain text (title, subtitle, name,
+   country, cta label, chips). Fields that can carry inline HTML (description,
+   lede, products, principals_list, icon_svg) stay as-is in the DB. */
+function decodePlain(s) {
+  return String(s || '')
+    .replace(/&amp;/g,  '&')
+    .replace(/&lt;/g,   '<')
+    .replace(/&gt;/g,   '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g,  "'")
+    .replace(/&middot;/g, '·')
+    .replace(/&mdash;/g,  '—')
+    .replace(/&ndash;/g,  '–')
+    .replace(/&nbsp;/g,   ' ')
+    .replace(/&egrave;/g, 'è')
+    .replace(/&eacute;/g, 'é')
+    .replace(/&uuml;/g,   'ü');
+}
+
+/* ---------- Principals parsing ---------- */
+function parsePrincipalsHtml() {
+  const html = fs.readFileSync(path.join(SITE_ROOT, 'principals.html'), 'utf8');
+  const cards = [];
+  const re = /<article class="gw-brand-card" data-category="([^"]+)" data-group="([^"]+)">([\s\S]*?)<\/article>/g;
+  let m, order = 10;
+  while ((m = re.exec(html)) !== null) {
+    const [, category, group, inner] = m;
+    const name    = (inner.match(/<div class="gw-brand-card__name">([\s\S]*?)<\/div>/) || [])[1] || '';
+    const countryMatch = inner.match(/<span class="gw-brand-card__country"(?:\s+lang="([^"]+)")?>([^<]+)<\/span>/) || [];
+    const countryLang = countryMatch[1] || null;
+    const country = countryMatch[2] || '';
+    const desc    = (inner.match(/<p class="gw-brand-card__desc">([\s\S]*?)<\/p>/) || [])[1] || '';
+    const chipsBlock = (inner.match(/<div class="gw-brand-card__chips">([\s\S]*?)<\/div>/) || [])[1] || '';
+    const chips = [...chipsBlock.matchAll(/<span class="gw-chip">([^<]+)<\/span>/g)].map(x => x[1].trim());
+    const href    = (inner.match(/<a class="gw-brand-card__cta" href="([^"]+)"/) || [])[1] || '';
+    cards.push({
+      category,
+      category_label: decodePlain(group).trim(),
+      name: decodePlain(name).trim(),
+      country: decodePlain(country).trim(),
+      country_lang: countryLang,
+      description: desc.trim(),              /* HTML — keep as-is */
+      chips: chips.map(decodePlain),
+      division_href: href,
+      sort_order: order
+    });
+    order += 10;
+  }
+  return cards;
+}
+
+/* ---------- Sectors parsing ---------- */
+function parseIndustriesHtml() {
+  const html = fs.readFileSync(path.join(SITE_ROOT, 'industries.html'), 'utf8');
+  const items = [];
+  const re = /<a href="request-a-quote\.html\?sector=([^"]+)" class="gw-industry" data-tier="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g;
+  let m, order = 10;
+  while ((m = re.exec(html)) !== null) {
+    const [, slug, tier, inner] = m;
+    const iconSvg  = (inner.match(/<div class="gw-industry__icon"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '';
+    const tierLabel = (inner.match(/<span class="gw-industry__tier">([^<]+)<\/span>/) || [])[1] || '';
+    const titleRaw = (inner.match(/<h3 class="gw-industry__title">([\s\S]*?)<\/h3>/) || [])[1] || '';
+    const subMatch = titleRaw.match(/<small[^>]*>\(?([^<]+?)\)?<\/small>/);
+    const subtitle = subMatch ? subMatch[1].trim() : null;
+    const title    = titleRaw.replace(/<small[\s\S]*?<\/small>/, '').trim();
+    const lede     = (inner.match(/<p class="gw-industry__lede">([\s\S]*?)<\/p>/) || [])[1] || '';
+    const metaBlock = inner.match(/<dl class="gw-industry__meta">([\s\S]*?)<\/dl>/) || [];
+    const dds = [...(metaBlock[1] || '').matchAll(/<dt>([^<]+)<\/dt><dd>([\s\S]*?)<\/dd>/g)];
+    const products = (dds.find(d => /products/i.test(d[1])) || [])[2] || '';
+    const principalsList = (dds.find(d => /principal/i.test(d[1])) || [])[2] || '';
+    const ctaLabel = (inner.match(/<span class="gw-industry__cta">([^<]+)<\/span>/) || [])[1] || 'Request supply';
+    items.push({
+      slug,
+      title: decodePlain(title).trim(),
+      subtitle: subtitle ? decodePlain(subtitle).trim() : null,
+      tier,
+      tier_label: decodePlain(tierLabel).trim(),
+      lede: lede.trim(),                         /* HTML-capable — keep raw */
+      products: products.trim(),                 /* HTML-capable — keep raw */
+      principals_list: principalsList.trim(),    /* HTML-capable — keep raw */
+      cta_label: decodePlain(ctaLabel).trim(),
+      icon_svg: iconSvg.trim(),
+      sort_order: order
+    });
+    order += 10;
+  }
+  return items;
+}
+
+/* ---------- Run ---------- */
+function slugify(s) {
+  return String(s).toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+}
+
+const principals = parsePrincipalsHtml();
+const sectors    = parseIndustriesHtml();
+
+console.log('Parsed ' + principals.length + ' principals + ' + sectors.length + ' sectors.');
+
+const tx = db.transaction(function () {
+  db.exec('DELETE FROM principals; DELETE FROM sectors;');
+  const insP = db.prepare(`
+    INSERT INTO principals (slug, name, country, country_lang, category, category_label, description,
+                             chips_json, division_href, sort_order, is_published)
+    VALUES (@slug, @name, @country, @country_lang, @category, @category_label, @description,
+            @chips_json, @division_href, @sort_order, 1)
+  `);
+  principals.forEach(function (p) {
+    insP.run({
+      slug: slugify(p.name),
+      name: p.name,
+      country: p.country,
+      country_lang: p.country_lang,
+      category: p.category,
+      category_label: p.category_label,
+      description: p.description,
+      chips_json: JSON.stringify(p.chips),
+      division_href: p.division_href,
+      sort_order: p.sort_order
+    });
+  });
+
+  const insS = db.prepare(`
+    INSERT INTO sectors (slug, title, subtitle, tier, tier_label, lede, products, principals_list,
+                         cta_label, icon_svg, sort_order, is_published)
+    VALUES (@slug, @title, @subtitle, @tier, @tier_label, @lede, @products, @principals_list,
+            @cta_label, @icon_svg, @sort_order, 1)
+  `);
+  sectors.forEach(function (s) { insS.run(s); });
+});
+tx();
+
+console.log('Seed complete. DB at ' + require('../db').DB_PATH);

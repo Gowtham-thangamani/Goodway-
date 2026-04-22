@@ -1,0 +1,7 @@
+<% if (flash && flash.length) { %>
+  <div class="gwa-flash-stack" role="status">
+    <% flash.forEach(function (f) { %>
+      <div class="gwa-flash gwa-flash--<%= f.kind %>"><%= f.msg %></div>
+    <% }); %>
+  </div>
+<% } %>

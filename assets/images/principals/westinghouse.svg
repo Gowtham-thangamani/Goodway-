@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120" role="img">
+
+    <title>Westinghouse</title>
+    <g transform="translate(26,34)">
+      <circle cx="22" cy="22" r="22" fill="#00708a"/>
+      <path d="M 10 12 L 16 32 L 22 18 L 28 32 L 34 12" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="82" y="62" font-family="'Fraunces', Georgia, serif" font-size="22" font-weight="500" fill="#00708a" letter-spacing="0.005em">Westinghouse</text>
+    <text x="82" y="82" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">USA</text>
+  
+</svg>
