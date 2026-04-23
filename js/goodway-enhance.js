@@ -21,7 +21,7 @@
      after replacing any file under /images/ or /assets/images/ to force
      a one-shot refresh. Applies to <img src>, <img data-src>, and
      <source srcset> within <picture>. */
-  var IMG_VER  = '2026-04-22-footer-unify';
+  var IMG_VER  = '2026-04-23-filler-sweep';
 
   /* ---------- SEO / marketing hook-ups ---------------------------------
      Paste tokens here once the client registers each service. Empty

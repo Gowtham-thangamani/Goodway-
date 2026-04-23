@@ -2533,6 +2533,23 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 }
 .gw-img-slot--avatar::after { font-size: 1.3rem; -webkit-text-stroke: 1px rgba(14, 26, 43, 0.25); }
 
+/* Any <img> dropped directly into one of the legacy Webflow slot wrappers
+   (benefit-img, gallery-item, our-work-img-*, .image-placeholder anchor)
+   should fill its parent the same way the old .gw-img-slot did, so swapping
+   placeholder → photograph is a pure HTML edit with no layout change. */
+.benefit-img > img,
+.gallery-item > img,
+.gallery-item > a.image-placeholder > img,
+.our-work-img-left > img,
+.our-work-img-top > img,
+a.image-placeholder > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
 /* Dark-section variant — when .gw-img-slot sits inside a navy section
    (gallery, benefit, our-work, cta) the stark cream tile dominates the
    layout and reads as "broken image". Swap to a subtle dark-mode
