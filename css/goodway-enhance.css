@@ -3061,6 +3061,39 @@ html.gw-intro-done body > *:not(.gw-intro) { transform: none; opacity: 1; transi
 }
 .gw-industry__icon svg { width: 24px; height: 24px; }
 
+/* Image-led industry card — replaces the small icon with a full-bleed
+   illustrated hero at the top of the card. Same pattern as division cards. */
+.gw-industry {
+  padding: 0 !important;
+  overflow: hidden;
+}
+.gw-industry__image {
+  position: relative;
+  display: block;
+  width: calc(100% + 0px);
+  margin: 0 0 4px;
+  overflow: hidden;
+}
+.gw-industry__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.5s var(--gw-ease);
+}
+.gw-industry:hover .gw-industry__image img { transform: scale(1.04); }
+
+/* Restore padding on textual sections inside image-led cards */
+.gw-industry > .gw-industry__tier,
+.gw-industry > .gw-industry__title,
+.gw-industry > .gw-industry__lede,
+.gw-industry > .gw-industry__meta,
+.gw-industry > .gw-industry__cta { padding-left: 24px; padding-right: 24px; }
+.gw-industry > .gw-industry__tier  { margin-top: 18px; }
+.gw-industry > .gw-industry__cta   { padding-bottom: 22px; margin-top: auto; }
+.gw-industry > .gw-industry__meta  { padding-bottom: 4px; }
+
 .gw-industry__tier {
   display: inline-block;
   font-size: 10.5px;
