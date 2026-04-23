@@ -1700,14 +1700,22 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   border-radius: 100px;
   box-shadow: 0 18px 44px rgba(14, 26, 43, 0.3);
   z-index: 80;
-  opacity: 0;
+  /* !important defeats the intro body-reveal rule that otherwise
+     forces opacity: 1 on every body child after gw-intro-done. */
+  opacity: 0 !important;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s var(--gw-ease), transform 0.3s var(--gw-ease);
+  transition: opacity 0.3s var(--gw-ease), transform 0.3s var(--gw-ease), visibility 0s 0.3s;
   font-weight: 600;
   max-width: calc(100vw - 32px);
   text-align: center;
 }
-.gw-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+.gw-toast.is-visible {
+  opacity: 1 !important;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  transition: opacity 0.3s var(--gw-ease), transform 0.3s var(--gw-ease), visibility 0s 0s;
+}
 .gw-toast--success { border: 1px solid rgba(201, 169, 97, 0.45); }
 .gw-toast--error { background: #6b1a1a; border: 1px solid #c66; }
 

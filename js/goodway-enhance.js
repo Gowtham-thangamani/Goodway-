@@ -727,20 +727,22 @@
     cue.setAttribute('aria-hidden', 'true');
     doc.body.appendChild(cue);
 
-    /* Release sequence — shorter + hard fallback ensures the page
-       never stays locked even if a setTimeout fires out of order or
-       the overlay reference dies. */
+    /* Release sequence — intro plays for ~2s total so the user sees
+       the logo land, the gold rule draw in, and the "Abu Dhabi · Since
+       2014" tag fade in. Fade begins at 1600ms, overlay removed at
+       2050ms, and a 3500ms belt-and-braces force-unlocks even if a
+       timer errors. */
     setTimeout(function () {
       overlay.classList.add('is-leaving');
       doc.documentElement.classList.add('gw-intro-done');
-    }, 900);
+    }, 1600);
     setTimeout(function () {
       doc.documentElement.classList.remove('gw-intro-lock');
       doc.documentElement.classList.remove('gw-intro-pending');
       if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
       sessionStorage.setItem('gw-intro-seen', '1');
-    }, 1300);
-    /* Belt-and-braces — if anything throws, force unlock by 2.5s. */
+    }, 2050);
+    /* Belt-and-braces — if anything throws, force unlock by 3.5s. */
     setTimeout(function () {
       doc.documentElement.classList.remove('gw-intro-lock');
       doc.documentElement.classList.remove('gw-intro-pending');
@@ -750,7 +752,7 @@
       document.querySelectorAll('.gw-scroll-cue').forEach(function (c) {
         if (c.parentNode) c.parentNode.removeChild(c);
       });
-    }, 2500);
+    }, 3500);
 
     /* Hide the scroll cue on first scroll/interaction */
     function killCue() {
