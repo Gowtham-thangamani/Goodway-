@@ -727,16 +727,30 @@
     cue.setAttribute('aria-hidden', 'true');
     doc.body.appendChild(cue);
 
-    /* Release after 1.4s, fade overlay, unlock scroll, mark done */
+    /* Release sequence — shorter + hard fallback ensures the page
+       never stays locked even if a setTimeout fires out of order or
+       the overlay reference dies. */
     setTimeout(function () {
       overlay.classList.add('is-leaving');
       doc.documentElement.classList.add('gw-intro-done');
-    }, 1100);
+    }, 900);
     setTimeout(function () {
       doc.documentElement.classList.remove('gw-intro-lock');
+      doc.documentElement.classList.remove('gw-intro-pending');
       if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
       sessionStorage.setItem('gw-intro-seen', '1');
-    }, 1500);
+    }, 1300);
+    /* Belt-and-braces — if anything throws, force unlock by 2.5s. */
+    setTimeout(function () {
+      doc.documentElement.classList.remove('gw-intro-lock');
+      doc.documentElement.classList.remove('gw-intro-pending');
+      doc.documentElement.classList.add('gw-intro-done');
+      var stuck = doc.querySelector('.gw-intro');
+      if (stuck && stuck.parentNode) stuck.parentNode.removeChild(stuck);
+      document.querySelectorAll('.gw-scroll-cue').forEach(function (c) {
+        if (c.parentNode) c.parentNode.removeChild(c);
+      });
+    }, 2500);
 
     /* Hide the scroll cue on first scroll/interaction */
     function killCue() {
