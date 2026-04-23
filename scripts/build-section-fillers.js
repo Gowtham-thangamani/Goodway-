@@ -168,10 +168,18 @@ const G = {
 
 /* ---- compose ------------------------------------------------------------ */
 function xml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-function compose({ w, h, glyph, label, orient = 'right' }) {
-  const cx = orient === 'right' ? w * 0.8 : w * 0.5;
-  const cy = h * 0.5;
+function compose({ w, h, glyph, label, orient = 'center' }) {
+  /* Always centre the glyph + wordmark so that when <img object-fit:cover>
+     crops the asset to a narrower container, the brand mark stays visible
+     inside the safe zone. */
+  const cx = orient === 'right' ? w * 0.72 : w * 0.5;
+  const cy = h * 0.46;
   const safeLabel = xml(String(label).toUpperCase());
+  const cw = Math.min(w, h);                    /* centred wordmark width reference */
+  const wordY = h * 0.88;
+  const subY  = h * 0.93;
+  const wordSize = Math.max(14, Math.round(cw * 0.042));
+  const subSize  = Math.max(9,  Math.round(cw * 0.020));
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
   <defs>
@@ -198,14 +206,14 @@ function compose({ w, h, glyph, label, orient = 'right' }) {
   <rect width="${w}" height="${h}" fill="url(#aura)"/>
 
   <!-- glyph -->
-  <g transform="translate(${cx},${cy}) scale(${Math.min(w,h)/380})" color="${PALETTE.gold}" opacity="0.78">
+  <g transform="translate(${cx},${cy}) scale(${Math.min(w,h)/420})" color="${PALETTE.gold}" opacity="0.78">
     ${glyph}
   </g>
 
-  <!-- wordmark bottom-left -->
-  <g font-family="'Plus Jakarta Sans', sans-serif" fill="${PALETTE.ivory}">
-    <text x="${Math.max(24, w*0.04)}" y="${h - 32}" font-size="${Math.max(12, Math.round(h*0.028))}" font-weight="800" letter-spacing="2">GOODWAY</text>
-    <text x="${Math.max(24, w*0.04)}" y="${h - 14}" font-size="${Math.max(10, Math.round(h*0.018))}" font-weight="400" letter-spacing="1.4" opacity="0.75">${safeLabel}</text>
+  <!-- centred wordmark — stays visible even when object-fit:cover crops -->
+  <g font-family="'Plus Jakarta Sans', sans-serif" fill="${PALETTE.ivory}" text-anchor="middle">
+    <text x="${w/2}" y="${wordY}" font-size="${wordSize}" font-weight="800" letter-spacing="3">GOODWAY</text>
+    <text x="${w/2}" y="${subY}" font-size="${subSize}" font-weight="400" letter-spacing="1.4" opacity="0.72">${safeLabel}</text>
   </g>
 
   <!-- gold hairline bottom -->

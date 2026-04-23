@@ -2895,9 +2895,16 @@ html.gw-intro-lock { overflow: hidden !important; }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Content under the overlay fades/eases up once the intro leaves */
-html.gw-intro-lock body > *:not(.gw-intro) { transform: translateY(8px); opacity: 0; transition: none; }
+/* Content under the overlay fades/eases up once the intro leaves.
+   Scoped to the homepage only — the intro JS only ever runs there, and
+   applying `opacity: 0` on inner pages has caused mobile devices to paint
+   an all-navy screen when a stale lock class lingered across a bfcache
+   navigation. */
+html.gw-intro-lock.gw-home body > *:not(.gw-intro) { transform: translateY(8px); opacity: 0; transition: none; }
 html.gw-intro-done body > *:not(.gw-intro) { transform: none; opacity: 1; transition: opacity 0.5s var(--gw-ease), transform 0.5s var(--gw-ease); }
+/* Hard safety net for inner pages: body children are ALWAYS visible,
+   regardless of any legacy class. */
+html:not(.gw-home) body > *:not(.gw-intro) { opacity: 1 !important; transform: none !important; }
 
 /* Safety net: the scroll-cue must never render outside the intro
    context on the homepage. On any inner page (or after intro completes)
@@ -2911,6 +2918,94 @@ html:not(.gw-intro-lock) .gw-scroll-cue { display: none !important; }
   .w-nav-button,
   .menu-button.w-nav-button,
   .w-nav-overlay { display: none !important; }
+}
+
+/* ==========================================================================
+   Mobile accessibility hardening (≤ 640px)
+   - No horizontal scroll
+   - Hero stats stack
+   - 44×44 minimum tap target on icon buttons
+   - Whats-app + back-to-top don't overlap body content
+   - Filler images keep a readable aspect when the wrapper is narrow
+   ========================================================================== */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+@media (max-width: 767px) {
+  /* Industries hero stats — collapse 3-col into a vertical stack so each
+     number + label gets its own row instead of cramped 3x on a 430px viewport. */
+  .gw-industries-hero__stats {
+    grid-template-columns: 1fr;
+  }
+  .gw-industries-hero__stat {
+    border-right: 0;
+    border-bottom: 1px solid var(--gw-border);
+    padding: 16px 20px;
+  }
+  .gw-industries-hero__stat:last-child { border-bottom: 0; }
+
+  /* Homepage "Our Work" — the filler tiles were cropping too tight and
+     chopping the Goodway wordmark. Give each tile a generous, predictable
+     aspect and let `object-fit: cover` center on the glyph. */
+  .our-work-img-left,
+  .our-work-img-right { width: 100%; height: auto; }
+  .our-work-img-left { aspect-ratio: 3 / 4; }
+  .our-work-img-top  { width: 100%; aspect-ratio: 4 / 3; height: auto; }
+
+  /* Gallery tiles (homepage) — ensure 2-col layout doesn't compress too far */
+  .gallery-item { width: 100%; height: auto; aspect-ratio: 3 / 4; }
+
+  /* Who-we-are collage — keep the overlapping split but pull badges inward
+     so they don't collide with the right edge on a 430px device. */
+  .gw-whoweare__collage { max-width: 100%; }
+  .gw-whoweare__badge {
+    left: auto;
+    right: 0;
+    bottom: -18px;
+    min-width: 0;
+    padding: 14px 18px;
+    font-size: 12px;
+  }
+
+  /* Benefit-img hero — 16:9 on narrow viewports wastes height; 5:3 reads
+     better and the glyph stays centred. */
+  .benefit-img { width: 100%; height: auto; aspect-ratio: 5 / 3; }
+
+  /* Tap targets */
+  .gw-whatsapp,
+  .gw-to-top {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Keep floating widgets out of the way of the last content block */
+  .gw-whatsapp { bottom: 18px; left: 14px; }
+  .gw-to-top   { bottom: 18px; right: 14px; }
+
+  /* Nav logo is too wide on narrow phones */
+  .navbar .logo-brand img { width: 140px !important; height: auto; }
+
+  /* Principals band cells — ensure they reflow cleanly */
+  .gw-principals-band__item,
+  .gw-principals-row__cell {
+    aspect-ratio: auto;
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 479px) {
+  /* Very narrow — push text down a rung to preserve line-count */
+  .gw-industries-hero__title,
+  .gw-whoweare__title {
+    font-size: clamp(1.6rem, 7vw, 2rem);
+  }
+  .gw-industries-hero { padding: 3rem 0 2rem; }
+  .gw-industries-hero__lede,
+  .gw-whoweare__lede { font-size: 15px; }
+
+  /* The tall "industries" tile on the homepage is too tall on a 430px
+     portrait — cap its aspect so the CTA below stays in view. */
+  .gallery-right .image-placeholder,
+  .gallery-right .gw-img-slot--tall { aspect-ratio: 4 / 5; }
 }
 
 /* Scroll-cue chevron shown briefly after the intro completes */
