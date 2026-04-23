@@ -1101,27 +1101,9 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 }
 .gw-flip__back-cta::after { content: " →"; }
 
-/* Small "flip" hint indicator on the front card */
-.gw-flip .service-card::after {
-  content: "";
-  position: absolute;
-  bottom: 14px;
-  right: 14px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1px solid rgba(201, 169, 97, 0.5);
-  background:
-    linear-gradient(45deg, transparent 45%, var(--gw-gold-ink) 45%, var(--gw-gold-ink) 55%, transparent 55%),
-    linear-gradient(-45deg, transparent 45%, var(--gw-gold-ink) 45%, var(--gw-gold-ink) 55%, transparent 55%);
-  background-size: 8px 8px, 8px 8px;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.7;
-  pointer-events: none;
-  transition: opacity 0.25s var(--gw-ease);
-}
-.gw-flip [class^="link-block"]:hover .service-card::after { opacity: 0; }
+/* Flip hint removed — the diagonal-line pseudo-element looked like a
+   close × icon, confusing users into thinking the card was dismissible.
+   The image + hover-lift + "Read more" link already signal interactivity. */
 
 @media (prefers-reduced-motion: reduce) {
   .gw-flip [class^="link-block"] { transition: none; transform: none !important; }
