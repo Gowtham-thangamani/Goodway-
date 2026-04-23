@@ -52,6 +52,7 @@ $RECYCLE.BIN/
 # ---------- Project scratch ----------
 .pdfpages/
 .pdfpages-oe/
+.playwright-mcp/
 images/_originals/
 assets/images/_source/ai/
 assets/images/_source/figma-exports/
