@@ -1,0 +1,231 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - link "Good Way General Trading" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img "Good Way General Trading" [ref=e7]
+      - navigation [ref=e8]:
+        - generic [ref=e9]:
+          - link "Home" [ref=e10] [cursor=pointer]:
+            - /url: index.html
+          - link "About Us" [ref=e11] [cursor=pointer]:
+            - /url: about.html
+          - link "What We Do" [ref=e12] [cursor=pointer]:
+            - /url: services.html
+          - button "Divisions" [ref=e14] [cursor=pointer]:
+            - generic [ref=e15]: 
+            - generic [ref=e16]: Divisions
+          - link "Principals & Brands" [ref=e17] [cursor=pointer]:
+            - /url: principals.html
+          - link "Industries" [ref=e18] [cursor=pointer]:
+            - /url: industries.html
+        - generic [ref=e19]:
+          - button "Search the site (press /)" [ref=e20] [cursor=pointer]:
+            - img [ref=e21]
+          - link "Contact Us" [ref=e24] [cursor=pointer]:
+            - /url: contact.html
+            - generic [ref=e25]: Contact Us
+  - navigation "Breadcrumb" [ref=e26]:
+    - list [ref=e27]:
+      - listitem [ref=e28]:
+        - link "Home" [ref=e29] [cursor=pointer]:
+          - /url: /index.html
+      - listitem [ref=e30]: /About Good Way General Trading
+  - main [ref=e31]:
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: About Good Way General Trading
+          - heading "Building an International Supply Bridge for UAE Industry" [level=1] [ref=e40]
+          - heading "A national establishment with international expertise in the oil, gas, petrochemical, power and water sectors — with a reputation for a progressive and forward-looking approach to business." [level=2] [ref=e41]
+        - link "Talk to Us" [ref=e42] [cursor=pointer]:
+          - /url: contact.html
+          - generic [ref=e43]: Talk to Us
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: "0"
+          - generic [ref=e47]: Established
+        - generic [ref=e48]:
+          - generic [ref=e49]: 0+
+          - generic [ref=e50]: Principals
+        - generic [ref=e51]:
+          - generic [ref=e52]: "0"
+          - generic [ref=e53]: Divisions
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]: // WHO WE ARE
+          - heading "A National Establishment with International Expertise" [level=3] [ref=e60]
+        - paragraph [ref=e61]: Good Way General Trading was established in the year 2014. We are a national company with international expertise in the oil, gas, petrochemical, power and water sectors with a reputation for a progressive and forward-looking approach to business. Our business is licensed by the Abu Dhabi Department of Economic Development under Licence No. CN-1843054 for onshore and offshore oil & gas fields and facilities services, and for general trading. We are VAT-registered with the UAE Federal Tax Authority under TRN 100464283900003 since 01 February 2018, and a member of the Abu Dhabi Chamber of Commerce (No. 328518).
+      - region "Your trusted industrial supply partner.":
+        - generic [ref=e62]:
+          - generic:
+            - img [ref=e63]: GW
+            - img [ref=e64]: GW
+            - generic [ref=e65]:
+              - strong [ref=e66]: 10+
+              - generic [ref=e67]: Years serving the UAE since 2014
+            - generic:
+              - img
+              - generic [ref=e68]: Who We Are
+              - heading "Your trusted industrial supply partner." [level=2]
+              - paragraph: Good Way General Trading is an Abu Dhabi–based national establishment supplying specialised products to the oil & gas, petrochemical, power, water and commercial sectors — sourced from authorised international principals and delivered on time, on spec, at a competitive price.
+              - list:
+                - listitem [ref=e69]:
+                  - img [ref=e71]
+                  - generic [ref=e74]:
+                    - strong [ref=e75]: Certified & Professional
+                    - generic [ref=e76]: Licence CN-1843054 · VAT-registered
+                - listitem [ref=e77]:
+                  - img [ref=e79]
+                  - generic [ref=e81]:
+                    - strong [ref=e82]: Best-Quality Products
+                    - generic [ref=e83]: Authorised international principals
+                - listitem [ref=e84]:
+                  - img [ref=e86]
+                  - generic [ref=e89]:
+                    - strong [ref=e90]: In-Country Value
+                    - generic [ref=e91]: UAE national establishment
+                - listitem [ref=e92]:
+                  - img [ref=e94]
+                  - generic [ref=e97]:
+                    - strong [ref=e98]: Timely Delivery
+                    - generic [ref=e99]: One-business-day quote response
+      - generic [ref=e102]:
+        - generic [ref=e103]:
+          - generic [ref=e104]: // OUR MISSION
+          - heading "Our Mission & Promise" [level=3] [ref=e105]
+        - paragraph [ref=e107]: Our mission is to be the UAE's most dependable authorised-distribution partner for industrial, scientific and commercial supply — sourcing original-equipment products from leading international principals and delivering them on time, on specification, and with the compliance paperwork every UAE buyer needs. We listen first, quote fast, and stand behind every delivery with local warranty support.
+      - generic [ref=e110]:
+        - generic [ref=e111]:
+          - generic [ref=e112]: // OUR APPROACH
+          - heading "Authorised distribution, not parallel imports." [level=3] [ref=e113]
+          - paragraph [ref=e114]: Goodway operates as a direct channel between international principals and UAE buyers. Every product we ship is sourced through a formal distribution agreement — not a grey-market intermediary — which means documented origin, full manufacturer warranty, and accountability that stays in Abu Dhabi.
+        - generic [ref=e115]:
+          - article [ref=e116]:
+            - heading "Original-equipment quality" [level=4] [ref=e117]
+            - paragraph [ref=e118]: Direct agreements with AEES, REP, Arbochim, Lütze, Fisher Scientific, Merck, Cooper Crouse-Hinds, Yuasa, Westinghouse, ATMI, Efftec and McMaster-Carr. Every shipment carries the principal's serial numbers, certificates of conformity, and mill test reports where applicable.
+          - article [ref=e119]:
+            - heading "Local warranty & after-sales" [level=4] [ref=e120]
+            - paragraph [ref=e121]: Warranty claims stay with Goodway as the authorised UAE channel. No international escalation, no courier returns to Europe, no translation delays — our technical desk handles the claim and coordinates with the principal on your behalf.
+          - article [ref=e122]:
+            - heading "Compliance paperwork — done" [level=4] [ref=e123]
+            - paragraph [ref=e124]:
+              - text: "Every quote includes the relevant paperwork bundle: Civil Defence approval letters, NFPA 80 test certificates, Certificates of Conformity, Free-Sale certificates, and manufacturer warranty terms. VAT-compliant invoicing under"
+              - strong [ref=e125]: TRN 100464283900003
+              - text: .
+          - article [ref=e126]:
+            - heading "Delivery across all 7 emirates" [level=4] [ref=e127]
+            - paragraph [ref=e128]: Warehouse-to-site delivery anywhere in Abu Dhabi, Dubai, Sharjah, Ajman, Umm Al Quwain, Ras Al Khaimah and Fujairah. Inbound freight consolidation, customs clearance and on-site handover managed end-to-end so your procurement team deals with one invoice and one accountable party.
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - generic [ref=e133]: // MILESTONES
+          - heading "A decade of continuous UAE operations." [level=3] [ref=e134]
+        - generic [ref=e135]:
+          - article [ref=e136]:
+            - generic [ref=e137]: "2014"
+            - heading "Establishment" [level=4] [ref=e138]
+            - paragraph [ref=e139]:
+              - text: Good Way General Trading incorporated on 10 September 2014 as a UAE national establishment. Abu Dhabi Department of Economic Development licence
+              - strong [ref=e140]: CN-1843054
+              - text: covers onshore and offshore oil & gas fields and facilities services, plus general trading.
+          - article [ref=e141]:
+            - generic [ref=e142]: "2018"
+            - heading "VAT registration" [level=4] [ref=e143]
+            - paragraph [ref=e144]:
+              - text: Registered with the UAE Federal Tax Authority under
+              - strong [ref=e145]: TRN 100464283900003
+              - text: ", effective 01 February 2018. Every invoice since has been fully VAT-compliant and audit-ready."
+          - article [ref=e146]:
+            - generic [ref=e147]: 2014–today
+            - heading "Principal partnerships" [level=4] [ref=e148]
+            - paragraph [ref=e149]: Built authorised distribution agreements across France, Germany, UK, USA, Belgium, Japan and Australia. Twelve active principals cover chemicals, motors, switchgear, lab equipment, hazardous-area fixtures, level switches, and specialty industrial catalogues.
+          - article [ref=e150]:
+            - generic [ref=e151]: ADCCI 328518
+            - heading "Abu Dhabi Chamber member" [level=4] [ref=e152]
+            - paragraph [ref=e153]: Goodway is an Abu Dhabi Chamber of Commerce & Industry member in good standing, giving our clients a verifiable channel for supplier due diligence, payment reliability, and trade reference.
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - generic [ref=e158]: Good Way General Trading
+          - heading "Partner with a Supplier who Knows the UAE Industrial Market." [level=2] [ref=e159]
+          - generic [ref=e161]: Speak to our team about your specifications, timelines and sourcing needs.
+        - link "Get in Touch" [ref=e162] [cursor=pointer]:
+          - /url: contact.html
+          - generic [ref=e163]: Get in Touch
+  - contentinfo [ref=e164]:
+    - generic [ref=e166]:
+      - generic [ref=e167]:
+        - generic [ref=e168]:
+          - generic [ref=e169]:
+            - img "Good Way General Trading" [ref=e170]
+            - generic [ref=e171]:
+              - strong [ref=e172]: Good Way General Trading
+              - text: — a national establishment with international expertise in oil, gas, petrochemical, power and water sectors since 2014.
+            - generic [ref=e173]:
+              - text: 📍
+              - strong [ref=e174]: "Head Office:"
+              - text: Abu Dhabi, UAE
+              - text: 📮
+              - strong [ref=e175]: "P.O. Box:"
+              - text: "10422"
+          - generic [ref=e176]:
+            - generic [ref=e177]: Follow Us
+            - link "Contact Goodway on LinkedIn — profile coming soon" [ref=e179] [cursor=pointer]:
+              - /url: contact.html
+              - img [ref=e180]
+        - generic [ref=e183]:
+          - generic [ref=e184]:
+            - generic [ref=e185]: Quick Links
+            - link "→ About" [ref=e186] [cursor=pointer]:
+              - /url: about.html
+            - link "→ What We Do" [ref=e187] [cursor=pointer]:
+              - /url: services.html
+            - link "→ Principals" [ref=e188] [cursor=pointer]:
+              - /url: principals.html
+            - link "→ Industries" [ref=e189] [cursor=pointer]:
+              - /url: industries.html
+            - link "→ Contact" [ref=e190] [cursor=pointer]:
+              - /url: contact.html
+          - generic [ref=e191]:
+            - generic [ref=e192]: Contact
+            - generic [ref=e193]:
+              - generic [ref=e194]:
+                - img [ref=e195]
+                - link "gwayuae@outlook.com" [ref=e198] [cursor=pointer]:
+                  - /url: mailto:gwayuae@outlook.com
+              - generic [ref=e199]:
+                - img [ref=e200]
+                - generic [ref=e202]:
+                  - link "+971 56 442 3539" [ref=e203] [cursor=pointer]:
+                    - /url: tel:+971564423539
+                  - text: (mobile)
+                  - link "+971 2 245 0497" [ref=e204] [cursor=pointer]:
+                    - /url: tel:+97122450497
+                  - text: (office) ·
+                  - link "WhatsApp" [ref=e205] [cursor=pointer]:
+                    - /url: https://wa.me/971564423539
+          - generic [ref=e206]:
+            - generic [ref=e207]: Request Catalogue
+            - generic [ref=e208]: Receive a PDF of our principals and product divisions.
+            - generic [ref=e210]:
+              - textbox "Email address for catalogue" [ref=e211]:
+                - /placeholder: Enter your email
+              - button "Send" [ref=e212] [cursor=pointer]
+              - textbox [ref=e213]
+      - generic [ref=e214]:
+        - generic [ref=e215]:
+          - text: © 2026 Good Way General Trading. All Rights Reserved. · Licence No. CN-1843054 · TRN 100464283900003 ·
+          - link "Privacy" [ref=e216] [cursor=pointer]:
+            - /url: privacy.html
+          - text: ·
+          - link "Terms" [ref=e217] [cursor=pointer]:
+            - /url: terms.html
+        - generic [ref=e218]: قودواي للتجارة العامة
+  - button "Back to top":
+    - img
+  - link "Chat with Goodway on WhatsApp" [ref=e219] [cursor=pointer]:
+    - /url: https://wa.me/971564423539?text=Hi%20Goodway%2C%20I%20found%20your%20website%20and%20would%20like%20to%20discuss%20a%20supply%20enquiry.
+    - img [ref=e220]
+  - status

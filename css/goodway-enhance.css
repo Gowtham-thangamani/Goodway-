@@ -2852,6 +2852,20 @@ html.gw-intro-lock { overflow: hidden !important; }
 html.gw-intro-lock body > *:not(.gw-intro) { transform: translateY(8px); opacity: 0; transition: none; }
 html.gw-intro-done body > *:not(.gw-intro) { transform: none; opacity: 1; transition: opacity 0.5s var(--gw-ease), transform 0.5s var(--gw-ease); }
 
+/* Safety net: the scroll-cue must never render outside the intro
+   context on the homepage. On any inner page (or after intro completes)
+   force it gone so a stale element from a prior navigation can't flash. */
+html:not(.gw-intro-lock) .gw-scroll-cue { display: none !important; }
+
+/* Belt-and-braces: Webflow's mobile menu button + overlay must stay
+   hidden on desktop widths (>991px). If webflow.js injects or momentarily
+   flashes these during hydration, nothing visible appears. */
+@media (min-width: 992px) {
+  .w-nav-button,
+  .menu-button.w-nav-button,
+  .w-nav-overlay { display: none !important; }
+}
+
 /* Scroll-cue chevron shown briefly after the intro completes */
 .gw-scroll-cue {
   position: fixed;
