@@ -21,7 +21,7 @@
      after replacing any file under /images/ or /assets/images/ to force
      a one-shot refresh. Applies to <img src>, <img data-src>, and
      <source srcset> within <picture>. */
-  var IMG_VER  = '2026-04-23-mobile-polish';
+  var IMG_VER  = '2026-04-24-client-photos';
 
   /* ---------- SEO / marketing hook-ups ---------------------------------
      Paste tokens here once the client registers each service. Empty
