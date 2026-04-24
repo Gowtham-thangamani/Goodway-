@@ -262,21 +262,22 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   opacity: 0.7;
 }
 
-/* --- Footer logo — light variant, full size, with subtle gold glow.
-   Pulled slightly left so the visible mark (ignoring the internal
-   whitespace baked into the PNG) lines up with the flush-left paragraph
-   copy and the Head Office / P.O. Box block underneath. --- */
+/* --- Footer logo — light variant, pulled flush-left so the visible
+   logo mark aligns with the paragraph copy + Head Office / P.O. Box
+   block underneath. The PNG carries ~28px of baked-in whitespace on
+   the left side, hence the negative margin pulling the effective
+   edge back to column-zero. --- */
 .company-description img {
   height: auto;
   max-height: 140px;
   width: auto;
   object-fit: contain;
   display: block;
-  margin: 0 0 20px -14px;
+  margin: 0 0 20px -28px;
   filter: drop-shadow(0 4px 18px rgba(201, 169, 97, 0.18));
 }
 @media (max-width: 767px) {
-  .company-description img { margin-left: -8px; }
+  .company-description img { margin-left: -20px; }
 }
 
 /* --- Head Office / P.O. Box block --- */
@@ -303,49 +304,52 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
 .footer-section .newsletter-form-field {
   display: flex;
   align-items: stretch;
-  gap: 0;
-  background: rgba(250, 246, 236, 0.06);
-  border: 1px solid rgba(201, 169, 97, 0.35);
+  gap: 6px;
+  background: rgba(250, 246, 236, 0.08);
+  border: 1px solid rgba(201, 169, 97, 0.45);
   padding: 5px;
   border-radius: 999px;
-  max-width: 320px;
+  width: 100%;
+  max-width: 340px;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
-  transition: border-color 0.2s var(--gw-ease), background 0.2s var(--gw-ease);
+  transition: border-color 0.2s var(--gw-ease), background 0.2s var(--gw-ease), box-shadow 0.2s var(--gw-ease);
 }
 .footer .newsletter-form-field:focus-within,
 .footer-section .newsletter-form-field:focus-within {
   border-color: var(--gw-gold);
-  background: rgba(250, 246, 236, 0.10);
-  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.18);
+  background: rgba(250, 246, 236, 0.14);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.22);
 }
 .footer .newsletter-field.w-input,
 .footer .newsletter-field,
 .footer-section .newsletter-field.w-input,
 .footer-section .newsletter-field {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
   border: none !important;
   background: transparent !important;
-  padding: 8px 14px !important;
-  font-size: 14px;
+  padding: 10px 16px !important;
+  font-size: 14px !important;
   color: var(--gw-ivory) !important;
-  font-family: inherit;
-  outline: none;
+  font-family: inherit !important;
+  outline: none !important;
   box-shadow: none !important;
-  height: auto !important;
+  height: 38px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
 }
 .footer .newsletter-field::placeholder,
-.footer-section .newsletter-field::placeholder { color: #8a93a6; opacity: 1; font-size: 13px; }
+.footer-section .newsletter-field::placeholder { color: #b8bcc8; opacity: 1; font-size: 13px; }
 .footer .newsletter-button.w-button,
 .footer .newsletter-button,
 .footer-section .newsletter-button.w-button,
 .footer-section .newsletter-button {
-  flex-shrink: 0;
+  flex: 0 0 auto;
   background: var(--gw-gold) !important;
   color: var(--gw-navy) !important;
   border: none !important;
-  padding: 0 20px !important;
+  padding: 0 22px !important;
   border-radius: 999px !important;
   font-weight: 700;
   font-size: 12px;
@@ -353,9 +357,32 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.25s var(--gw-ease), transform 0.1s var(--gw-ease), box-shadow 0.2s var(--gw-ease);
-  min-width: 86px;
-  height: 36px !important;
-  line-height: 36px !important;
+  min-width: 0;
+  height: 38px !important;
+  line-height: 38px !important;
+  margin: 0 !important;
+}
+
+/* Narrow footer column: stack the form vertically so the input is not
+   squeezed to zero width. Happens when the footer grid drops to 2 or
+   1 columns on tablet / phone. */
+@media (max-width: 991px) {
+  .footer .newsletter-form-field,
+  .footer-section .newsletter-form-field {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 14px;
+    max-width: 360px;
+  }
+  .footer .newsletter-button,
+  .footer-section .newsletter-button {
+    width: 100%;
+    height: 42px !important;
+    line-height: 42px !important;
+  }
+  .footer .newsletter-field,
+  .footer-section .newsletter-field { width: 100%; height: 42px !important; }
 }
 .footer .newsletter-button:hover,
 .footer-section .newsletter-button:hover {
