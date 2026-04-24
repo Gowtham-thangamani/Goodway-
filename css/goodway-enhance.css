@@ -1991,6 +1991,123 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   .gw-marquee { -webkit-mask-image: none; mask-image: none; }
 }
 
+/* ==========================================================================
+   EDITORIAL TIMELINE BAND — About page "Milestones"
+   Giant low-opacity "SINCE 2014" wordmark floats behind the card row and
+   parallaxes at 0.3× scroll speed. Cards sit over a thin gold rail.
+   Set --gw-word-y from JS via the scroll driver in §24 gwParallaxWord.
+   ========================================================================== */
+.gw-timeline-band {
+  position: relative;
+  overflow: hidden;                 /* clip the oversized wordmark */
+  isolation: isolate;
+}
+.gw-timeline-band__word {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Parallax offset is set by JS — start a touch below centre so the
+     natural scroll direction is downward for the giant text. */
+  transform: translate3d(0, var(--gw-word-y, 0px), 0);
+  will-change: transform;
+}
+.gw-timeline-band__word span {
+  font-family: var(--gw-display, 'Fraunces', serif);
+  font-weight: 600;
+  font-size: clamp(120px, 22vw, 340px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(201, 169, 97, 0.28);
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.gw-timeline-band .services-wrap,
+.gw-timeline-band .container { position: relative; z-index: 1; }
+
+/* Timeline rail — thin gold hairline threading the milestone cards */
+@media (min-width: 992px) {
+  .gw-timeline-rail {
+    position: relative;
+  }
+  .gw-timeline-rail::before {
+    content: "";
+    position: absolute;
+    top: 52px;                       /* sits across the datestamp row */
+    left: 6%;
+    right: 6%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(201, 169, 97, 0.45) 8%,
+      rgba(201, 169, 97, 0.45) 92%,
+      transparent);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .gw-timeline-rail > * { position: relative; z-index: 1; }
+}
+
+/* Datestamp chip — the "2014 · 2018 · ADCCI 328518" labels look
+   postage-stamp bold instead of muted meta text. */
+.gw-datestamp {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 14px 7px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  border-radius: 999px;
+  background: rgba(201, 169, 97, 0.08);
+  color: var(--gw-gold-ink);
+  font-family: var(--gw-display, 'Fraunces', serif);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  position: relative;
+}
+.gw-datestamp::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gw-gold);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.18);
+  flex: 0 0 auto;
+}
+
+/* Tilt-on-reveal — Our Approach + Milestones cards come up rotated
+   and settle flat as they enter viewport (uses the same .gw-reveal /
+   .is-visible machinery; we only add the extra starting transform). */
+.gw-tilt-reveal > .gw-coverage-card.gw-reveal {
+  transform: translateY(28px) rotate(1.2deg);
+  transform-origin: 20% 100%;
+}
+.gw-tilt-reveal > .gw-coverage-card.gw-reveal:nth-child(even) {
+  transform: translateY(28px) rotate(-1.2deg);
+  transform-origin: 80% 100%;
+}
+.gw-tilt-reveal > .gw-coverage-card.gw-reveal.is-visible { transform: none; }
+/* Make sure the transition covers the rotate too */
+.gw-tilt-reveal > .gw-coverage-card.gw-reveal {
+  transition: opacity 0.8s var(--gw-ease), transform 0.8s var(--gw-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gw-timeline-band__word { transform: none !important; }
+  .gw-tilt-reveal > .gw-coverage-card.gw-reveal {
+    transform: none !important;
+  }
+}
+
 /* ---------- Capability gallery layout polish ----------
    The original Webflow layout let .gallery-right stretch to match the
    .gallery-left grid's height, which made the tall industries tile

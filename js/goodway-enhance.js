@@ -752,7 +752,8 @@
     var selectors = [
       '.hero-numbers .h3-default',
       '.gw-facts__num',
-      '.gw-division-hero__num'
+      '.gw-division-hero__num',
+      '.gw-coverage__num[data-gw-count]'   /* About-page milestones */
     ];
     var targets = doc.querySelectorAll(selectors.join(','));
     if (!targets.length) return;
@@ -1855,6 +1856,48 @@
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
+  })();
+
+  /* ============================================================
+     24. PARALLAX WORDMARK — About "Milestones" giant background
+     type translates at ~0.35x scroll speed relative to its band.
+     Uses a CSS custom property (--gw-word-y) so the transform
+     itself lives in CSS and the browser can composite it cheaply.
+     ============================================================ */
+  (function gwParallaxWord() {
+    if (prefersReducedMotion) return;
+    var bands = doc.querySelectorAll('.gw-timeline-band');
+    if (!bands.length) return;
+
+    /* How far the word travels relative to the band's own height.
+       0.35 = moves 35% of the band's height across a full scroll-through. */
+    var RATIO = 0.35;
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight || 800;
+      bands.forEach(function (band) {
+        var rect = band.getBoundingClientRect();
+        /* Progress: -1 when band is entirely below the fold, 0 when its
+           centre meets the viewport centre, +1 when it's entirely above. */
+        var progress = ((rect.top + rect.height / 2) - vh / 2) / (vh / 2 + rect.height / 2);
+        progress = Math.max(-1, Math.min(1, progress));
+        /* Translate the word in the OPPOSITE direction to scroll so it
+           feels anchored to the background, like a billboard behind glass. */
+        var y = -progress * rect.height * RATIO;
+        var word = band.querySelector('.gw-timeline-band__word');
+        if (word) word.style.setProperty('--gw-word-y', y.toFixed(1) + 'px');
+      });
+    }
+    function onScrollOrResize() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+    update();
   })();
 
   updateStatic();
