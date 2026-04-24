@@ -319,15 +319,21 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
 }
 .footer .newsletter-form-field,
 .footer-section .newsletter-form-field {
+  /* Stack vertically on every viewport — the footer grid's rightmost
+     column is consistently too narrow (~180px on desktop after 3-col
+     split) to fit a sensible email input + Send button side by side
+     without one of them rendering invisible. A vertical stack is
+     unambiguous, always readable, never broken. */
   display: flex;
+  flex-direction: column;
   align-items: stretch;
-  gap: 6px;
+  gap: 8px;
   background: rgba(250, 246, 236, 0.08);
   border: 1px solid rgba(201, 169, 97, 0.45);
-  padding: 5px;
-  border-radius: 999px;
+  padding: 10px;
+  border-radius: 14px;
   width: 100%;
-  max-width: 340px;
+  max-width: 360px;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   transition: border-color 0.2s var(--gw-ease), background 0.2s var(--gw-ease), box-shadow 0.2s var(--gw-ease);
@@ -342,19 +348,24 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
 .footer .newsletter-field,
 .footer-section .newsletter-field.w-input,
 .footer-section .newsletter-field {
-  flex: 1 1 auto;
-  min-width: 0;
-  border: none !important;
-  background: transparent !important;
-  padding: 10px 16px !important;
+  width: 100%;
+  border: 1px solid rgba(201, 169, 97, 0.25) !important;
+  background: rgba(14, 26, 43, 0.45) !important;
+  padding: 10px 14px !important;
   font-size: 14px !important;
   color: var(--gw-ivory) !important;
   font-family: inherit !important;
   outline: none !important;
   box-shadow: none !important;
-  height: 38px !important;
+  height: 42px !important;
   line-height: 1.2 !important;
   margin: 0 !important;
+  border-radius: 10px !important;
+}
+.footer .newsletter-field:focus,
+.footer-section .newsletter-field:focus {
+  border-color: var(--gw-gold) !important;
+  background: rgba(14, 26, 43, 0.6) !important;
 }
 .footer .newsletter-field::placeholder,
 .footer-section .newsletter-field::placeholder { color: #b8bcc8; opacity: 1; font-size: 13px; }
@@ -362,44 +373,21 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
 .footer .newsletter-button,
 .footer-section .newsletter-button.w-button,
 .footer-section .newsletter-button {
-  flex: 0 0 auto;
+  width: 100%;
   background: var(--gw-gold) !important;
   color: var(--gw-navy) !important;
   border: none !important;
   padding: 0 22px !important;
-  border-radius: 999px !important;
+  border-radius: 10px !important;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.25s var(--gw-ease), transform 0.1s var(--gw-ease), box-shadow 0.2s var(--gw-ease);
-  min-width: 0;
-  height: 38px !important;
-  line-height: 38px !important;
+  height: 42px !important;
+  line-height: 42px !important;
   margin: 0 !important;
-}
-
-/* Narrow footer column: stack the form vertically so the input is not
-   squeezed to zero width. Happens when the footer grid drops to 2 or
-   1 columns on tablet / phone. */
-@media (max-width: 991px) {
-  .footer .newsletter-form-field,
-  .footer-section .newsletter-form-field {
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    border-radius: 14px;
-    max-width: 360px;
-  }
-  .footer .newsletter-button,
-  .footer-section .newsletter-button {
-    width: 100%;
-    height: 42px !important;
-    line-height: 42px !important;
-  }
-  .footer .newsletter-field,
-  .footer-section .newsletter-field { width: 100%; height: 42px !important; }
 }
 .footer .newsletter-button:hover,
 .footer-section .newsletter-button:hover {
@@ -940,10 +928,21 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   grid-template-columns: 1fr 1fr 1fr;
   align-items: start;
 }
-.company-description { display: flex; flex-direction: column; gap: 14px; }
+/* Pull the whole company-info block (logo + paragraph + head-office +
+   Follow Us + social row) to the same flush-left column as the logo's
+   visible mark, instead of just the logo. The logo keeps its −28px
+   negative margin to compensate for the PNG's baked-in whitespace;
+   the siblings get a matching negative margin-left so their text
+   lines up with the logo mark. */
+.company-info { margin-left: -28px; }
+.company-description { display: flex; flex-direction: column; gap: 14px; margin-left: 0; }
 .company-description > * { margin: 0; }
+.company-description img { margin-left: 0 !important; }
 .company-description .paragraph { max-width: 36ch; line-height: 1.55; }
 .company-socmed { margin-top: 6px; }
+@media (max-width: 767px) {
+  .company-info { margin-left: -20px; }
+}
 
 .paragraph.bold-white {
   color: var(--gw-sand) !important;
