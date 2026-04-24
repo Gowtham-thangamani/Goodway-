@@ -11,6 +11,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://goodway.ae/index.html">
   <link rel="preload" as="image" href="images/goodway-logo.png" fetchpriority="high">
+  <!-- LCP hero image — preloaded so it lands with first paint -->
+  <link rel="preload" as="image" href="assets/images/sections/home/benefit-ops.jpg" fetchpriority="high">
+  <!-- Preconnect to the jQuery CDN used by webflow.js below -->
+  <link rel="preconnect" href="https://d3e54v103j8qbb.cloudfront.net" crossorigin>
   <meta property="og:image" content="https://goodway.ae/images/goodway-logo.png">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
@@ -92,6 +96,7 @@
   </script>
 </head>
 <body>
+  <a class="gw-skip-link" href="#main">Skip to main content</a>
   <!-- NAVBAR -->
   <div data-animation="over-right" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="container">
@@ -215,7 +220,7 @@
           </div>
           <p class="paragraph regular-light-grey">Established in 2014 and VAT-registered with the UAE Federal Tax Authority (TRN 100464283900003), Goodway pairs national identity with international supply relationships — delivering products backed by recognized principals across Europe, North America, Asia and Oceania.</p>
         </div>
-        <div class="benefit-img"><img src="assets/images/sections/home/benefit-ops.jpg" alt="Goodway authorized trading partner — UAE industrial operations" loading="lazy" decoding="async" width="1600" height="900"></div>
+        <div class="benefit-img"><img src="assets/images/sections/home/benefit-ops.jpg" alt="Goodway authorized trading partner — UAE industrial operations" fetchpriority="high" decoding="async" width="1600" height="900"></div>
         <div class="benefit-points">
           <div class="benefit-item">
             <div class="benefit-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v6c0 5.55 3.84 10.74 10 12 6.16-1.26 10-6.45 10-12V7l-10-5zm0 10h7c-.53 4.12-3.28 7.79-7 8.94V12H5V8.3l7-3.11V12z"/></svg></div>

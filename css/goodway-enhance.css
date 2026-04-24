@@ -11,7 +11,7 @@
   --gw-navy-2: #14243d;
   --gw-navy-3: #1b2f4c;
   --gw-gold: #c9a961;
-  --gw-gold-ink: #8a6c2c;   /* accessible gold-on-light */
+  --gw-gold-ink: #7a5d22;   /* AA-contrast gold-on-light (≥5.6:1 vs --gw-linen) */
   --gw-sand: #e9d7a5;
   --gw-ivory: #faf6ec;
   --gw-ink: #0e1a2b;
@@ -42,6 +42,28 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* ==========================================================================
+   WCAG AA focus ring — single global rule so every keyboard-focused
+   element gets a clear gold outline. The `:focus-visible` selector
+   targets only keyboard/AT focus, not mouse click focus, so the site
+   keeps its clean visual state for pointer users.
+   ========================================================================== */
+:focus-visible {
+  outline: 3px solid var(--gw-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* Cards + marquee items — match the :hover lift on :focus-visible
+   so keyboard users get the same visual feedback as pointer users. */
+.gw-marquee__item:focus-visible,
+.gw-industry:focus-visible,
+.gw-coverage-card:focus-visible,
+.gallery-item > a:focus-visible,
+.footer-link:focus-visible {
+  transform: translateY(-2px);
+  outline-offset: 3px;
 }
 .paragraph { color: var(--gw-text); line-height: 1.65; }
 /* Smaller text — footer copy, form hints, metadata — consistent readability */
@@ -887,7 +909,7 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 }
 .footer-contact .contact-footer > .paragraph { flex: 1 1 auto; min-width: 0; }
 .footer-contact .contact-footer svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 3px; }
-.footer-contact .contact-footer .contact-meta { color: #9aa0ad; font-size: 12px; margin-left: 4px; font-weight: 400; }
+.footer-contact .contact-footer .contact-meta { color: #c2c6d0; font-size: 12px; margin-left: 4px; font-weight: 400; } /* ≥ AA on navy footer */
 .footer-contact .contact-footer a { word-break: break-all; }
 .footer-bottom {
   margin-top: 2rem;
@@ -925,11 +947,16 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 /* ---------- Partner carousel: improve visual weight ---------- */
 .partner-section .partner-wrap { gap: 28px; padding: 16px 0; }
 
-/* ---------- Reveal-on-scroll ---------- */
-.gw-reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s var(--gw-ease), transform 0.7s var(--gw-ease);
+/* ---------- Reveal-on-scroll ----------
+   Motion-sensitive users (prefers-reduced-motion: reduce) get content
+   immediately — no translate, no opacity fade. The animated variant
+   only applies when the user has NOT asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .gw-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--gw-ease), transform 0.7s var(--gw-ease);
+  }
 }
 .gw-reveal.is-visible { opacity: 1; transform: none; }
 
