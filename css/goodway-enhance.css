@@ -230,14 +230,21 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   opacity: 0.7;
 }
 
-/* --- Footer logo — light variant, full size, with subtle gold glow --- */
+/* --- Footer logo — light variant, full size, with subtle gold glow.
+   Pulled slightly left so the visible mark (ignoring the internal
+   whitespace baked into the PNG) lines up with the flush-left paragraph
+   copy and the Head Office / P.O. Box block underneath. --- */
 .company-description img {
   height: auto;
   max-height: 140px;
   width: auto;
   object-fit: contain;
-  margin-bottom: 20px;
+  display: block;
+  margin: 0 0 20px -14px;
   filter: drop-shadow(0 4px 18px rgba(201, 169, 97, 0.18));
+}
+@media (max-width: 767px) {
+  .company-description img { margin-left: -8px; }
 }
 
 /* --- Head Office / P.O. Box block --- */
@@ -865,10 +872,16 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 .footer-contact .contact-footer {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 10px;
+  line-height: 1.55;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
+.footer-contact .contact-footer > .paragraph { flex: 1 1 auto; min-width: 0; }
 .footer-contact .contact-footer svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 3px; }
+.footer-contact .contact-footer .contact-meta { color: #9aa0ad; font-size: 12px; margin-left: 4px; font-weight: 400; }
+.footer-contact .contact-footer a { word-break: break-all; }
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 1.25rem;
