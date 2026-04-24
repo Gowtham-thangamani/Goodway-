@@ -1943,6 +1943,69 @@
   })();
 
   /* ============================================================
+     26. SECTION RAIL — desktop jump-nav on long pages.
+     Phase 1: lives on /divisions/electrical.html only. If proven
+     useful it'll roll to the other 8 divisions. Honours
+     prefers-reduced-motion (no smooth-scroll) and clicks.
+     ============================================================ */
+  (function gwSectionRail() {
+    var rail = doc.querySelector('[data-gw-rail]');
+    if (!rail) return;
+    var links = Array.prototype.slice.call(rail.querySelectorAll('[data-gw-rail-link]'));
+    if (!links.length) return;
+
+    /* Map each link to its target section by id */
+    var entries = links.map(function (link) {
+      var id = (link.getAttribute('href') || '').replace(/^#/, '');
+      var section = id ? doc.getElementById(id) : null;
+      return { link: link, section: section, id: id };
+    }).filter(function (e) { return e.section; });
+    if (!entries.length) return;
+
+    function setActive(id) {
+      entries.forEach(function (e) {
+        e.link.classList.toggle('is-active', e.id === id);
+        if (e.id === id) e.link.setAttribute('aria-current', 'true');
+        else e.link.removeAttribute('aria-current');
+      });
+    }
+
+    /* Click handler — smooth-scroll (respecting reduced-motion via CSS)
+       and immediately set the active state so the UI responds before
+       the observer catches up. */
+    entries.forEach(function (e) {
+      e.link.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        setActive(e.id);
+        var top = e.section.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        if (history.replaceState) history.replaceState(null, '', '#' + e.id);
+      });
+    });
+
+    /* Scroll-linked active state — fires whichever section's top has
+       crossed the 30% mark of the viewport most recently. Simpler
+       than IntersectionObserver for this "scrollspy" use case. */
+    var last = null;
+    function onScroll() {
+      var viewportAnchor = window.innerHeight * 0.3;
+      var current = entries[0].id;
+      for (var i = 0; i < entries.length; i++) {
+        var r = entries[i].section.getBoundingClientRect();
+        if (r.top <= viewportAnchor) current = entries[i].id;
+        else break;
+      }
+      if (current !== last) { setActive(current); last = current; }
+    }
+    var raf = null;
+    window.addEventListener('scroll', function () {
+      if (raf) return;
+      raf = requestAnimationFrame(function () { raf = null; onScroll(); });
+    }, { passive: true });
+    onScroll();
+  })();
+
+  /* ============================================================
      25. CONTACT TABS — /contact.html#general vs /contact.html#quote
      Syncs aria-selected + .is-active on the tab buttons and the
      hidden attribute on the matching panel. Runs on load and on

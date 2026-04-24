@@ -2393,6 +2393,83 @@ body .gallery-section .gw-reveal { transition-delay: 0s !important; }
 .gw-block--divider { border-top: 1px solid var(--gw-border); }
 
 /* ==========================================================================
+   SECTION RAIL — desktop-only jump nav on long pages.
+   Fixed to the right edge, vertical list of section labels, active state
+   driven by an IntersectionObserver in goodway-enhance.js §26. Hidden
+   below 992px (mobile uses the scroll-to-top button). Honours
+   prefers-reduced-motion (no smooth-scroll for motion-sensitive users).
+   ========================================================================== */
+.gw-rail { display: none; }
+
+@media (min-width: 992px) {
+  .gw-rail {
+    display: block;
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 60;
+    padding: 16px 14px;
+    background: rgba(250, 246, 236, 0.82);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201, 169, 97, 0.28);
+    border-radius: 14px;
+    box-shadow: 0 18px 44px rgba(14, 26, 43, 0.08);
+    max-width: 200px;
+  }
+  .gw-rail__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .gw-rail__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--gw-muted);
+    font-family: var(--gw-body);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s var(--gw-ease), background 0.2s var(--gw-ease);
+  }
+  .gw-rail__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(14, 26, 43, 0.2);
+    flex: 0 0 auto;
+    transition: background 0.2s var(--gw-ease), box-shadow 0.2s var(--gw-ease), transform 0.2s var(--gw-ease);
+  }
+  .gw-rail__label { white-space: nowrap; }
+  .gw-rail__link:hover { color: var(--gw-navy); background: rgba(201, 169, 97, 0.10); }
+  .gw-rail__link:hover .gw-rail__dot { background: var(--gw-gold); }
+  .gw-rail__link.is-active {
+    color: var(--gw-navy);
+    font-weight: 600;
+    background: rgba(201, 169, 97, 0.14);
+  }
+  .gw-rail__link.is-active .gw-rail__dot {
+    background: var(--gw-gold);
+    box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.22);
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gw-rail__dot, .gw-rail__link { transition: none; }
+}
+
+/* ==========================================================================
    RELATED DIVISIONS — cross-sell strip at the foot of each division page.
    Simple card grid, subtle gold-ink hover lift, matches the editorial tone.
    ========================================================================== */
