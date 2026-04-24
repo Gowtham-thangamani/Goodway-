@@ -1928,19 +1928,50 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 .gw-legal a { color: var(--gw-gold-ink); text-decoration: underline; }
 .gw-legal a:hover { color: var(--gw-navy); }
 
+/* ---------- Capability gallery layout polish ----------
+   The original Webflow layout let .gallery-right stretch to match the
+   .gallery-left grid's height, which made the tall industries tile
+   dominate the row and (because of scroll-reveal stagger) visually
+   "cover" the title area as the section came into view.  Cap the
+   right tile's aspect and align both columns to the top so the
+   section reads as a single editorial composition. */
+.gallery-content {
+  align-items: stretch;
+}
+.gallery-right {
+  display: flex;
+  align-self: stretch;
+}
+.gallery-right > .image-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;          /* tall portrait, capped — no runaway height */
+  max-height: 100%;
+  display: block;
+}
+
+/* Remove the staggered reveal inside the gallery so the left grid and
+   the right tile fade in together.  Stops the "big image drops in first
+   and covers the title" moment.  (Stagger is set inline by the
+   IntersectionObserver callback — reset with specificity on body.) */
+body .gallery-section .gw-reveal { transition-delay: 0s !important; }
+
 /* ---------- Scroll snap for capability gallery on mobile ---------- */
 @media (max-width: 767px) {
+  .gallery-content { flex-direction: column; gap: 18px; }
   .gallery-left {
     display: flex;
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: 8px;
+    width: 100%;
   }
   .gallery-left .gallery-item {
     flex: 0 0 82%;
     scroll-snap-align: center;
   }
+  .gallery-right { width: 100%; }
+  .gallery-right > .image-placeholder { aspect-ratio: 16 / 10; }
 }
 
 /* ---------- Partner-logo row enhancement ---------- */
