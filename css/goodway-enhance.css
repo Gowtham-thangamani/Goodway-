@@ -262,6 +262,22 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   opacity: 0.7;
 }
 
+/* --- Footer logo anchor — wraps the logo in a link back to home.
+   The anchor itself carries no padding so the PNG's baked-in
+   whitespace negative margin still works. Focus-visible gets the
+   global gold ring via the :focus-visible rule at the top of the
+   file; here we just strip the default anchor underline. --- */
+.footer-logo-link {
+  display: inline-block;
+  text-decoration: none !important;
+  line-height: 0;
+}
+.footer-logo-link:focus-visible img {
+  outline: 3px solid var(--gw-gold);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 /* --- Footer logo — light variant, pulled flush-left so the visible
    logo mark aligns with the paragraph copy + Head Office / P.O. Box
    block underneath. The PNG carries ~28px of baked-in whitespace on
