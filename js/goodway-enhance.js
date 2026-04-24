@@ -30,6 +30,13 @@
   var GSC_TOKEN       = '';    // Google Search Console "HTML tag" method — paste the content="..." value
   var GA_MEASUREMENT_ID = '';  // Google Analytics 4, format "G-XXXXXXXX"
   var GTM_ID          = '';    // Google Tag Manager, format "GTM-XXXXXX" (optional — only if using GTM instead of GA4 direct)
+
+  /* Where the lead-capture POST goes. Leave empty to skip server capture
+     and fall straight back to `mailto:` (useful on the static-only
+     preview). In production point this at the Node server, eg:
+       window.GW_LEAD_ENDPOINT = 'https://admin.goodway.ae/api/leads';
+     A same-origin default is tried first if nothing is configured. */
+  var LEAD_ENDPOINT = window.GW_LEAD_ENDPOINT || '/api/leads';
   var IMG_BASE = window.GW_IMG_BASE || null;   // null means "use existing path as-is"
   window.GW_IMG_VER = IMG_VER;
 
@@ -1563,6 +1570,118 @@
           try { sessionStorage.removeItem(key); } catch (e) {}
         }, 10);
       });
+    });
+  })();
+
+  /* ============================================================
+     22. Lead-capture submit — POSTs every gw-form to /api/leads
+     and shows a success toast. If the server is unreachable
+     (no admin backend deployed yet, or CORS block), transparently
+     falls through to the form's original `mailto:` action so the
+     user's enquiry still reaches the inbox.
+     Idempotent: the gwFormAutosave IIFE above only listens to
+     'submit' to clear its draft; this one intercepts with
+     preventDefault() and handles the network call. No conflict.
+     ============================================================ */
+  (function gwFormSubmit() {
+    var forms = doc.querySelectorAll('form.gw-form[data-gw-form]');
+    if (!forms.length) return;
+
+    forms.forEach(function (form) {
+      form.addEventListener('submit', function (ev) {
+        /* If submit is already in-flight, let the original fire */
+        if (form.dataset.gwSubmitting === '1') return;
+
+        /* Honeypot — if the hidden website field is filled, assume a bot
+           and let the mailto go through (but don't POST server-side). */
+        var honey = form.querySelector('input[name="website"]');
+        if (honey && honey.value.trim()) return;
+
+        /* Gather form data as a plain object */
+        var data = {};
+        new FormData(form).forEach(function (value, key) {
+          if (key === 'website') return;
+          data[key] = String(value).trim();
+        });
+        data.source = form.getAttribute('data-gw-form') || 'web';
+        data.page = location.pathname;
+
+        /* Minimum field check — the server also validates, but short-circuit
+           here so the UI responds immediately on obviously-empty forms. */
+        if (!data.name || !data.email) return;
+        if (data.source === 'quote' && !data.spec) return;
+        if (data.source === 'contact' && !data.message) return;
+
+        /* Map "message" (contact form) to "spec" so the server schema
+           accepts it — the quotes table uses `spec` as the body column. */
+        if (data.message && !data.spec) { data.spec = data.message; delete data.message; }
+
+        ev.preventDefault();
+        form.dataset.gwSubmitting = '1';
+        var submit = form.querySelector('input[type="submit"], button[type="submit"]');
+        var oldVal = submit ? (submit.value || submit.textContent) : '';
+        if (submit) {
+          submit.disabled = true;
+          if (submit.value !== undefined) submit.value = 'Sending…';
+          else submit.textContent = 'Sending…';
+        }
+
+        function toast(msg, ok) {
+          var t = doc.querySelector('.gw-toast') || (function () {
+            var el = doc.createElement('div');
+            el.className = 'gw-toast';
+            el.setAttribute('role', 'status');
+            el.setAttribute('aria-live', 'polite');
+            doc.body.appendChild(el);
+            return el;
+          })();
+          t.textContent = msg;
+          t.style.setProperty('--gw-toast-bg', ok ? 'var(--gw-navy)' : '#8a2a2a');
+          t.classList.add('is-visible');
+          setTimeout(function () { t.classList.remove('is-visible'); }, 4200);
+        }
+
+        function fallbackToMailto() {
+          form.dataset.gwSubmitting = '0';
+          if (submit) { submit.disabled = false; if (submit.value !== undefined) submit.value = oldVal; else submit.textContent = oldVal; }
+          /* Re-submit with the original action (mailto:) */
+          form.submit();
+        }
+
+        if (!LEAD_ENDPOINT) return fallbackToMailto();
+
+        /* 6-second timeout so a slow / offline server doesn't hang the UX */
+        var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+        var timeout = setTimeout(function () { if (controller) controller.abort(); }, 6000);
+
+        fetch(LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data),
+          signal: controller ? controller.signal : undefined,
+          credentials: 'omit',
+          mode: 'cors'
+        })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+        .then(function (out) {
+          clearTimeout(timeout);
+          if (!out || out.ok !== true) throw new Error('Server declined');
+          toast('Thanks — we received your enquiry and will reply within one business day.', true);
+          try { sessionStorage.removeItem('gw-form-' + (form.getAttribute('data-gw-form'))); } catch (e) {}
+          form.reset();
+          form.dataset.gwSubmitting = '0';
+          if (submit) { submit.disabled = false; if (submit.value !== undefined) submit.value = oldVal; else submit.textContent = oldVal; }
+          /* Fire GA4 / GTM conversion event if either is configured */
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', { source: data.source });
+          }
+        })
+        .catch(function (e) {
+          clearTimeout(timeout);
+          console.warn('[gw] lead POST failed, falling back to mailto:', e && e.message);
+          fallbackToMailto();
+        });
+      }, true /* capture-phase so we run before the form default */);
     });
   })();
 

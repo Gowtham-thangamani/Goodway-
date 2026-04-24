@@ -1134,11 +1134,16 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 
   /* ===================================================================
      MOBILE NAV PANEL — full-height navy sheet with legible content.
-     Overrides Webflow's column-layout defaults so every link, button,
-     dropdown and the burger lines show up with proper contrast.
+     CRITICAL: only style the overlay WHEN OPEN. Webflow's default
+     `.w-nav-overlay { display: none }` must win in the closed state,
+     otherwise an empty `.w-nav-overlay` element renders as a
+     100vh navy sheet covering the viewport on every page load.
+     Webflow sets data-nav-menu-open on the inner menu when the
+     hamburger is tapped; the `.nav-menu.w--open` class is the
+     alternate flag used when `data-collapse="all"`.
      =================================================================== */
-  .w-nav-overlay,
-  .w-nav-overlay .w-nav-menu,
+  .w-nav-overlay [data-nav-menu-open],
+  .w-nav-overlay .w-nav-menu[data-nav-menu-open],
   .nav-menu.w--open {
     background: var(--gw-navy) !important;
     color: var(--gw-ivory) !important;
@@ -1150,6 +1155,21 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
     flex-direction: column;
     align-items: stretch !important;
     gap: 4px !important;
+  }
+
+  /* Belt-and-braces: even if Webflow JS attaches an empty overlay node,
+     it must never be a painted sheet until its child menu is opened.
+     Without this, any future regression re-introduces the void-viewport. */
+  .w-nav-overlay:not(:has([data-nav-menu-open])) {
+    display: none !important;
+    background: transparent !important;
+    min-height: 0 !important;
+  }
+  /* :has() fallback for older engines — force display:none unconditionally
+     on any overlay that carries no children. */
+  .w-nav-overlay:empty {
+    display: none !important;
+    background: transparent !important;
   }
   .w-nav-overlay .nav-menu-item,
   .nav-menu.w--open .nav-menu-item {
@@ -1707,12 +1727,16 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   top: 92px;
   left: 50%;
   transform: translate(-50%, -16px);
-  background: var(--gw-navy);
+  background: var(--gw-toast-bg, var(--gw-navy));
   color: var(--gw-ivory);
   padding: 14px 22px;
   border-radius: 100px;
   box-shadow: 0 18px 44px rgba(14, 26, 43, 0.3);
   z-index: 80;
+  max-width: min(92vw, 440px);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.45;
   opacity: 0 !important;
   visibility: hidden;
   pointer-events: none;
