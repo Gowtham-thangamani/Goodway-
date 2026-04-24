@@ -1746,6 +1746,117 @@
     });
   })();
 
+  /* ============================================================
+     23. VELOCITY MARQUEE — principals row
+     Two-direction, scroll-accelerated infinite ticker. Duplicates
+     each row's children once (aria-hidden clones) so the track can
+     loop seamlessly. rAF loop advances a per-row offset at a base
+     speed (px/sec) modulated by recent scroll velocity. Pauses on
+     pointer-hover and when the row is off-screen. Short-circuits
+     entirely under prefers-reduced-motion.
+     ============================================================ */
+  (function gwMarquee() {
+    var rows = doc.querySelectorAll('[data-gw-marquee]');
+    if (!rows.length) return;
+    if (prefersReducedMotion) return;
+
+    var state = [];
+    rows.forEach(function (row) {
+      var track = row.querySelector('.gw-marquee__track');
+      if (!track) return;
+      var original = Array.prototype.slice.call(track.children);
+      /* Clone children once so the track loops seamlessly. */
+      original.forEach(function (el) {
+        var c = el.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        c.setAttribute('tabindex', '-1');
+        track.appendChild(c);
+      });
+      state.push({
+        row: row,
+        track: track,
+        dir: row.getAttribute('data-dir') === 'right' ? 1 : -1,
+        base: parseFloat(row.getAttribute('data-speed')) || 32,
+        x: 0,
+        halfWidth: 0,
+        hovered: false,
+        visible: true
+      });
+    });
+
+    /* Measure half-width (one copy's total width incl. gaps).
+       Re-measure on resize because tile widths flex with the viewport. */
+    function measure() {
+      state.forEach(function (s) {
+        s.halfWidth = s.track.scrollWidth / 2;
+        /* Normalise x so we don't jump on resize */
+        if (s.halfWidth > 0) {
+          if (s.x > 0) s.x = s.x % s.halfWidth;
+          else s.x = -((-s.x) % s.halfWidth);
+        }
+      });
+    }
+    measure();
+    window.addEventListener('resize', measure);
+
+    /* Pause off-screen rows with IntersectionObserver */
+    if ('IntersectionObserver' in window) {
+      var vis = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var s = state.find(function (x) { return x.row === e.target; });
+          if (s) s.visible = e.isIntersecting;
+        });
+      }, { threshold: 0 });
+      state.forEach(function (s) { vis.observe(s.row); });
+    }
+
+    /* Pointer hover pauses just that row */
+    state.forEach(function (s) {
+      s.row.addEventListener('pointerenter', function () { s.hovered = true; });
+      s.row.addEventListener('pointerleave', function () { s.hovered = false; });
+    });
+
+    /* Scroll-velocity tracker — the marquee speeds up while the user
+       is actively scrolling, then decays back to base. dir of scroll
+       determines which direction gets the boost. */
+    var scrollBoost = 0;          /* px/sec bonus applied to all rows' dir */
+    var lastScrollY = window.scrollY;
+    var lastScrollT = performance.now();
+    window.addEventListener('scroll', function () {
+      var now = performance.now();
+      var dy = window.scrollY - lastScrollY;
+      var dt = Math.max(16, now - lastScrollT);  /* clamp at 60fps worst case */
+      /* px/sec — clamp to avoid a single jerky scroll sending it wild */
+      var v = Math.max(-1200, Math.min(1200, (dy / dt) * 1000));
+      /* Boost multiplier tuned to feel noticeable but not chaotic */
+      scrollBoost = v * 0.35;
+      lastScrollY = window.scrollY;
+      lastScrollT = now;
+    }, { passive: true });
+
+    var last = performance.now();
+    function frame(now) {
+      var dt = Math.max(0, Math.min(64, now - last)) / 1000;  /* seconds */
+      last = now;
+      /* Decay scrollBoost toward 0 — exponential-ish, ~0.5s half-life */
+      scrollBoost *= Math.pow(0.06, dt);
+      state.forEach(function (s) {
+        if (!s.visible || s.hovered || !s.halfWidth) return;
+        /* dir: -1 = leftward (negative x), +1 = rightward.
+           Boost applies with the row's dir so a scroll-down makes
+           both rows pick up speed in their respective directions. */
+        var vel = (s.base + Math.abs(scrollBoost)) * s.dir;
+        s.x += vel * dt;
+        /* Wrap so we never accumulate huge x values */
+        if (s.x <= -s.halfWidth) s.x += s.halfWidth;
+        else if (s.x >= s.halfWidth) s.x -= s.halfWidth;
+        s.track.style.transform = 'translate3d(' + s.x.toFixed(2) + 'px, 0, 0)';
+      });
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+
   updateStatic();
   if (parallaxItems.length) onScroll();
 })();
