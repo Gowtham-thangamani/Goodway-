@@ -354,7 +354,7 @@ function page(s) {
   <link rel="canonical" href="${canonical}">
   <link rel="preload" as="image" href="../images/goodway-logo.png" fetchpriority="high">
   <meta property="og:image" content="${og}">
-  <link href="../css/normalize.css" rel="stylesheet"><link href="../css/webflow.css" rel="stylesheet"><link href="../css/green-crescent-consultant.webflow.css" rel="stylesheet"><link href="../css/goodway-brand.css" rel="stylesheet"><link href="../css/goodway-enhance.css" rel="stylesheet">
+  <link href="../css/normalize.min.css" rel="stylesheet"><link href="../css/webflow.min.css" rel="stylesheet"><link href="../css/green-crescent-consultant.webflow.min.css" rel="stylesheet"><link href="../css/goodway-brand.min.css" rel="stylesheet"><link href="../css/goodway-enhance.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com" rel="preconnect"><link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="../images/goodway-logo.png" rel="shortcut icon"><link href="../images/goodway-logo.png" rel="apple-touch-icon"><link href="../site.webmanifest" rel="manifest"><meta name="theme-color" content="#0e1a2b"><meta name="robots" content="index,follow"><meta name="twitter:card" content="summary_large_image"><meta property="og:type" content="website">

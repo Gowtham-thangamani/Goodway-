@@ -6,12 +6,16 @@
   "main": "index.html",
   "type": "commonjs",
   "scripts": {
-    "dev":      "node scripts/dev-server.js",
-    "check":    "node scripts/check.js",
-    "test":     "npm run check",
-    "favicons": "node scripts/build-favicons.js",
-    "logos":    "node scripts/build-principal-logos.js",
-    "search":   "node scripts/build-search-index.js"
+    "dev":          "node scripts/dev-server.js",
+    "check":        "node scripts/check.js",
+    "test":         "npm run check",
+    "favicons":     "node scripts/build-favicons.js",
+    "logos":        "node scripts/build-principal-logos.js",
+    "search":       "node scripts/build-search-index.js",
+    "build:css":    "node scripts/build-css-min.js",
+    "build:pages":  "node scripts/build-industry-pages.js",
+    "prebuild":     "npm run build:css && npm run build:pages",
+    "build":        "npm run check"
   },
   "devDependencies": {
     "sharp": "^0.34.0"

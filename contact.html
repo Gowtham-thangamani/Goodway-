@@ -10,9 +10,9 @@
   <link rel="canonical" href="https://goodway.ae/contact.html">
   <link rel="preload" as="image" href="images/goodway-logo.png" fetchpriority="high">
   <meta property="og:image" content="https://goodway.ae/images/goodway-logo.png">
-  <link href="css/normalize.css" rel="stylesheet"><link href="css/webflow.css" rel="stylesheet"><link href="css/green-crescent-consultant.webflow.css" rel="stylesheet"><link href="css/goodway-brand.css" rel="stylesheet"><link href="css/goodway-enhance.css" rel="stylesheet">
+  <link href="css/normalize.min.css" rel="stylesheet"><link href="css/webflow.min.css" rel="stylesheet"><link href="css/green-crescent-consultant.webflow.min.css" rel="stylesheet"><link href="css/goodway-brand.min.css" rel="stylesheet"><link href="css/goodway-enhance.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com" rel="preconnect"><link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" fetchpriority="high">
   <link href="images/goodway-logo.png" rel="shortcut icon"><link href="images/goodway-logo.png" rel="apple-touch-icon"><link href="site.webmanifest" rel="manifest"><meta name="theme-color" content="#0e1a2b"><meta name="robots" content="index,follow"><meta name="twitter:card" content="summary_large_image"><meta property="og:type" content="website">
 </head>
 <body>
@@ -20,12 +20,12 @@
   <div data-animation="over-right" data-collapse="medium" data-duration="400" role="banner" class="navbar w-nav">
     <div class="container"><div class="navbar-wrap">
       <a href="index.html" class="logo-brand w-nav-brand"><img src="images/goodway-logo.png" width="180" alt="Goodway"></a>
-      <nav role="navigation" class="nav-menu w-nav-menu"><div class="nav-menu-item">
+      <nav role="navigation" aria-label="Primary" class="nav-menu w-nav-menu"><div class="nav-menu-item">
         <a href="about.html" class="nav-link w-nav-link">About Us</a>
         <a href="services.html" class="nav-link w-nav-link">What We Do</a>
         <div data-hover="false" data-delay="0" class="w-dropdown">
           <div class="w-dropdown-toggle"><div class="w-icon-dropdown-toggle"></div><div>Divisions</div></div>
-          <nav class="w-dropdown-list">
+          <nav class="w-dropdown-list" aria-label="Divisions">
             <a href="divisions/scientific-lab.html" class="w-dropdown-link">Scientific &amp; Lab Instrumentation</a>
             <a href="divisions/mechanical.html" class="w-dropdown-link">Mechanical Items</a>
             <a href="divisions/electrical.html" class="w-dropdown-link">Electrical</a>
@@ -62,8 +62,8 @@
               <input id="fld-website-c" name="website" type="text" tabindex="-1" autocomplete="off">
             </div>
             <div><label for="fld-name">Full Name (Required)</label><input id="fld-name" class="form-field w-input" name="name" required type="text" autocomplete="name" enterkeyhint="next" placeholder="Enter your name"></div>
-            <div><label for="fld-email">Email (Required)</label><input id="fld-email" class="form-field w-input" name="email" required type="email" autocomplete="email" inputmode="email" spellcheck="false" enterkeyhint="next" placeholder="Enter your email"></div>
-            <div><label for="fld-phone">Phone</label><input id="fld-phone" class="form-field w-input" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+971 …"></div>
+            <div><label for="fld-email">Email (Required)</label><input id="fld-email" class="form-field w-input" name="email" required type="email" autocomplete="email" inputmode="email" spellcheck="false" enterkeyhint="next" placeholder="Enter your email" aria-describedby="fld-email-help"><small id="fld-email-help" class="gw-form-hint">We reply within one business day.</small></div>
+            <div><label for="fld-phone">Phone</label><input id="fld-phone" class="form-field w-input" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+971 …" aria-describedby="fld-phone-help"><small id="fld-phone-help" class="gw-form-hint">Optional. UAE mobile preferred for urgent queries.</small></div>
             <div><label for="fld-division">Division of Interest</label><select id="fld-division" name="division">
                 <option>Scientific &amp; Lab Instrumentation</option>
                 <option>Mechanical Items</option>

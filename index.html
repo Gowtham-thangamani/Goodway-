@@ -16,13 +16,13 @@
   <!-- Preconnect to the jQuery CDN used by webflow.js below -->
   <link rel="preconnect" href="https://d3e54v103j8qbb.cloudfront.net" crossorigin>
   <meta property="og:image" content="https://goodway.ae/images/goodway-logo.png">
-  <link href="css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/green-crescent-consultant.webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/goodway-brand.css" rel="stylesheet" type="text/css"><link href="css/goodway-enhance.css" rel="stylesheet">
+  <link href="css/normalize.min.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.min.css" rel="stylesheet" type="text/css">
+  <link href="css/green-crescent-consultant.webflow.min.css" rel="stylesheet" type="text/css">
+  <link href="css/goodway-brand.min.css" rel="stylesheet" type="text/css"><link href="css/goodway-enhance.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" fetchpriority="high">
   <script>!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <!-- Intro overlay removed 2026-04-24 — pre-boot guard no longer needed. -->
   <link href="images/goodway-logo.png" rel="shortcut icon" type="image/x-icon">
@@ -102,7 +102,7 @@
     <div class="container">
       <div class="navbar-wrap">
         <a href="index.html" aria-current="page" class="logo-brand w-nav-brand w--current"><img src="images/goodway-logo.png" loading="lazy" width="180" alt="Good Way General Trading"></a>
-        <nav role="navigation" class="nav-menu w-nav-menu">
+        <nav role="navigation" aria-label="Primary" class="nav-menu w-nav-menu">
           <div class="nav-menu-item">
             <a href="about.html" class="nav-link w-nav-link">About Us</a>
             <a href="services.html" class="nav-link w-nav-link">What We Do</a>
@@ -111,7 +111,7 @@
                 <div class="w-icon-dropdown-toggle"></div>
                 <div>Divisions</div>
               </div>
-              <nav class="w-dropdown-list">
+              <nav class="w-dropdown-list" aria-label="Divisions">
                 <a href="divisions/scientific-lab.html" class="w-dropdown-link">Scientific &amp; Lab Instrumentation</a>
                 <a href="divisions/mechanical.html" class="w-dropdown-link">Mechanical Items</a>
                 <a href="divisions/electrical.html" class="w-dropdown-link">Electrical</a>
