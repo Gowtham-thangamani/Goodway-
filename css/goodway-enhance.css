@@ -2393,6 +2393,81 @@ body .gallery-section .gw-reveal { transition-delay: 0s !important; }
 .gw-block--divider { border-top: 1px solid var(--gw-border); }
 
 /* ==========================================================================
+   INTRO SPLASH — CSS-only. No JS timers, no state classes. The whole
+   animation is a single @keyframes that starts fully visible and fades
+   to opacity:0 + pointer-events:none by the end, so the element
+   can never strand the viewport. JS §27 listens for animationend and
+   removes the element from the DOM, but even if JS fails to load the
+   CSS alone is safe (the animation's final state is non-blocking).
+   First-visit only (sessionStorage-gated in the JS) and skipped
+   entirely by prefers-reduced-motion.
+   ========================================================================== */
+.gw-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(201, 169, 97, 0.12) 0%, transparent 55%),
+    var(--gw-ivory);
+  display: grid;
+  place-items: center;
+  animation: gw-splash-exit 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity;
+}
+.gw-splash__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.gw-splash__logo {
+  width: clamp(140px, 22vw, 200px);
+  height: auto;
+  opacity: 0;
+  transform: scale(0.84);
+  filter: drop-shadow(0 14px 28px rgba(14, 26, 43, 0.10));
+  animation: gw-splash-logo 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+}
+.gw-splash__rule {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gw-gold), var(--gw-sand));
+  border-radius: 2px;
+  animation: gw-splash-rule 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+}
+.gw-splash__tag {
+  opacity: 0;
+  font-family: var(--gw-body);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: var(--gw-gold-ink);
+  animation: gw-splash-tag 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards;
+}
+@keyframes gw-splash-logo {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes gw-splash-rule {
+  to { width: clamp(60px, 10vw, 96px); }
+}
+@keyframes gw-splash-tag {
+  to { opacity: 1; }
+}
+@keyframes gw-splash-exit {
+  0%, 70%  { opacity: 1; pointer-events: auto; }
+  100%     { opacity: 0; pointer-events: none; visibility: hidden; }
+}
+
+/* Reduced-motion: never show the splash, render content immediately. */
+@media (prefers-reduced-motion: reduce) {
+  .gw-splash { display: none !important; }
+}
+
+/* Once the splash has already played (sessionStorage flag set by JS),
+   the next HTML paint skips it via this guard class. */
+html.gw-splash-seen .gw-splash { display: none !important; }
+
+/* ==========================================================================
    SECTION RAIL — desktop-only jump nav on long pages.
    Fixed to the right edge, vertical list of section labels, active state
    driven by an IntersectionObserver in goodway-enhance.js §26. Hidden

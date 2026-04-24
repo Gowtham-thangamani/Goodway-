@@ -1943,6 +1943,52 @@
   })();
 
   /* ============================================================
+     27. INTRO SPLASH — first-visit logo reveal (CSS-only animation,
+     JS just flips a sessionStorage flag and removes the element
+     when its own animationend fires. No setTimeout chains, no
+     state-class juggling — if JS never runs the CSS keyframe
+     still completes and the element becomes non-blocking
+     (opacity:0, pointer-events:none, visibility:hidden).
+     ============================================================ */
+  (function gwSplash() {
+    var splash = doc.querySelector('[data-gw-splash]');
+    if (!splash) return;
+
+    /* Skip on repeat navigations in the same session + under
+       prefers-reduced-motion (CSS also handles the latter). */
+    try {
+      if (sessionStorage.getItem('gw-splash-seen') === '1') {
+        splash.parentNode && splash.parentNode.removeChild(splash);
+        doc.documentElement.classList.add('gw-splash-seen');
+        return;
+      }
+    } catch (e) { /* private-mode / disabled storage — fall through */ }
+
+    if (prefersReducedMotion) {
+      splash.parentNode && splash.parentNode.removeChild(splash);
+      return;
+    }
+
+    /* Remove the node when its exit animation ends — named
+       animation 'gw-splash-exit' is the one that owns the fade-out. */
+    splash.addEventListener('animationend', function (ev) {
+      if (ev.animationName !== 'gw-splash-exit') return;
+      try { sessionStorage.setItem('gw-splash-seen', '1'); } catch (e) {}
+      doc.documentElement.classList.add('gw-splash-seen');
+      if (splash.parentNode) splash.parentNode.removeChild(splash);
+    });
+
+    /* Belt-and-braces: if animationend never fires (ancient engine or
+       the animation was cancelled), force-remove after 3s so the
+       element can never strand the page. */
+    setTimeout(function () {
+      if (splash.parentNode) splash.parentNode.removeChild(splash);
+      doc.documentElement.classList.add('gw-splash-seen');
+      try { sessionStorage.setItem('gw-splash-seen', '1'); } catch (e) {}
+    }, 3000);
+  })();
+
+  /* ============================================================
      26. SECTION RAIL — desktop jump-nav on long pages.
      Phase 1: lives on /divisions/electrical.html only. If proven
      useful it'll roll to the other 8 divisions. Honours

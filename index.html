@@ -95,6 +95,15 @@
 </head>
 <body>
   <a class="gw-skip-link" href="#main">Skip to main content</a>
+  <!-- INTRO SPLASH — CSS-only, no JS timers. Honors prefers-reduced-motion
+       and sessionStorage (first-visit only). Self-removes via animationend. -->
+  <div class="gw-splash" data-gw-splash aria-hidden="true">
+    <div class="gw-splash__inner">
+      <img class="gw-splash__logo" src="images/goodway-logo.png" alt="" width="200" height="200">
+      <div class="gw-splash__rule" aria-hidden="true"></div>
+      <div class="gw-splash__tag">Abu Dhabi · Since 2014</div>
+    </div>
+  </div>
   <!-- NAVBAR -->
   <div data-animation="over-right" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="container">
