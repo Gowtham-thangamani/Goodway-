@@ -681,94 +681,25 @@
   })();
 
   /* ============================================================
-     0. INTRO OVERLAY — first-visit logo reveal + scroll-launch
-     Runs immediately (synchronous) so the overlay paints on the
-     first frame, before any hero content is visible. Uses
-     sessionStorage so repeat navigations during the same session
-     don't re-trigger the animation.
+     0. INTRO OVERLAY — REMOVED (2026-04-24)
+     The animated logo-reveal was responsible for recurring black /
+     navy viewport bugs on mobile (pre-boot guard + lock classes +
+     body-reveal opacity rules + fixed-position overlay = too many
+     moving parts that occasionally stuck). Clearing any stale state
+     from prior sessions so the site renders directly.
      ============================================================ */
-  (function gwIntro() {
-    if (prefersReducedMotion) return;
-    /* Show only on homepage + first visit in the session.
-       Override via ?intro=1 on the URL for QA. */
-    var path = location.pathname.replace(/^\//, '');
-    var isHome = path === '' || /^index\.html$/i.test(path);
-    var force  = /[?&]intro=1\b/.test(location.search);
-    var seen   = sessionStorage.getItem('gw-intro-seen');
-    if (!force && (!isHome || seen)) return;
-
-    /* Lock scroll + transition the pre-boot guard class into the live lock */
-    doc.documentElement.classList.add('gw-intro-lock');
-    doc.documentElement.classList.remove('gw-intro-pending');
-
-    /* Find the logo from whatever the page already has */
-    var logoSrc = (doc.querySelector('a.logo-brand img') || {}).src
-               || (doc.querySelector('link[rel="apple-touch-icon"]') || {}).href
-               || '/images/goodway-logo.png';
-
-    var overlay = doc.createElement('div');
-    overlay.className = 'gw-intro';
-    overlay.setAttribute('role', 'status');
-    overlay.setAttribute('aria-live', 'polite');
-    overlay.setAttribute('aria-label', 'Welcome to Good Way General Trading');
-    overlay.innerHTML =
-      '<div style="display:flex;flex-direction:column;align-items:center">' +
-        '<img class="gw-intro__logo" src="' + logoSrc + '" alt="Good Way General Trading" width="200" height="200">' +
-        '<div class="gw-intro__rule" aria-hidden="true"></div>' +
-        '<div class="gw-intro__tag">Abu Dhabi · Since 2014</div>' +
-      '</div>';
-    /* Inject as the first child of <body> so it paints before anything */
-    if (doc.body.firstChild) doc.body.insertBefore(overlay, doc.body.firstChild);
-    else doc.body.appendChild(overlay);
-
-    /* Scroll-cue that appears briefly after the reveal completes */
-    var cue = doc.createElement('div');
-    cue.className = 'gw-scroll-cue';
-    cue.setAttribute('aria-hidden', 'true');
-    doc.body.appendChild(cue);
-
-    /* Release sequence — intro plays for ~2s total so the user sees
-       the logo land, the gold rule draw in, and the "Abu Dhabi · Since
-       2014" tag fade in. Fade begins at 1600ms, overlay removed at
-       2050ms, and a 3500ms belt-and-braces force-unlocks even if a
-       timer errors. */
-    setTimeout(function () {
-      overlay.classList.add('is-leaving');
-      doc.documentElement.classList.add('gw-intro-done');
-    }, 1600);
-    setTimeout(function () {
-      doc.documentElement.classList.remove('gw-intro-lock');
-      doc.documentElement.classList.remove('gw-intro-pending');
-      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-      sessionStorage.setItem('gw-intro-seen', '1');
-    }, 2050);
-    /* Belt-and-braces — if anything throws, force unlock by 3.5s. */
-    setTimeout(function () {
-      doc.documentElement.classList.remove('gw-intro-lock');
-      doc.documentElement.classList.remove('gw-intro-pending');
-      doc.documentElement.classList.add('gw-intro-done');
-      var stuck = doc.querySelector('.gw-intro');
-      if (stuck && stuck.parentNode) stuck.parentNode.removeChild(stuck);
-      document.querySelectorAll('.gw-scroll-cue').forEach(function (c) {
-        if (c.parentNode) c.parentNode.removeChild(c);
-      });
-    }, 3500);
-
-    /* Hide the scroll cue on first scroll/interaction */
-    function killCue() {
-      cue.classList.add('is-gone');
-      setTimeout(function () { if (cue.parentNode) cue.parentNode.removeChild(cue); }, 400);
-      window.removeEventListener('scroll', killCue);
-      window.removeEventListener('wheel', killCue);
-      window.removeEventListener('touchstart', killCue);
-      window.removeEventListener('keydown', killCue);
-    }
-    window.addEventListener('scroll', killCue, { passive: true, once: true });
-    window.addEventListener('wheel', killCue, { passive: true, once: true });
-    window.addEventListener('touchstart', killCue, { passive: true, once: true });
-    window.addEventListener('keydown', killCue, { once: true });
-    /* Also auto-remove the cue after 6 s so it doesn't linger */
-    setTimeout(killCue, 6000);
+  (function gwIntroPurge() {
+    var h = doc.documentElement;
+    h.classList.remove('gw-intro-lock');
+    h.classList.remove('gw-intro-pending');
+    h.classList.remove('gw-intro-done');
+    /* Strip any overlay / scroll-cue left over in DOM by bfcache or
+       a half-applied earlier build */
+    var stuck = doc.querySelector('.gw-intro');
+    if (stuck && stuck.parentNode) stuck.parentNode.removeChild(stuck);
+    document.querySelectorAll('.gw-scroll-cue').forEach(function (c) {
+      if (c.parentNode) c.parentNode.removeChild(c);
+    });
   })();
 
   /* ============================================================

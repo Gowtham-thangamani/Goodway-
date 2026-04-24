@@ -1713,8 +1713,6 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   border-radius: 100px;
   box-shadow: 0 18px 44px rgba(14, 26, 43, 0.3);
   z-index: 80;
-  /* !important defeats the intro body-reveal rule that otherwise
-     forces opacity: 1 on every body child after gw-intro-done. */
   opacity: 0 !important;
   visibility: hidden;
   pointer-events: none;
@@ -2834,95 +2832,7 @@ a.image-placeholder > img {
   .gw-whoweare__creds { grid-template-columns: 1fr; }
 }
 
-/* ==========================================================================
-   INTRO OVERLAY — first-visit logo reveal + scroll-launch handoff
-   Injected by goodway-enhance.js on first visit (sessionStorage flag).
-   All properties are transform/opacity so the animation stays on the
-   compositor thread. No CLS — overlay is position:fixed.
-   ========================================================================== */
-html.gw-intro-lock { overflow: hidden !important; }
-
-.gw-intro {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background:
-    radial-gradient(ellipse at 50% 45%, rgba(201, 169, 97, 0.10) 0%, transparent 55%),
-    var(--gw-ivory);
-  display: grid;
-  place-items: center;
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity;
-}
-.gw-intro.is-leaving { opacity: 0; pointer-events: none; }
-
-.gw-intro__logo {
-  width: clamp(140px, 22vw, 200px);
-  height: auto;
-  transform: scale(0.82);
-  opacity: 0;
-  filter: drop-shadow(0 14px 28px rgba(14, 26, 43, 0.10));
-  will-change: transform, opacity;
-  animation: gw-intro-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-             gw-intro-float 2.8s ease-in-out 0.9s infinite alternate;
-}
-@keyframes gw-intro-in {
-  0%   { transform: scale(0.82); opacity: 0; }
-  100% { transform: scale(1);    opacity: 1; }
-}
-@keyframes gw-intro-float {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-3px); }
-}
-
-/* Gold underline accent that draws in after the logo lands */
-.gw-intro__rule {
-  width: 0;
-  height: 2px;
-  margin-top: 16px;
-  background: linear-gradient(90deg, var(--gw-gold), var(--gw-sand));
-  animation: gw-intro-rule 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
-  will-change: width;
-  border-radius: 2px;
-}
-@keyframes gw-intro-rule {
-  0%   { width: 0;   opacity: 0; }
-  100% { width: clamp(60px, 10vw, 96px); opacity: 1; }
-}
-
-/* Sub-wordmark */
-.gw-intro__tag {
-  margin-top: 12px;
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  font-size: 11px;
-  color: var(--gw-gold-ink);
-  opacity: 0;
-  animation: gw-intro-tag 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
-}
-@keyframes gw-intro-tag {
-  0%   { opacity: 0; transform: translateY(4px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Content under the overlay fades/eases up once the intro leaves.
-   Scoped to the homepage only — the intro JS only ever runs there, and
-   applying `opacity: 0` on inner pages has caused mobile devices to paint
-   an all-navy screen when a stale lock class lingered across a bfcache
-   navigation. */
-html.gw-intro-lock.gw-home body > *:not(.gw-intro) { transform: translateY(8px); opacity: 0; transition: none; }
-html.gw-intro-done body > *:not(.gw-intro) { transform: none; opacity: 1; transition: opacity 0.5s var(--gw-ease), transform 0.5s var(--gw-ease); }
-/* Hard safety net for inner pages: body children are ALWAYS visible,
-   regardless of any legacy class. */
-html:not(.gw-home) body > *:not(.gw-intro) { opacity: 1 !important; transform: none !important; }
-
-/* Safety net: the scroll-cue must never render outside the intro
-   context on the homepage. On any inner page (or after intro completes)
-   force it gone so a stale element from a prior navigation can't flash. */
-html:not(.gw-intro-lock) .gw-scroll-cue { display: none !important; }
+/* INTRO OVERLAY — removed 2026-04-24. See goodway-enhance.js §0 note. */
 
 /* Belt-and-braces: Webflow's mobile menu button + overlay must stay
    hidden on desktop widths (>991px). If webflow.js injects or momentarily
@@ -3041,45 +2951,8 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .gallery-right .gw-img-slot--tall { aspect-ratio: 4 / 5; }
 }
 
-/* Scroll-cue chevron shown briefly after the intro completes */
-.gw-scroll-cue {
-  position: fixed;
-  left: 50%;
-  bottom: 28px;
-  transform: translate(-50%, 0);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid rgba(14, 26, 43, 0.2);
-  display: grid;
-  place-items: center;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 40;
-  animation: gw-cue-in 0.4s 1.6s both, gw-cue-bounce 1.8s 2s infinite;
-}
-.gw-scroll-cue::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-right: 1.5px solid var(--gw-navy);
-  border-bottom: 1.5px solid var(--gw-navy);
-  transform: rotate(45deg) translate(-1px, -1px);
-}
-@keyframes gw-cue-in { to { opacity: 1; } }
-@keyframes gw-cue-bounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50%      { transform: translate(-50%, 6px); }
-}
-.gw-scroll-cue.is-gone { opacity: 0 !important; transition: opacity 0.3s; }
-
-/* Reduced-motion branch: skip all animation, show content immediately */
-@media (prefers-reduced-motion: reduce) {
-  .gw-intro,
-  .gw-scroll-cue { display: none !important; }
-  html.gw-intro-lock { overflow: auto !important; }
-  html.gw-intro-lock body > * { opacity: 1 !important; transform: none !important; }
-}
+/* Scroll-cue + reduced-motion branch removed 2026-04-24 along with
+   the intro overlay. */
 
 /* ==========================================================================
    COUNT-UP stats — hooked by gwCountUp() in goodway-enhance.js
