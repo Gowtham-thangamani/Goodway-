@@ -191,6 +191,12 @@
 
   /* ============================================================
      5. Reveal-on-scroll
+     Elements above the fold are revealed synchronously on the first
+     frame — NO dependency on the IntersectionObserver callback, which
+     previously caused a "content stays invisible until you scroll"
+     bug on certain viewport heights where above-fold elements didn't
+     cross the 8% threshold on the observer's first tick.
+     Below-fold elements still get the gentle fade-in-up on scroll.
      ============================================================ */
   var revealSelectors = [
     '.hero-left-header','.hero-right','.benefit-description','.benefit-img','.benefit-item',
@@ -200,7 +206,18 @@
     '.gw-industry','.gw-brand-card','.gw-industries-hero__stats > *','.gw-sector-close'
   ];
   var revealTargets = doc.querySelectorAll(revealSelectors.join(','));
-  revealTargets.forEach(function (el) { el.classList.add('gw-reveal'); });
+  var vh = window.innerHeight || doc.documentElement.clientHeight;
+
+  revealTargets.forEach(function (el) {
+    el.classList.add('gw-reveal');
+    /* If already in viewport, reveal immediately — no fade, no
+       transitionDelay, just show it so first paint is correct. */
+    var r = el.getBoundingClientRect();
+    if (r.top < vh && r.bottom > 0) {
+      el.classList.add('is-visible');
+    }
+  });
+
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -211,11 +228,26 @@
         e.target.classList.add('is-visible');
         io.unobserve(e.target);
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    revealTargets.forEach(function (el) { io.observe(el); });
+    }, { rootMargin: '0px 0px 0px 0px', threshold: 0 });
+    revealTargets.forEach(function (el) {
+      /* Only observe the ones still hidden — above-fold elements
+         are already visible and don't need watching. */
+      if (!el.classList.contains('is-visible')) io.observe(el);
+    });
   } else {
+    /* No IO support → reveal everything immediately, accept the
+       trade-off of no scroll animation over broken content. */
     revealTargets.forEach(function (el) { el.classList.add('is-visible'); });
   }
+
+  /* Belt-and-braces: if anything is still hidden 1.5 s after load
+     (e.g. an element got a 0-height during hydration and the observer
+     ignored it), force-reveal it. Prevents a stranded empty hero. */
+  setTimeout(function () {
+    revealTargets.forEach(function (el) {
+      if (!el.classList.contains('is-visible')) el.classList.add('is-visible');
+    });
+  }, 1500);
 
   /* ============================================================
      6. Parallax (rAF + lerp)
