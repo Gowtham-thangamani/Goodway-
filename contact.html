@@ -60,9 +60,9 @@
               <label for="fld-website-c">Website (leave empty)</label>
               <input id="fld-website-c" name="website" type="text" tabindex="-1" autocomplete="off">
             </div>
-            <div><label for="fld-name">Full Name (Required)</label><input id="fld-name" class="form-field w-input" name="name" required type="text" placeholder="Enter your name"></div>
-            <div><label for="fld-email">Email (Required)</label><input id="fld-email" class="form-field w-input" name="email" required type="email" placeholder="Enter your email"></div>
-            <div><label for="fld-phone">Phone</label><input id="fld-phone" class="form-field w-input" name="phone" type="tel" placeholder="+971 …"></div>
+            <div><label for="fld-name">Full Name (Required)</label><input id="fld-name" class="form-field w-input" name="name" required type="text" autocomplete="name" enterkeyhint="next" placeholder="Enter your name"></div>
+            <div><label for="fld-email">Email (Required)</label><input id="fld-email" class="form-field w-input" name="email" required type="email" autocomplete="email" inputmode="email" spellcheck="false" enterkeyhint="next" placeholder="Enter your email"></div>
+            <div><label for="fld-phone">Phone</label><input id="fld-phone" class="form-field w-input" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+971 …"></div>
             <div><label for="fld-division">Division of Interest</label><select id="fld-division" name="division">
                 <option>Scientific &amp; Lab Instrumentation</option>
                 <option>Mechanical Items</option>

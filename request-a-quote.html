@@ -39,6 +39,7 @@
         <a href="principals.html" class="nav-link w-nav-link">Principals &amp; Brands</a>
         <a href="industries.html" class="nav-link w-nav-link">Industries</a>
       </div><div class="button-menu"><a href="contact.html" class="button-outline w-inline-block"><div class="p1-default">Contact Us</div></a></div></nav>
+      <div class="menu-button w-nav-button" aria-label="Menu"><div class="menu-icon-line"><div class="menu-line-top"></div><div class="menu-line-middle"></div><div class="menu-line-bottom"></div></div></div>
     </div></div>
   </div>
 
@@ -58,12 +59,12 @@
             <input id="fld-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
           <div class="gw-row-2">
-            <div><label for="fld-name">Full Name *</label><input id="fld-name" name="name" required type="text" placeholder="Your name"></div>
-            <div><label for="fld-company">Company *</label><input id="fld-company" name="company" required type="text" placeholder="Company name"></div>
+            <div><label for="fld-name">Full Name *</label><input id="fld-name" name="name" required type="text" autocomplete="name" enterkeyhint="next" placeholder="Your name"></div>
+            <div><label for="fld-company">Company *</label><input id="fld-company" name="company" required type="text" autocomplete="organization" enterkeyhint="next" placeholder="Company name"></div>
           </div>
           <div class="gw-row-2">
-            <div><label for="fld-email">Email *</label><input id="fld-email" name="email" required type="email" placeholder="Email"></div>
-            <div><label for="fld-phone">Phone *</label><input id="fld-phone" name="phone" required type="tel" placeholder="+971 …"></div>
+            <div><label for="fld-email">Email *</label><input id="fld-email" name="email" required type="email" autocomplete="email" inputmode="email" spellcheck="false" enterkeyhint="next" placeholder="Email"></div>
+            <div><label for="fld-phone">Phone *</label><input id="fld-phone" name="phone" required type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+971 …"></div>
           </div>
           <div><label for="fld-division">Division of Interest</label><select id="fld-division" name="division">
               <option>Scientific &amp; Lab Instrumentation</option><option>Mechanical Items</option><option>Electrical</option><option>Instrumentation</option><option>Building Material</option><option>Chemicals &amp; Power</option><option>Heavy Equipment &amp; Spares</option><option>Road &amp; Industrial Safety</option><option>Office Equipment &amp; Stationery</option>
@@ -71,8 +72,8 @@
           </div>
           <div><label for="fld-spec">Product Specification / Part Number / BOQ *</label><textarea id="fld-spec" name="spec" required rows="5" placeholder="Paste your specifications, BOQ or part number details"></textarea></div>
           <div class="gw-row-2">
-            <div><label for="fld-location">Delivery Location</label><input id="fld-location" name="location" type="text" placeholder="City / Emirate"></div>
-            <div><label for="fld-timeline">Required By</label><input id="fld-timeline" name="timeline" type="text" placeholder="e.g. 2 weeks"></div>
+            <div><label for="fld-location">Delivery Location</label><input id="fld-location" name="location" type="text" autocomplete="address-level2" enterkeyhint="next" placeholder="City / Emirate"></div>
+            <div><label for="fld-timeline">Required By</label><input id="fld-timeline" name="timeline" type="text" enterkeyhint="send" placeholder="e.g. 2 weeks"></div>
           </div>
           <input type="submit" value="Submit Request" class="gw-submit">
           <p id="quote-form-note" class="paragraph gw-form-note">Submitting opens your email client with the request pre-filled to <strong>gwayuae@outlook.com</strong>.</p>
