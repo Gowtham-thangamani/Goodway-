@@ -1580,6 +1580,60 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   padding: 32px;
   box-shadow: 0 18px 44px rgba(14, 26, 43, 0.06);
 }
+
+/* ==========================================================================
+   CONTACT — tabbed form wrap (General / Quote)
+   CSS-only visual state; JS in goodway-enhance.js §25 toggles hidden attr
+   and aria-selected based on URL hash.
+   ========================================================================== */
+.gw-form-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(14, 26, 43, 0.04);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+.gw-form-tab {
+  flex: 1 1 50%;
+  padding: 10px 14px;
+  border-radius: 9px;
+  text-decoration: none;
+  color: var(--gw-text);
+  transition: background 0.2s var(--gw-ease), color 0.2s var(--gw-ease);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+  text-align: left;
+}
+.gw-form-tab__label { font-weight: 600; font-size: 15px; color: var(--gw-navy); }
+.gw-form-tab__sub { font-size: 12px; color: var(--gw-muted); }
+.gw-form-tab.is-active {
+  background: var(--gw-navy);
+  box-shadow: 0 4px 12px rgba(14, 26, 43, 0.18);
+}
+.gw-form-tab.is-active .gw-form-tab__label { color: var(--gw-ivory); }
+.gw-form-tab.is-active .gw-form-tab__sub { color: rgba(250, 246, 236, 0.7); }
+.gw-form-tab:hover:not(.is-active) { background: rgba(14, 26, 43, 0.08); }
+
+.gw-form-panel[hidden] { display: none; }
+
+/* Trust strip above the form — chips with gold rule separator */
+.gw-form-trust {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  padding: 14px 0 0;
+  margin: 22px 0 0;
+  border-top: 1px solid rgba(201, 169, 97, 0.35);
+  font-size: 13px;
+  color: #c9cfdb;
+  max-width: 640px;
+}
+.gw-form-trust li { display: inline-flex; align-items: baseline; gap: 6px; line-height: 1.35; }
+.gw-form-trust strong { color: var(--gw-sand); font-weight: 700; font-variant-numeric: tabular-nums; }
 .gw-form .gw-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;

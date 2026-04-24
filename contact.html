@@ -50,37 +50,87 @@
       <div class="hero-left"><div class="hero-left-header"><div class="hero-title">
         <div class="hero-label">Contact Us</div>
         <div class="hero-headline"><h1 class="h1-default bold-green">Get in <span class="text-span-heading">Touch</span> with Goodway</h1></div>
-        <h2 class="h6-default">Send us your enquiry, specification or BOQ. We respond within one business day.</h2>
+        <h2 class="h6-default">General enquiry or full specification — both land with our team within one business day. Pick a tab and go.</h2>
+        <!-- Trust strip — proof band above the form reduces abandonment -->
+        <ul class="gw-form-trust" aria-label="Why send us a message">
+          <li><strong>12</strong> authorised international principals</li>
+          <li><strong>7</strong> emirates served</li>
+          <li><strong>≤ 1</strong> business day response</li>
+          <li>TRN <strong>100464283900003</strong></li>
+        </ul>
       </div></div></div>
       <div class="hero-right">
         <div class="gw-form-wrap">
-          <div class="paragraph bold-lime-green">// SEND US A MESSAGE</div>
-          <form method="post" action="mailto:gwayuae@outlook.com?subject=Website%20Enquiry" enctype="text/plain" data-gw-form="contact" novalidate aria-describedby="contact-form-note" class="gw-form">
-            <!-- Honeypot: bots fill every field. Humans never see this. -->
-            <div class="gw-honeypot" aria-hidden="true">
-              <label for="fld-website-c">Website (leave empty)</label>
-              <input id="fld-website-c" name="website" type="text" tabindex="-1" autocomplete="off">
-            </div>
-            <div><label for="fld-name">Full Name (Required)</label><input id="fld-name" class="form-field w-input" name="name" required type="text" autocomplete="name" enterkeyhint="next" placeholder="Enter your name"></div>
-            <div><label for="fld-email">Email (Required)</label><input id="fld-email" class="form-field w-input" name="email" required type="email" autocomplete="email" inputmode="email" spellcheck="false" enterkeyhint="next" placeholder="Enter your email" aria-describedby="fld-email-help"><small id="fld-email-help" class="gw-form-hint">We reply within one business day.</small></div>
-            <div><label for="fld-phone">Phone</label><input id="fld-phone" class="form-field w-input" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+971 …" aria-describedby="fld-phone-help"><small id="fld-phone-help" class="gw-form-hint">Optional. UAE mobile preferred for urgent queries.</small></div>
-            <div><label for="fld-division">Division of Interest</label><select id="fld-division" name="division">
-                <option>Scientific &amp; Lab Instrumentation</option>
-                <option>Mechanical Items</option>
-                <option>Electrical</option>
-                <option>Instrumentation</option>
-                <option>Building Material</option>
-                <option>Chemicals &amp; Power</option>
-                <option>Heavy Equipment &amp; Spares</option>
-                <option>Road &amp; Industrial Safety</option>
-                <option>Office Equipment &amp; Stationery</option>
-                <option>General enquiry</option>
-              </select>
-            </div>
-            <div><label for="fld-message">Message (Required)</label><textarea id="fld-message" name="message" required rows="4" placeholder="Describe your requirement"></textarea></div>
-            <input type="submit" value="Send Message" class="gw-submit">
-            <p id="contact-form-note" class="paragraph gw-form-note">Submitting opens your email client with the message pre-filled to <strong>gwayuae@outlook.com</strong>.</p>
-          </form>
+          <!-- Tabs: #general (default) or #quote. JS toggles aria-selected
+               and the .is-active panel class; CSS hides inactive. -->
+          <div class="gw-form-tabs" role="tablist" aria-label="Choose how to contact Goodway">
+            <a href="#general" id="tab-general" class="gw-form-tab is-active" role="tab" aria-selected="true" aria-controls="panel-general">
+              <span class="gw-form-tab__label">General enquiry</span>
+              <span class="gw-form-tab__sub">Short message · 4 fields</span>
+            </a>
+            <a href="#quote" id="tab-quote" class="gw-form-tab" role="tab" aria-selected="false" aria-controls="panel-quote">
+              <span class="gw-form-tab__label">Specification / Quote</span>
+              <span class="gw-form-tab__sub">BOQ · part number · spec sheet</span>
+            </a>
+          </div>
+
+          <!-- Panel 1 — General enquiry (the former contact.html form) -->
+          <div id="panel-general" class="gw-form-panel is-active" role="tabpanel" aria-labelledby="tab-general">
+            <form method="post" action="mailto:gwayuae@outlook.com?subject=Website%20Enquiry" enctype="text/plain" data-gw-form="contact" novalidate aria-describedby="contact-form-note" class="gw-form">
+              <div class="gw-honeypot" aria-hidden="true">
+                <label for="fld-website-c">Website (leave empty)</label>
+                <input id="fld-website-c" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <div><label for="fld-name">Full Name (Required)</label><input id="fld-name" class="form-field w-input" name="name" required type="text" autocomplete="name" enterkeyhint="next" placeholder="Enter your name"></div>
+              <div><label for="fld-email">Email (Required)</label><input id="fld-email" class="form-field w-input" name="email" required type="email" autocomplete="email" inputmode="email" spellcheck="false" enterkeyhint="next" placeholder="Enter your email" aria-describedby="fld-email-help"><small id="fld-email-help" class="gw-form-hint">We reply within one business day.</small></div>
+              <div><label for="fld-phone">Phone</label><input id="fld-phone" class="form-field w-input" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+971 …" aria-describedby="fld-phone-help"><small id="fld-phone-help" class="gw-form-hint">Optional. UAE mobile preferred for urgent queries.</small></div>
+              <div><label for="fld-division">Division of Interest</label><select id="fld-division" name="division">
+                  <option>General enquiry</option>
+                  <option>Scientific &amp; Lab Instrumentation</option>
+                  <option>Mechanical Items</option>
+                  <option>Electrical</option>
+                  <option>Instrumentation</option>
+                  <option>Building Material</option>
+                  <option>Chemicals &amp; Power</option>
+                  <option>Heavy Equipment &amp; Spares</option>
+                  <option>Road &amp; Industrial Safety</option>
+                  <option>Office Equipment &amp; Stationery</option>
+                </select>
+              </div>
+              <div><label for="fld-message">Message (Required)</label><textarea id="fld-message" name="message" required rows="4" placeholder="Describe your requirement"></textarea></div>
+              <input type="submit" value="Send Message" class="gw-submit">
+              <p id="contact-form-note" class="paragraph gw-form-note">Need a formal VAT-compliant quotation with lead time? <a href="#quote" class="gw-chip-link">Switch to Specification / Quote →</a></p>
+            </form>
+          </div>
+
+          <!-- Panel 2 — Specification / BOQ quote (the former request-a-quote.html form) -->
+          <div id="panel-quote" class="gw-form-panel" role="tabpanel" aria-labelledby="tab-quote" hidden>
+            <form method="post" action="mailto:gwayuae@outlook.com?subject=Quotation%20Request" enctype="text/plain" data-gw-form="quote" novalidate aria-describedby="quote-form-note" class="gw-form">
+              <div class="gw-honeypot" aria-hidden="true">
+                <label for="qfld-website">Website (leave empty)</label>
+                <input id="qfld-website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <div class="gw-row-2">
+                <div><label for="qfld-name">Full Name *</label><input id="qfld-name" name="name" required type="text" autocomplete="name" enterkeyhint="next" placeholder="Your name"></div>
+                <div><label for="qfld-company">Company *</label><input id="qfld-company" name="company" required type="text" autocomplete="organization" enterkeyhint="next" placeholder="Company name"></div>
+              </div>
+              <div class="gw-row-2">
+                <div><label for="qfld-email">Email *</label><input id="qfld-email" name="email" required type="email" autocomplete="email" inputmode="email" spellcheck="false" enterkeyhint="next" placeholder="Email" aria-describedby="qfld-email-help"><small id="qfld-email-help" class="gw-form-hint">Quote lands in your inbox within one business day.</small></div>
+                <div><label for="qfld-phone">Phone *</label><input id="qfld-phone" name="phone" required type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+971 …" aria-describedby="qfld-phone-help"><small id="qfld-phone-help" class="gw-form-hint">We call back on UAE numbers for urgent specifications.</small></div>
+              </div>
+              <div><label for="qfld-division">Division of Interest</label><select id="qfld-division" name="division">
+                  <option>Scientific &amp; Lab Instrumentation</option><option>Mechanical Items</option><option>Electrical</option><option>Instrumentation</option><option>Building Material</option><option>Chemicals &amp; Power</option><option>Heavy Equipment &amp; Spares</option><option>Road &amp; Industrial Safety</option><option>Office Equipment &amp; Stationery</option>
+                </select>
+              </div>
+              <div><label for="qfld-spec">Product Specification / Part Number / BOQ *</label><textarea id="qfld-spec" name="spec" required rows="5" placeholder="Paste your specifications, BOQ or part number details" aria-describedby="qfld-spec-help"></textarea><small id="qfld-spec-help" class="gw-form-hint">Paste the BOQ line items, part numbers, or principal/brand names. Files can be emailed separately to <a href="mailto:gwayuae@outlook.com">gwayuae@outlook.com</a>.</small></div>
+              <div class="gw-row-2">
+                <div><label for="qfld-location">Delivery Location</label><input id="qfld-location" name="location" type="text" autocomplete="address-level2" enterkeyhint="next" placeholder="City / Emirate"></div>
+                <div><label for="qfld-timeline">Required By</label><input id="qfld-timeline" name="timeline" type="text" enterkeyhint="send" placeholder="e.g. 2 weeks"></div>
+              </div>
+              <input type="submit" value="Submit Request" class="gw-submit">
+              <p id="quote-form-note" class="paragraph gw-form-note">We reply with a VAT-compliant quotation and lead time within one business day. Submitting this form opens your email client with the request pre-filled to <strong>gwayuae@outlook.com</strong>.</p>
+            </form>
+          </div>
         </div>
       </div>
     </div></div>

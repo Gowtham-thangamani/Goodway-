@@ -7,6 +7,15 @@ ErrorDocument 404 /404.html
 # RewriteCond %{HTTPS} !=on
 # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Redesign consolidation (audit 2026-04-24):
+# Contact + Request-a-Quote merged into one tabbed page at /contact.html.
+# Fragment (#quote) preserves intent; the RewriteRule [R=301,L,NE] passes
+# the #quote anchor through so returning visitors land on the quote tab.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^request-a-quote\.html$ /contact.html#quote [R=301,L,NE]
+</IfModule>
+
 # Gzip + brotli
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml

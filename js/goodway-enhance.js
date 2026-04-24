@@ -1859,6 +1859,47 @@
   })();
 
   /* ============================================================
+     25. CONTACT TABS — /contact.html#general vs /contact.html#quote
+     Syncs aria-selected + .is-active on the tab buttons and the
+     hidden attribute on the matching panel. Runs on load and on
+     hashchange. Deep-linking (#quote via a division CTA) opens the
+     correct tab without a page reload.
+     ============================================================ */
+  (function gwContactTabs() {
+    var tabs = doc.querySelectorAll('.gw-form-tab');
+    var panels = doc.querySelectorAll('.gw-form-panel');
+    if (!tabs.length || !panels.length) return;
+
+    function activate(hash) {
+      var target = (hash || '').replace(/^#/, '') || 'general';
+      if (target !== 'general' && target !== 'quote') target = 'general';
+      tabs.forEach(function (t) {
+        var isMe = t.id === 'tab-' + target;
+        t.classList.toggle('is-active', isMe);
+        t.setAttribute('aria-selected', isMe ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        var isMe = p.id === 'panel-' + target;
+        p.classList.toggle('is-active', isMe);
+        if (isMe) p.removeAttribute('hidden'); else p.setAttribute('hidden', '');
+      });
+    }
+
+    /* Click on a tab: update hash without scrolling */
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        var h = t.getAttribute('href') || '#general';
+        activate(h);
+        if (history.replaceState) history.replaceState(null, '', h);
+        else location.hash = h;
+      });
+    });
+    window.addEventListener('hashchange', function () { activate(location.hash); });
+    activate(location.hash);
+  })();
+
+  /* ============================================================
      24. PARALLAX WORDMARK — About "Milestones" giant background
      type translates at ~0.35x scroll speed relative to its band.
      Uses a CSS custom property (--gw-word-y) so the transform

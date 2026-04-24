@@ -441,7 +441,7 @@ ${s.journal ? `  <!-- RELATED JOURNAL -->
       <h2 class="h1-default">Supply for ${s.h1.replace(/<[^>]+>/g, '').replace(/\.$/, '').replace(/^.*for /, '')}.</h2>
       <div class="cta-description"><div class="h5-default">Share a BOQ or specification. We revert with a VAT-compliant quote, lead time and paperwork bundle within one business day.</div></div>
     </div>
-    <a href="../contact.html#quote?sector=${s.slug}" class="main-button-white w-inline-block"><div class="p1-default semibold-white">Request Supply</div></a>
+    <a href="../contact.html?sector=${s.slug}#quote" class="main-button-white w-inline-block"><div class="p1-default semibold-white">Request Supply</div></a>
   </div></div></section>
 
   </main>
