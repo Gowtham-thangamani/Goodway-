@@ -2115,18 +2115,57 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
    "cover" the title area as the section came into view.  Cap the
    right tile's aspect and align both columns to the top so the
    section reads as a single editorial composition. */
+/* Stack the eyebrow/title and the subheading vertically so the
+   long subheading paragraph can never overlap the image row below
+   it. Previously .gallery-title used flex-row + align-items:flex-end,
+   which placed the subheading to the right of the title on the same
+   axis — when the subheading block was taller than the title, its
+   last lines spilled downward into .gallery-content and were covered
+   by the tall pipe image. */
+.gallery-title {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 20px;
+}
+.gallery-subheading { max-width: 72ch; }
+
+/* Clear breathing room between the copy block and the image grid so
+   they can never touch. */
+.gallery-wrap { gap: 40px; }
 .gallery-content {
   align-items: stretch;
+  margin-top: 12px;
 }
+
 .gallery-right {
   display: flex;
   align-self: stretch;
+  overflow: hidden;             /* belt-and-braces clip against any overflow */
 }
 .gallery-right > .image-placeholder {
   width: 100%;
-  aspect-ratio: 3 / 4;          /* tall portrait, capped — no runaway height */
+  height: 100%;
   max-height: 100%;
   display: block;
+  object-fit: cover;            /* image fills whatever height the row allocates */
+}
+.gallery-right > .image-placeholder > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  /* Restore the side-by-side title/subheading on wide screens where
+     there's room — only if the subheading is short enough that it
+     doesn't exceed the title column's height. */
+  .gallery-title {
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    gap: 48px;
+  }
+  .gallery-subheading { max-width: 540px; }
 }
 
 /* Remove the staggered reveal inside the gallery so the left grid and
