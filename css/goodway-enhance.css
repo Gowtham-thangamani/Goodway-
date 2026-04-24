@@ -285,15 +285,16 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
    edge back to column-zero. --- */
 .company-description img {
   height: auto;
-  max-height: 140px;
+  max-height: 120px;
   width: auto;
   object-fit: contain;
   display: block;
-  margin: 0 0 20px -28px;
+  /* bottom margin now handled by .company-description { gap: 14px } */
+  margin: 0 0 0 -28px;
   filter: drop-shadow(0 4px 18px rgba(201, 169, 97, 0.18));
 }
 @media (max-width: 767px) {
-  .company-description img { margin-left: -20px; }
+  .company-description img { margin-left: -20px; max-height: 100px; }
 }
 
 /* --- Head Office / P.O. Box block --- */
@@ -919,54 +920,76 @@ form textarea {
 }
 form input:focus, form select:focus, form textarea:focus { border-color: var(--gw-gold) !important; }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer ----------
+   Tightened spacing sweep (2026-04-24): dropped padding-top from 4.5rem
+   to 3rem, footer-top gap + padding-bottom halved, .div-block-3 gap
+   reduced to 2rem, footer-bottom margin-top tightened. Also reset the
+   per-column vertical rhythm so column headings (Quick Links / Contact
+   / Request Catalogue) land on a consistent baseline. */
 .footer-section {
   background: linear-gradient(180deg, #0b1525 0%, #0e1a2b 100%);
   color: var(--gw-ivory);
-  padding-top: 4.5rem;
-  padding-bottom: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 1.25rem;
   border-top: 1px solid rgba(201, 169, 97, 0.12);
 }
-.footer-wrap .footer-top { gap: 3rem; padding-bottom: 2.5rem; }
+.footer-wrap .footer-top { gap: 2rem; padding-bottom: 1.75rem; }
 .footer-wrap .div-block-3 {
-  gap: 2.5rem;
+  gap: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: start;
 }
-.company-description .paragraph { max-width: 36ch; }
+.company-description { display: flex; flex-direction: column; gap: 14px; }
+.company-description > * { margin: 0; }
+.company-description .paragraph { max-width: 36ch; line-height: 1.55; }
+.company-socmed { margin-top: 6px; }
+
 .paragraph.bold-white {
   color: var(--gw-sand) !important;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .footer-link {
   display: block;
-  padding: 7px 0;
+  padding: 5px 0;
   color: #d9dbe2;
   font-weight: 500;
   transition: color 0.2s var(--gw-ease), transform 0.2s var(--gw-ease);
 }
 .footer-link:hover { color: var(--gw-sand); transform: translateX(2px); }
+
+/* Column containers — remove any stray outer margins and align column
+   tops so headings sit on the same baseline across the three columns. */
+.menu-quick-links,
+.footer-contact,
+.footer-newsletter { margin: 0; }
+
 .footer-contact .contact-footer {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   line-height: 1.55;
   word-break: break-word;
   overflow-wrap: anywhere;
 }
 .footer-contact .contact-footer > .paragraph { flex: 1 1 auto; min-width: 0; }
 .footer-contact .contact-footer svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 3px; }
-.footer-contact .contact-footer .contact-meta { color: #c2c6d0; font-size: 12px; margin-left: 4px; font-weight: 400; } /* ≥ AA on navy footer */
+.footer-contact .contact-footer .contact-meta { color: #c2c6d0; font-size: 12px; margin-left: 4px; font-weight: 400; }
 .footer-contact .contact-footer a { word-break: break-all; }
+
+/* Request Catalogue column — tighten the vertical rhythm between the
+   heading, hint, and pill so the column matches its siblings. */
+.footer-newsletter label.paragraph { margin-bottom: 10px; line-height: 1.45; }
+.footer-newsletter .newsletter-form { margin-top: 4px; }
+
 .footer-bottom {
-  margin-top: 2rem;
-  padding-top: 1.25rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
   border-top: 1px solid rgba(250, 246, 236, 0.12);
   display: flex;
   justify-content: space-between;
