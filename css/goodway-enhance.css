@@ -621,6 +621,13 @@ summary:focus-visible,
 
 /* ---------- Hero polish with parallax-ready background ---------- */
 .hero-section {
+  /* Kill the Webflow 50px top margin that stacks on top of the sticky
+     navbar's height and leaves a big empty ivory band at the start of
+     every page. Use a tight internal top padding instead so the hero
+     content sits snug under the nav without losing all breathing room. */
+  margin-top: 0 !important;
+  padding-top: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(32px, 4vw, 56px);
   background:
     radial-gradient(ellipse at 85% 15%, rgba(201, 169, 97, 0.14), transparent 55%),
     radial-gradient(ellipse at 10% 90%, rgba(14, 26, 43, 0.04), transparent 45%),
