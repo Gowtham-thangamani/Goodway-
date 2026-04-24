@@ -167,27 +167,111 @@
   var navbar = doc.querySelector('.navbar');
 
   /* ============================================================
-     4. Mobile menu — close on link click, body lock, Escape
+     4. Navigation — mobile hamburger + Divisions dropdown.
+     Replaces webflow.js + jQuery (~220KB) with ~60 lines of vanilla.
+     Toggles the same .w--open class the CSS already targets, so no
+     style changes needed — just the interaction plumbing.
      ============================================================ */
-  var menuButton = doc.querySelector('.menu-button.w-nav-button');
-  var navMenu = doc.querySelector('.nav-menu.w-nav-menu');
-  if (menuButton && navMenu) {
-    navMenu.addEventListener('click', function (e) {
-      var target = e.target.closest('a.nav-link, a.w-dropdown-link, a.button-outline');
-      if (!target || window.innerWidth >= 992) return;
-      setTimeout(function () {
-        if (menuButton.classList.contains('w--open')) menuButton.click();
-      }, 10);
+  (function gwNav() {
+    var hamburger = doc.querySelector('.menu-button.w-nav-button');
+    var navMenu   = doc.querySelector('.nav-menu.w-nav-menu');
+    var dropdowns = doc.querySelectorAll('.w-dropdown');
+    if (!hamburger && !dropdowns.length) return;
+
+    function setMobileOpen(open) {
+      if (!hamburger || !navMenu) return;
+      hamburger.classList.toggle('w--open', open);
+      navMenu.classList.toggle('w--open', open);
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      doc.documentElement.style.overflow = (open && window.innerWidth < 992) ? 'hidden' : '';
+    }
+
+    function setDropdownOpen(dd, open) {
+      dd.classList.toggle('w--open', open);
+      var toggle = dd.querySelector('.w-dropdown-toggle');
+      var list   = dd.querySelector('.w-dropdown-list');
+      if (toggle) {
+        toggle.classList.toggle('w--open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      if (list) list.classList.toggle('w--open', open);
+    }
+
+    function closeAllDropdowns(except) {
+      dropdowns.forEach(function (dd) { if (dd !== except) setDropdownOpen(dd, false); });
+    }
+
+    /* Hamburger toggle */
+    if (hamburger) {
+      hamburger.setAttribute('role', 'button');
+      hamburger.setAttribute('tabindex', '0');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-controls', 'main-nav-menu');
+      if (navMenu) navMenu.id = navMenu.id || 'main-nav-menu';
+      hamburger.addEventListener('click', function () {
+        setMobileOpen(!hamburger.classList.contains('w--open'));
+      });
+      hamburger.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setMobileOpen(!hamburger.classList.contains('w--open'));
+        }
+      });
+    }
+
+    /* Close the mobile panel when a link inside it is clicked */
+    if (navMenu) {
+      navMenu.addEventListener('click', function (e) {
+        var link = e.target.closest('a.nav-link, a.w-dropdown-link, a.button-outline');
+        if (!link) return;
+        if (window.innerWidth < 992) setMobileOpen(false);
+      });
+    }
+
+    /* Dropdown toggles — click-only (matches site's data-hover="false") */
+    dropdowns.forEach(function (dd) {
+      var toggle = dd.querySelector('.w-dropdown-toggle');
+      if (!toggle) return;
+      toggle.setAttribute('role', 'button');
+      toggle.setAttribute('tabindex', '0');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-haspopup', 'true');
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var wasOpen = dd.classList.contains('w--open');
+        closeAllDropdowns(dd);
+        setDropdownOpen(dd, !wasOpen);
+      });
+      toggle.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle.click();
+        }
+      });
     });
-    var menuObserver = new MutationObserver(function () {
-      var open = menuButton.classList.contains('w--open');
-      doc.documentElement.style.overflow = open && window.innerWidth < 992 ? 'hidden' : '';
+
+    /* Click outside any open dropdown → close */
+    doc.addEventListener('click', function (e) {
+      if (!e.target.closest('.w-dropdown')) closeAllDropdowns(null);
     });
-    menuObserver.observe(menuButton, { attributes: true, attributeFilter: ['class'] });
+
+    /* Escape closes mobile panel + any open dropdown */
     doc.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menuButton.classList.contains('w--open')) menuButton.click();
+      if (e.key !== 'Escape') return;
+      closeAllDropdowns(null);
+      if (hamburger && hamburger.classList.contains('w--open')) {
+        setMobileOpen(false);
+        hamburger.focus();
+      }
     });
-  }
+
+    /* Resize to desktop while the mobile panel is open → unlock scroll */
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 992 && hamburger && hamburger.classList.contains('w--open')) {
+        setMobileOpen(false);
+      }
+    });
+  })();
 
   /* ============================================================
      5. Reveal-on-scroll

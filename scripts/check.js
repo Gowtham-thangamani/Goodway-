@@ -41,11 +41,14 @@ check('Every HTML has canonical + og:image + no w-form', function () {
   }
 });
 
-check('jQuery + webflow.js carry defer where present', function () {
+check('No reintroduction of jQuery or webflow.js', function () {
+  /* Both were removed in the P1/P2 cleanup (2026-04-24). If anyone
+     re-adds them via a future Webflow export, the site gets 220KB
+     heavier and TBT regresses ~100-200ms on mid-range Android. */
   for (const f of htmlFiles) {
     const s = fs.readFileSync(path.join(ROOT, f), 'utf8');
-    if (s.includes('jquery-3.5.1') && !/jquery-3\.5\.1[^"]+"[^>]* defer/.test(s)) throw new Error(f + ' jQuery missing defer');
-    if (s.includes('webflow.js') && !/webflow\.js"[^>]* defer/.test(s)) throw new Error(f + ' webflow.js missing defer');
+    if (s.includes('jquery-3.5.1')) throw new Error(f + ' reintroduces jQuery');
+    if (/src="[^"]*webflow\.js/.test(s)) throw new Error(f + ' reintroduces webflow.js');
   }
 });
 
