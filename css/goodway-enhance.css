@@ -3106,16 +3106,22 @@ html, body { max-width: 100%; overflow-x: hidden; }
    ========================================================================== */
 .gw-industries-hero {
   padding: clamp(4rem, 7vw, 6rem) 0 clamp(2.5rem, 4vw, 3.5rem);
-  background:
+  /* Solid fallback first — if custom props or gradient rendering hiccup
+     on a mobile engine, the section still paints a visible ivory so the
+     navy navbar above doesn't bleed through. */
+  background-color: #f7f3ec;
+  background-image:
     radial-gradient(ellipse at 90% 20%, rgba(201, 169, 97, 0.14), transparent 55%),
-    linear-gradient(180deg, var(--gw-linen) 0%, var(--gw-ivory) 100%);
+    linear-gradient(180deg, var(--gw-linen, #f7f3ec) 0%, var(--gw-ivory, #faf6ec) 100%);
   overflow: hidden;
   position: relative;
+  isolation: isolate;            /* new stacking context — pseudo can never cover container */
 }
 .gw-industries-hero::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;                     /* explicit: below the container */
   background-image:
     linear-gradient(var(--gw-border) 1px, transparent 1px),
     linear-gradient(90deg, var(--gw-border) 1px, transparent 1px);
@@ -3124,6 +3130,12 @@ html, body { max-width: 100%; overflow-x: hidden; }
   mask-image: radial-gradient(ellipse at 50% 0%, #000 20%, transparent 70%);
   opacity: 0.55;
   pointer-events: none;
+}
+/* If the mobile engine doesn't support mask-image the pattern
+   degrades to invisible — prevents the pseudo painting as a solid
+   sheet that hides the hero text. */
+@supports not ((-webkit-mask-image: radial-gradient(circle, #000, transparent)) or (mask-image: radial-gradient(circle, #000, transparent))) {
+  .gw-industries-hero::before { display: none; }
 }
 .gw-industries-hero > .container { position: relative; z-index: 1; }
 .gw-industries-hero__eyebrow {
