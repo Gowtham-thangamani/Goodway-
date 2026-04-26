@@ -925,7 +925,11 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 .footer-wrap .div-block-3 {
   gap: 2rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* Catalogue column gets 1.6× the width of Quick Links / Contact so
+     the email input has enough room to show the typed value without
+     clipping. Required min-width on the Contact column keeps the
+     phone numbers from wrapping awkwardly. */
+  grid-template-columns: 0.85fr minmax(190px, 1fr) 1.6fr;
   align-items: start;
 }
 /* Pull the whole company-info block (logo + paragraph + head-office +
