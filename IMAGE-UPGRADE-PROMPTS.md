@@ -17,7 +17,7 @@ should be replaced first.
 
 | File | Size | Where it appears | Prompt |
 |---|---|---|---|
-| `assets/images/sections/divisions/instrumentation/card-hero.png` | **480×320** (3:2 — but used at 700×700 in the homepage gallery, so prefer **700×700** square) | (a) Top-left tile of the homepage "Supplying the Sectors that Power the Nation" 2×2 gallery grid, **AND** (b) the slot-A image in the Who-We-Are collage on `/divisions/instrumentation.html` | Eye-level photograph of an industrial meteorological / environmental monitoring station on a rooftop or substation perimeter — cup anemometer, pyranometer, thermistor mast, temperature probe and rain gauge clustered on a stainless steel pole, clean UAE blue-hour sky behind, gold rim-light on the steelwork, no logos, no text, no people. **Square 700×700 crop** with the instruments centred. `--ar 1:1` |
+| `assets/images/sections/divisions/instrumentation/card-hero.jpg` | **480×320** (3:2 — but used at 700×700 in the homepage gallery, so prefer **700×700** square) | (a) Top-left tile of the homepage "Supplying the Sectors that Power the Nation" 2×2 gallery grid, **AND** (b) the slot-A image in the Who-We-Are collage on `/divisions/instrumentation.html` | Eye-level photograph of an industrial meteorological / environmental monitoring station on a rooftop or substation perimeter — cup anemometer, pyranometer, thermistor mast, temperature probe and rain gauge clustered on a stainless steel pole, clean UAE blue-hour sky behind, gold rim-light on the steelwork, no logos, no text, no people. **Square 700×700 crop** with the instruments centred. `--ar 1:1` |
 
 All prompts are written for Midjourney / DALL·E / Imagen. Append
 `--ar 16:9` (or equivalent aspect) to match the slot shape; the `width` /
