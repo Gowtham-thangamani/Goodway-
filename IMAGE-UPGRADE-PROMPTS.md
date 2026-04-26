@@ -6,6 +6,19 @@ upgrade a slot to real photography, drop the commissioned file in at the
 **same path and filename** and the HTML will pick it up unchanged. Cache-bust
 is automatic via `IMG_VER` in `js/goodway-enhance.js`.
 
+---
+
+## ⚠ Outstanding — high priority
+
+These slots are still rendering as the generated SVG-to-PNG fillers
+because they slipped through the previous photography batches. They
+look like placeholders next to the real-photo tiles around them and
+should be replaced first.
+
+| File | Size | Where it appears | Prompt |
+|---|---|---|---|
+| `assets/images/sections/divisions/instrumentation/card-hero.png` | **480×320** (3:2 — but used at 700×700 in the homepage gallery, so prefer **700×700** square) | (a) Top-left tile of the homepage "Supplying the Sectors that Power the Nation" 2×2 gallery grid, **AND** (b) the slot-A image in the Who-We-Are collage on `/divisions/instrumentation.html` | Eye-level photograph of an industrial meteorological / environmental monitoring station on a rooftop or substation perimeter — cup anemometer, pyranometer, thermistor mast, temperature probe and rain gauge clustered on a stainless steel pole, clean UAE blue-hour sky behind, gold rim-light on the steelwork, no logos, no text, no people. **Square 700×700 crop** with the instruments centred. `--ar 1:1` |
+
 All prompts are written for Midjourney / DALL·E / Imagen. Append
 `--ar 16:9` (or equivalent aspect) to match the slot shape; the `width` /
 `height` columns below are the intended output pixel size.
