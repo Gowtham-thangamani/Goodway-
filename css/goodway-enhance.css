@@ -42,7 +42,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Sticky-footer scaffold — body becomes a vertical flex container so
+     <main> can absorb spare height and the footer is pinned to the
+     viewport bottom on short-content pages (401, 404, terms, privacy)
+     without resorting to position: fixed. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+body > main,
+body > #main { flex: 1 0 auto; }
+body > .footer-section,
+body > .footer { flex-shrink: 0; }
 
 /* ==========================================================================
    WCAG AA focus ring — single global rule so every keyboard-focused
@@ -333,7 +344,7 @@ section.hero-section:has(.hero-right--removed) .hero-left { max-width: 960px; }
   padding: 10px;
   border-radius: 14px;
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   transition: border-color 0.2s var(--gw-ease), background 0.2s var(--gw-ease), box-shadow 0.2s var(--gw-ease);
@@ -921,7 +932,20 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   padding-bottom: 1.25rem;
   border-top: 1px solid rgba(201, 169, 97, 0.12);
 }
-.footer-wrap .footer-top { gap: 2rem; padding-bottom: 1.75rem; }
+/* Footer-top — replace Webflow's `flex + width:30%/60%` (which leaves a
+   ~10% residual gap and lets the right column drift away from the
+   container's right edge) with a 2-column CSS Grid that fills the
+   container cleanly. The Webflow %-widths on the children are reset
+   so they take their full grid-cell width. */
+.footer-wrap .footer-top {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.4fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+  padding-bottom: 1.75rem;
+}
+.footer-wrap .footer-top .company-info,
+.footer-wrap .footer-top .footer-menu { width: auto; }
 .footer-wrap .div-block-3 {
   gap: 2rem;
   display: grid;
@@ -932,6 +956,7 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   grid-template-columns: 0.85fr minmax(190px, 1fr) 1.6fr;
   align-items: start;
 }
+.footer-wrap .div-block-3 > .footer-newsletter { width: auto; }
 /* Pull the whole company-info block (logo + paragraph + head-office +
    Follow Us + social row) to the same flush-left column as the logo's
    visible mark, instead of just the logo. The logo keeps its −28px
@@ -944,8 +969,13 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
 .company-description img { margin-left: 0 !important; }
 .company-description .paragraph { max-width: 36ch; line-height: 1.55; }
 .company-socmed { margin-top: 6px; }
+/* Mobile: drop the column-level bleed so the company-info text aligns
+   with Quick Links / Contact / Request Catalogue headings. The logo
+   alone keeps a small negative margin to neutralise the PNG's baked-in
+   left whitespace, so the GOOD WAY mark visually anchors to column 0. */
 @media (max-width: 767px) {
-  .company-info { margin-left: -20px; }
+  .company-info { margin-left: 0; }
+  .company-description img { margin-left: -16px !important; }
 }
 
 .paragraph.bold-white {
@@ -996,10 +1026,11 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   border-top: 1px solid rgba(250, 246, 236, 0.12);
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
   flex-wrap: wrap;
 }
-.footer-bottom .paragraph { margin: 0; color: #bfc2cc; font-size: 13px; }
+.footer-bottom .paragraph { margin: 0; color: #bfc2cc; font-size: 13px; line-height: 1.6; }
 .socmed-link {
   display: inline-flex;
   align-items: center;
@@ -1242,6 +1273,14 @@ form input:focus, form select:focus, form textarea:focus { border-color: var(--g
   .footer-wrap .div-block-3 { gap: 2rem; }
 }
 @media (max-width: 991px) {
+  /* Defeat Webflow's `.footer-top { display: flex; flex-flow: column }`
+     tablet override — keep grid semantics so column gaps/alignment stay
+     consistent with the desktop spec, just collapsed to a single column. */
+  .footer-wrap .footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
   .footer-wrap .div-block-3 { grid-template-columns: 1fr 1fr; }
   .hero-section { padding-top: 2.5rem; }
 
