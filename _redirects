@@ -1,7 +1,74 @@
-# Netlify / Cloudflare Pages style redirects
-/home       /index.html      301
-/about-us   /about.html      301
-/quote      /request-a-quote.html  301
+# Netlify / Cloudflare Pages style redirects.
+# Order matters: first match wins. Specific rules first, catch-all last.
 
-# Catch-all 404
-/*          /404.html        404
+# 1) Pretty URLs — extension-less paths serve the .html file.
+#    Status 200 = internal rewrite; the URL bar shows the clean form.
+/about                                       /about.html                                  200
+/services                                    /services.html                               200
+/principals                                  /principals.html                             200
+/industries                                  /industries.html                             200
+/contact                                     /contact.html                                200
+/journal                                     /journal.html                                200
+/team                                        /team.html                                   200
+/privacy                                     /privacy.html                                200
+/terms                                       /terms.html                                  200
+/divisions/scientific-lab                    /divisions/scientific-lab.html               200
+/divisions/mechanical                        /divisions/mechanical.html                   200
+/divisions/electrical                        /divisions/electrical.html                   200
+/divisions/instrumentation                   /divisions/instrumentation.html              200
+/divisions/building-material                 /divisions/building-material.html            200
+/divisions/chemicals-power                   /divisions/chemicals-power.html              200
+/divisions/heavy-equipment                   /divisions/heavy-equipment.html              200
+/divisions/road-safety                       /divisions/road-safety.html                  200
+/divisions/office-equipment                  /divisions/office-equipment.html             200
+/industries/oil-gas                          /industries/oil-gas.html                     200
+/industries/petrochemical                    /industries/petrochemical.html               200
+/industries/power                            /industries/power.html                       200
+/industries/water                            /industries/water.html                       200
+/industries/government                       /industries/government.html                  200
+/industries/construction                     /industries/construction.html                200
+/industries/hospitality                      /industries/hospitality.html                 200
+/industries/manufacturing                    /industries/manufacturing.html               200
+/journal/civil-defence-fire-door-compliance  /journal/civil-defence-fire-door-compliance.html  200
+
+# 2) 301 legacy .html URLs to the clean form — settles canonical for
+#    Google + bookmarks + external backlinks. The `!` flag forces the
+#    redirect even when the destination would otherwise serve content.
+/index.html                                  /                                            301!
+/about.html                                  /about                                       301!
+/services.html                               /services                                    301!
+/principals.html                             /principals                                  301!
+/industries.html                             /industries                                  301!
+/contact.html                                /contact                                     301!
+/journal.html                                /journal                                     301!
+/team.html                                   /team                                        301!
+/privacy.html                                /privacy                                     301!
+/terms.html                                  /terms                                       301!
+/divisions/scientific-lab.html               /divisions/scientific-lab                    301!
+/divisions/mechanical.html                   /divisions/mechanical                        301!
+/divisions/electrical.html                   /divisions/electrical                        301!
+/divisions/instrumentation.html              /divisions/instrumentation                   301!
+/divisions/building-material.html            /divisions/building-material                 301!
+/divisions/chemicals-power.html              /divisions/chemicals-power                   301!
+/divisions/heavy-equipment.html              /divisions/heavy-equipment                   301!
+/divisions/road-safety.html                  /divisions/road-safety                       301!
+/divisions/office-equipment.html             /divisions/office-equipment                  301!
+/industries/oil-gas.html                     /industries/oil-gas                          301!
+/industries/petrochemical.html               /industries/petrochemical                    301!
+/industries/power.html                       /industries/power                            301!
+/industries/water.html                       /industries/water                            301!
+/industries/government.html                  /industries/government                       301!
+/industries/construction.html                /industries/construction                     301!
+/industries/hospitality.html                 /industries/hospitality                      301!
+/industries/manufacturing.html               /industries/manufacturing                    301!
+/journal/civil-defence-fire-door-compliance.html  /journal/civil-defence-fire-door-compliance  301!
+
+# 3) Friendly aliases (kept from previous config, repointed at clean URLs).
+/home                                        /                                            301
+/about-us                                    /about                                       301
+/quote                                       /contact#quote                               301
+/request-a-quote                             /contact#quote                               301
+/request-a-quote.html                        /contact#quote                               301!
+
+# 4) Catch-all 404 — must be last.
+/*                                           /404.html                                    404
