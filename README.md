@@ -3,7 +3,7 @@
 Static marketing site for **Good Way General Trading** (Abu Dhabi, UAE).
 A national establishment with international expertise in the oil, gas,
 petrochemical, power and water sectors. Authorised UAE distributor for
-12 international principals.
+9 international principals.
 
 - **Live domain:** https://goodway.ae
 - **Stack:** Static HTML + CSS + vanilla JS (Webflow-exported base + custom
@@ -59,7 +59,7 @@ site/
 ├── images/              # logos, favicon family (24 variants)
 ├── assets/
 │   └── images/
-│       ├── principals/  # 12 brand-mark placeholders (swap for official)
+│       ├── principals/  # 9 brand-mark placeholders (swap for official)
 │       └── sections/    # structured folders for commissioned photography
 ├── scripts/             # local tooling (dev-server, check, build-favicons,
 │                          build-principal-logos, build-search-index)
@@ -81,7 +81,7 @@ site/
 2. **Design system** — custom CSS layer on top of a Webflow export.
    Fraunces display + Plus Jakarta Sans body, ivory / navy / gold palette,
    flip cards, reveal-on-scroll, count-up, parallax.
-3. **12 principal logo placeholders** at `assets/images/principals/*.svg`
+3. **9 principal logo placeholders** at `assets/images/principals/*.svg`
    — replace with official brand logos when supplied.
 4. **Site search** — press `/` or `Ctrl/⌘-K` anywhere to open.
 5. **Framer components** — FAQ on homepage, sticky reading-progress on the

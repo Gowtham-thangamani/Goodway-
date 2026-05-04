@@ -30,7 +30,7 @@ const BLURBS = {
   'electrical':        'HV &amp; MV motors, switchgear, circuit breakers and cables.',
   'instrumentation':   'Meteorological sensors, level switches and environmental monitoring.',
   'building-material': 'Civil Defence-approved fire doors, wood doors and joinery.',
-  'chemicals-power':   'Petroleum production chemicals, DC/AC power supplies and UPS.',
+  'chemicals-power':   'DC/AC power supplies, UPS, emergency lighting and standby battery systems.',
   'heavy-equipment':   'Caterpillar &amp; Komatsu earth-movers and compressor rebuild spares.',
   'road-safety':       'Barriers, cones, fall-arrest harnesses and lifting/lashing kit.',
   'office-equipment':  '20,000+ SKU office catalogue — 3M, Brother, Leitz, Fellowes, PaperOne.'
@@ -57,8 +57,8 @@ const FAQS = {
      'We cover low-voltage distribution, medium-voltage (up to 11 kV) and high-voltage motors from ABB, WEG, Westinghouse, Baldor, Brook Crompton and Marathon Electric. Switchgear up to 33 kV through ABB, Siemens and Merlin Gerin.'],
     ['What is the typical lead time on an HV motor?',
      'Stocked frame sizes ship within 2 weeks. Custom-wound or large-frame HV motors are typically 8&ndash;14 weeks ex-works, plus 1&ndash;2 weeks consolidation to the UAE. We quote firm lead times on every enquiry.'],
-    ['Do you supply explosion-protected electrical fixtures?',
-     'Yes &mdash; Cooper Crouse-Hinds is our authorised channel for Zone 1 / Zone 2 Ex-proof lighting, junction boxes and safety switches. Certification paperwork (ATEX, IECEx) ships with every order.'],
+    ['Which cable and wiring systems do you supply?',
+     'L&uuml;tze (Germany) is our authorised channel for industrial cables, LSC wiring systems, suppression and interface technology. Certification paperwork ships with every order.'],
     ['Can you handle motor rebuilds?',
      'We coordinate rebuilds with the original principal. For on-site rebuild support, speak to our technical desk &mdash; we match the serial number to the right OEM facility and manage the logistics both ways.']
   ],
@@ -105,8 +105,6 @@ const FAQS = {
   'chemicals-power': [
     ['Do you supply MSDS and SDS documentation?',
      'Yes &mdash; every chemical shipment includes the current SDS (GHS-compliant), Certificate of Analysis and ADNOC-compatible transit paperwork. UAE Civil Defence approval letters are issued for classified hazardous chemistries.'],
-    ['Are the chemicals you supply ADNOC-approved?',
-     'REP and Arbochim petroleum production chemistries are ADNOC-approved or registered for upstream and downstream use. Specific approvals vary by chemistry &mdash; we confirm against the current ADNOC vendor list on each enquiry.'],
     ['What voltage options are available on AEES power supplies?',
      'AEES supplies rectifier systems from 24 V DC up to 220 V DC and AC UPS from 2 kVA to 400 kVA. Custom redundancy (N+1, 2N) and battery bank sizing are specified per installation.'],
     ['Do you supply batteries for DC power systems?',

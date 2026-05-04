@@ -35,34 +35,6 @@ const logos = {
     <text x="160" y="112" text-anchor="middle" font-family="${JK}" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">FRANCE</text>
   `),
 
-  /* REP — stylized circular "rep" (Recherche Exploitation Produits) */
-  'rep': wrap(`
-    <title>REP · Recherche Exploitation Produits</title>
-    <g transform="translate(24,18)">
-      <circle cx="36" cy="36" r="34" fill="none" stroke="#1a2a4a" stroke-width="2"/>
-      <text x="36" y="50" text-anchor="middle" font-family="${FR}" font-size="34" font-weight="700" font-style="italic" fill="#c0392b">rep</text>
-    </g>
-    <g transform="translate(115,30)">
-      <text font-family="${JK}" font-size="15" font-weight="700" fill="#1a2a4a" letter-spacing="0.04em">Recherche</text>
-      <text y="20" font-family="${JK}" font-size="15" font-weight="700" fill="#1a2a4a" letter-spacing="0.04em">Exploitation</text>
-      <text y="40" font-family="${JK}" font-size="15" font-weight="700" fill="#1a2a4a" letter-spacing="0.04em">Produits</text>
-      <text y="62" font-family="${JK}" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">FRANCE</text>
-    </g>
-  `),
-
-  /* Arbochim N.V. — three red droplets above bold wordmark */
-  'arbochim': wrap(`
-    <title>Arbochim N.V.</title>
-    <g transform="translate(112,14)" fill="#d93a2a">
-      <path d="M 14 0 C 6 18 0 30 14 32 C 28 30 22 18 14 0 Z"/>
-      <path d="M 48 0 C 40 18 34 30 48 32 C 62 30 56 18 48 0 Z"/>
-      <path d="M 82 0 C 74 18 68 30 82 32 C 96 30 90 18 82 0 Z"/>
-    </g>
-    <text x="160" y="85" text-anchor="middle" font-family="${JK}" font-size="28" font-weight="900" fill="#1a1a1a" letter-spacing="0.04em">ARBOCHIM</text>
-    <text x="270" y="85" text-anchor="start" font-family="${JK}" font-size="16" font-weight="700" fill="#6b7488"> N.V.</text>
-    <text x="160" y="106" text-anchor="middle" font-family="${JK}" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">BELGIUM</text>
-  `),
-
   /* Lütze — stylised wordmark with angled "Z" arrow */
   'lutze': wrap(`
     <title>Lütze · Systematic Technology</title>
@@ -91,15 +63,6 @@ const logos = {
     <rect x="24" y="40" width="6" height="40" fill="#ea5b2f"/>
     <text x="44" y="77" font-family="${JK}" font-size="42" font-weight="800" fill="#0093b2" letter-spacing="0.02em">MERCK</text>
     <text x="44" y="96" font-family="${JK}" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">GERMANY</text>
-  `),
-
-  /* Cooper Crouse-Hinds — bold COOPER + small Crouse-Hinds */
-  'cooper-crouse-hinds': wrap(`
-    <title>Cooper Crouse-Hinds</title>
-    <text x="160" y="60" text-anchor="middle" font-family="${JK}" font-size="30" font-weight="900" fill="#c8102e" letter-spacing="0.04em">COOPER</text>
-    <line x1="60" y1="72" x2="260" y2="72" stroke="#1a1a1a" stroke-width="1.2"/>
-    <text x="160" y="92" text-anchor="middle" font-family="${JK}" font-size="14" font-weight="500" fill="#1a1a1a" letter-spacing="0.06em">Crouse-Hinds</text>
-    <text x="160" y="108" text-anchor="middle" font-family="${JK}" font-size="8" font-weight="600" fill="#6b7488" letter-spacing="0.22em">USA</text>
   `),
 
   /* Yuasa — bold black block with red accent stripes */

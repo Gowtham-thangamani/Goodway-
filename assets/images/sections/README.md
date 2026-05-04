@@ -33,7 +33,7 @@ sections/
 │   └── 03-cta/
 ├── principals/            principals.html
 │   ├── 01-hero/
-│   ├── 02-brands-grid/    12-card principal grid
+│   ├── 02-brands-grid/    9-card principal grid
 │   ├── 03-gallery/        Principal gallery tiles
 │   └── 04-cta/
 ├── contact/               contact.html

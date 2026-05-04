@@ -28,30 +28,30 @@ const sectors = [
   {
     slug: 'oil-gas',
     title: 'Oil &amp; Gas Supplier UAE — Authorised Distribution | Goodway',
-    desc:  'UAE onshore &amp; offshore oil &amp; gas supply: specialty chemicals (REP, Arbochim), Ex-proof fixtures (Cooper Crouse-Hinds), motors (Westinghouse) and instrumentation — authorised distribution under ADNOC-compliant paperwork.',
+    desc:  'UAE onshore &amp; offshore oil &amp; gas supply: DC power supplies &amp; UPS (AEES), process instrumentation (ATMI), motors (Westinghouse) and lab analytics — authorised distribution under ADNOC-compliant paperwork.',
     eyebrow: '// Industries · Oil &amp; Gas',
     h1: 'Authorised supply to UAE oil &amp; gas operators.',
-    lede: 'Goodway supplies onshore and offshore oil &amp; gas operators, EPC contractors and refinery maintenance teams across the UAE with specialty chemicals, explosion-protected fixtures, motors, valves and instrumentation &mdash; all under authorised distribution agreements with ADNOC-compliant paperwork.',
+    lede: 'Goodway supplies onshore and offshore oil &amp; gas operators, EPC contractors and refinery maintenance teams across the UAE with specialty chemicals, motors, valves and instrumentation &mdash; all under authorised distribution agreements with ADNOC-compliant paperwork.',
     stats: [
       { num: 'CN-1843054', label: 'DED licence covers onshore &amp; offshore O&amp;G fields and facilities services' },
-      { num: 'Ex', label: 'Cooper Crouse-Hinds certified explosion-protected fittings for Zone 1 / Zone 2' },
-      { num: '4+', label: 'Specialty chemical principals including REP, Arbochim, ATMI' }
+      { num: 'ADNOC', label: 'Compliant transit paperwork on every shipment' },
+      { num: '3+', label: 'Power-electronics and process-instrument principals: AEES, ATMI, Westinghouse' }
     ],
     divisions: ['chemicals-power', 'electrical', 'instrumentation', 'mechanical'],
     principals: [
-      { name: 'REP',                  country: 'France', role: 'Petroleum production chemicals' },
-      { name: 'Arbochim',             country: 'Belgium', role: 'Water &amp; gas treatment chemicals' },
-      { name: 'ATMI',                 country: 'France', role: 'Process chemicals &amp; instrumentation' },
-      { name: 'Cooper Crouse-Hinds',  country: 'USA',    role: 'Explosion-protected fixtures &amp; safety switches' },
+      { name: 'AEES',                 country: 'France', role: 'DC power supplies &amp; UPS for process systems' },
+      { name: 'ATMI',                 country: 'France', role: 'Process instrumentation &amp; level switches' },
       { name: 'Westinghouse',         country: 'USA',    role: 'HV/MV motors for upstream and refining' },
-      { name: 'AEES',                 country: 'France', role: 'DC power supplies &amp; UPS for process systems' }
+      { name: 'Yuasa',                country: 'Japan',  role: 'Standby batteries for SCADA &amp; protection' },
+      { name: 'L&uuml;tze',           country: 'Germany', role: 'Industrial cables &amp; wiring systems' },
+      { name: 'McMaster-Carr',        country: 'USA',    role: 'Mechanical hardware &amp; consumables' }
     ],
     applications: [
       'Specialty chemical injection for production enhancement and corrosion control on upstream fields',
-      'Explosion-protected lighting and junction boxes for Zone 1 / Zone 2 installations',
       'HV &amp; MV motor supply and emergency rebuild spares for pumps, compressors and separators',
       'Process instrumentation &mdash; pressure, temperature and flow &mdash; with calibration certificates',
-      'Redundant DC power and UPS systems for SCADA, DCS and safety-critical process control'
+      'Standby battery banks for SCADA, DCS and safety-critical process control',
+      'Industrial cabling, wiring systems and mechanical hardware for plant installations'
     ]
   },
   {
@@ -71,60 +71,60 @@ const sectors = [
       { name: 'Fisher Scientific',    country: 'UK',      role: 'Laboratory chemicals, glassware, analytical reagents' },
       { name: 'Merck',                country: 'Germany', role: 'Industrial &amp; laboratory chemistry' },
       { name: 'ATMI',                 country: 'France',  role: 'Process gas detection &amp; monitoring' },
-      { name: 'Cooper Crouse-Hinds',  country: 'USA',     role: 'Ex-proof fittings for refinery hazardous areas' },
-      { name: 'Westinghouse',         country: 'USA',     role: 'HV motors for compression &amp; process trains' }
+      { name: 'Westinghouse',         country: 'USA',     role: 'HV motors for compression &amp; process trains' },
+      { name: 'L&uuml;tze',           country: 'Germany', role: 'Industrial cabling &amp; wiring systems' }
     ],
     applications: [
       'Plant laboratory fit-out &mdash; analytical balances, pH meters, spectrophotometers, glassware and reagents',
       'Process chromatography &amp; gas analysis for refinery feed and product streams',
       'Certified pressure, flow and temperature transmitters with DCS-ready signalling',
-      'Zone-1 lighting and control stations for hazardous petrochemical areas',
+      'Industrial cabling and wiring systems for refinery and petrochemical plant installations',
       'VAT-compliant consumables replenishment under a single blanket order'
     ]
   },
   {
     slug: 'power',
     title: 'Power Generation Supplier UAE — Motors, Switchgear &amp; UPS | Goodway',
-    desc:  'UAE power station and substation supply: ABB, WEG, Westinghouse motors; ABB, Siemens, Merlin Gerin switchgear; AEES UPS; emergency lighting &mdash; authorised distribution with documented origin.',
+    desc:  'UAE power station and substation supply: ABB, WEG, Westinghouse motors; ABB, Siemens, Merlin Gerin switchgear; Yuasa standby batteries &mdash; authorised distribution with documented origin.',
     eyebrow: '// Industries · Power Generation',
     h1: 'Motors, switchgear and UPS for UAE power stations.',
-    lede: 'UAE power stations, substations and transmission utilities source HV &amp; MV rotating machines, switchgear, protection hardware and redundant UPS from Goodway under authorised distribution &mdash; with the paperwork package Transco, EWEC and ADWEA procurement need on day one.',
+    lede: 'UAE power stations, substations and transmission utilities source HV &amp; MV rotating machines, switchgear, protection hardware and standby battery systems from Goodway under authorised distribution &mdash; with the paperwork package Transco, EWEC and ADWEA procurement need on day one.',
     stats: [
       { num: 'HV / MV', label: 'High and medium voltage motor supply and rebuild spares' },
-      { num: '9', label: 'Switchgear OEMs: ABB · Siemens · Merlin Gerin · Square D · GE · Westinghouse · Allen-Bradley · Cooper · Omron' },
-      { num: 'AEES', label: 'Authorised UAE distributor for French DC power and UPS systems' }
+      { num: '8', label: 'Switchgear OEMs: ABB · Siemens · Merlin Gerin · Square D · GE · Westinghouse · Allen-Bradley · Omron' },
+      { num: 'Yuasa', label: 'Authorised UAE channel for sealed lead-acid standby batteries' }
     ],
     divisions: ['electrical', 'chemicals-power', 'instrumentation'],
     principals: [
       { name: 'ABB',                  country: 'Switzerland', role: 'HV motors and primary switchgear' },
       { name: 'WEG',                  country: 'Brazil',      role: 'MV motors and variable-speed drives' },
       { name: 'Westinghouse',         country: 'USA',         role: 'AC/DC motors for generation and auxiliaries' },
-      { name: 'AEES',                 country: 'France',      role: 'DC power systems and UPS' },
-      { name: 'Cooper Crouse-Hinds',  country: 'USA',         role: 'Hazardous-area fixtures for fuel-handling areas' }
+      { name: 'Yuasa',                country: 'Japan',       role: 'Sealed lead-acid standby batteries' },
+      { name: 'L&uuml;tze',           country: 'Germany',     role: 'Industrial cabling &amp; wiring systems' }
     ],
     applications: [
       'HV &amp; MV motor supply for boiler feed pumps, condensate pumps and forced-draft fans',
       'Primary and secondary switchgear, circuit breakers and protection relays for generation step-up stations',
-      'Emergency lighting and Ex-proof fittings for fuel handling and chemical storage',
-      'Redundant DC power systems and UPS for control rooms and protection schemes',
-      'Cabling, bus way and distribution hardware from Lütze and industry-standard brands'
+      'Standby battery banks for control rooms and protection schemes',
+      'Cabling, bus way and distribution hardware from Lütze and industry-standard brands',
+      'Process instrumentation and level switches for fuel-handling and storage areas'
     ]
   },
   {
     slug: 'water',
     title: 'Water &amp; Wastewater Supplier UAE — Treatment Chemicals &amp; Instrumentation | Goodway',
-    desc:  'UAE water treatment and desalination supply: Arbochim and ATMI treatment chemicals, level switches, flow and pressure instrumentation for municipal, industrial and desalination plants.',
+    desc:  'UAE water treatment and desalination supply: AEES UPS and emergency lighting, ATMI level switches, flow and pressure instrumentation for municipal, industrial and desalination plants.',
     eyebrow: '// Industries · Water &amp; Wastewater',
     h1: 'Treatment chemicals and instrumentation for UAE water &amp; wastewater plants.',
     lede: 'Desalination plants, municipal treatment works and industrial effluent systems across the UAE rely on consistent supply of treatment chemicals, level and flow measurement, valves and pump spares. Goodway bundles all of that under one authorised UAE desk.',
     stats: [
-      { num: 'Arbochim', label: 'Belgian principal for water and gas treatment chemistry' },
+      { num: 'AEES', label: 'French principal for plant UPS, DC power and emergency lighting' },
       { num: 'ATMI', label: 'French principal for level switches and process instruments' },
       { num: '7', label: 'All seven emirates served for warehouse-to-plant delivery' }
     ],
     divisions: ['chemicals-power', 'instrumentation', 'mechanical'],
     principals: [
-      { name: 'Arbochim', country: 'Belgium', role: 'Treatment chemicals for potable, process and wastewater' },
+      { name: 'AEES',     country: 'France',  role: 'UPS, DC power systems and emergency lighting' },
       { name: 'ATMI',     country: 'France',  role: 'Level switches, flow and pressure instruments' },
       { name: 'Efftec',   country: 'Australia', role: 'Environmental and effluent monitoring' },
       { name: 'McMaster-Carr', country: 'USA', role: 'Valves, flanges, fittings and mechanical spares' }
@@ -151,14 +151,14 @@ const sectors = [
     ],
     divisions: ['building-material', 'road-safety', 'office-equipment', 'electrical'],
     principals: [
-      { name: 'Cooper Crouse-Hinds', country: 'USA',  role: 'Civil-Defence compliant hazardous-area fixtures' },
       { name: 'McMaster-Carr',       country: 'USA',  role: 'Safety equipment, PPE and mechanical hardware' },
+      { name: 'Civil Defence-registered fabricators', country: 'UAE', role: 'NFPA 80 fire-rated steel doors' },
       { name: '3M · Brother · Leitz', country: '—',   role: 'Office equipment for ministries and institutional offices' }
     ],
     applications: [
       'Civil Defence-approved fire-rated steel doors (&frac12;h &mdash; 2h rating, 20/18/16 gauge) for schools, hospitals and labour camps',
       'NFPA 80-compliant door hardware packages and testing certificates bundled with delivery',
-      'Hazardous-area electrical fittings for fuel storage, generator rooms and archival spaces',
+      'Mechanical hardware and protective equipment for facilities maintenance and storage areas',
       'Fall-arrest and PPE kits for facilities maintenance teams',
       'Office fit-out catalogues (stationery, printing consumables, filing, shredding) for ministries'
     ],
@@ -181,7 +181,6 @@ const sectors = [
       { name: 'Caterpillar',        country: 'USA',     role: 'Heavy earth-moving equipment and spare parts' },
       { name: 'Komatsu',            country: 'Japan',   role: 'Earth-moving and compressor spares' },
       { name: 'Atlas Copco',        country: 'Sweden',  role: 'Compressed air and pneumatic tools' },
-      { name: 'Cooper Crouse-Hinds', country: 'USA',    role: 'Site hazardous-area electrical fixtures' },
       { name: 'McMaster-Carr',      country: 'USA',     role: 'Lifting, lashing and mechanical hardware' }
     ],
     applications: [
@@ -225,10 +224,10 @@ const sectors = [
   {
     slug: 'manufacturing',
     title: 'Manufacturing &amp; Industrial Supplier UAE — Cables, Mechanical Parts &amp; Instrumentation | Goodway',
-    desc:  'UAE manufacturing and industrial-plant supply: Lütze industrial cables, McMaster-Carr mechanical parts, compressor spares, process instrumentation and Ex-proof fixtures &mdash; authorised distribution.',
+    desc:  'UAE manufacturing and industrial-plant supply: Lütze industrial cables, McMaster-Carr mechanical parts, compressor spares and process instrumentation &mdash; authorised distribution.',
     eyebrow: '// Industries · Manufacturing &amp; Industrial',
     h1: 'Cables, mechanical parts and instrumentation for UAE manufacturing plants.',
-    lede: 'UAE manufacturing plants, process industries and heavy-industrial sites run on reliable cables, mechanical consumables, compressor spares and process measurement. Goodway consolidates Lütze, McMaster-Carr, ATMI, AEES and more under a single UAE supply channel.',
+    lede: 'UAE manufacturing plants, process industries and heavy-industrial sites run on reliable cables, mechanical consumables, compressor spares and process measurement. Goodway consolidates Lütze, McMaster-Carr, ATMI, Efftec and more under a single UAE supply channel.',
     stats: [
       { num: 'Lütze', label: 'German industrial cable and wiring system specialist' },
       { num: 'McMC', label: 'McMaster-Carr USA &mdash; industrial hardware catalogue access' },
@@ -239,15 +238,15 @@ const sectors = [
       { name: 'Lütze',          country: 'Germany', role: 'Industrial cables, cable carriers, wiring systems' },
       { name: 'McMaster-Carr',  country: 'USA',     role: 'Industrial hardware, mechanical parts, consumables' },
       { name: 'ATMI',           country: 'France',  role: 'Process instrumentation and level switches' },
-      { name: 'AEES',           country: 'France',  role: 'Industrial DC power and UPS' },
-      { name: 'Cooper Crouse-Hinds', country: 'USA', role: 'Hazardous-area electrical fixtures' },
-      { name: 'Efftec',         country: 'Australia', role: 'Environmental monitoring for plant emissions' }
+      { name: 'Yuasa',          country: 'Japan',   role: 'Sealed lead-acid standby batteries' },
+      { name: 'Efftec',         country: 'Australia', role: 'Environmental monitoring for plant emissions' },
+      { name: 'Westinghouse',   country: 'USA',     role: 'AC/DC motors for production lines' }
     ],
     applications: [
       'Industrial cables and cable carriers for production line retrofits and expansion',
       'Compressor spares, couplings, flanges, valves and bolts for maintenance shutdowns',
       'Process instrumentation for temperature, pressure, flow and level measurement',
-      'Industrial DC power and UPS for control rooms and SCADA servers',
+      'Standby battery systems for control rooms and SCADA servers',
       'Environmental monitoring for plant emissions, stack gas and effluent compliance'
     ]
   }

@@ -245,7 +245,7 @@ const jobs = [
   { dir: path.join(OUT, 'about'), file: 'whoweare-b.jpg', w: 800, h: 640, glyph: G.operations,  label: 'Licensed · compliant · insured' },
 
   /* principals whoweare */
-  { dir: path.join(OUT, 'principals'), file: 'whoweare-a.jpg', w: 900, h: 900, glyph: G.principals, label: '12 international principals' },
+  { dir: path.join(OUT, 'principals'), file: 'whoweare-a.jpg', w: 900, h: 900, glyph: G.principals, label: '9 international principals' },
   { dir: path.join(OUT, 'principals'), file: 'whoweare-b.jpg', w: 800, h: 640, glyph: G.about,      label: 'Authorised distribution' },
 
   /* services whoweare */

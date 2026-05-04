@@ -62,7 +62,7 @@ equipment (not render), photojournalistic realism, high detail, 4k.
 
 | File | Size | Prompt |
 |---|---|---|
-| `assets/images/sections/principals/whoweare-a.jpg` | 900×900 | Flat-lay of twelve blank rectangular product-tag cards arranged in a 4×3 grid on a linen surface, each card has a small gold foil accent, soft directional light — suggestion of a "principal brand library". No readable text. `--ar 1:1` |
+| `assets/images/sections/principals/whoweare-a.jpg` | 900×900 | Flat-lay of nine blank rectangular product-tag cards arranged in a 3×3 grid on a linen surface, each card has a small gold foil accent, soft directional light — suggestion of a "principal brand library". No readable text. `--ar 1:1` |
 | `assets/images/sections/principals/whoweare-b.jpg` | 800×640 | Two pairs of hands meeting for a handshake above a desk with a printed distribution agreement, blurred UAE flag and world-globe in deep background. `--ar 5:4` |
 
 ---
@@ -89,7 +89,7 @@ slot-B (`detail.jpg`) placeholders are the ones to upgrade.
 | `assets/images/sections/divisions/scientific-lab/detail.jpg` | Tidy analytical-lab bench with a spectrophotometer, calibrated pipettes and a row of clean reagent bottles, soft daylight, white walls, no readable labels. `--ar 5:4` |
 | `assets/images/sections/divisions/heavy-equipment/detail.jpg` | Overhead shot of a parts-warehouse shelf: heavy-equipment filters, gaskets and hoses in branded OEM boxes (logo-free), tidy, gold accent lighting. `--ar 5:4` |
 | `assets/images/sections/divisions/building-material/detail.jpg` | A Civil-Defence-compliant fire door being fitted into a frame by a worker in PPE, UAE site context, dust-free hallway, warm light. `--ar 5:4` |
-| `assets/images/sections/divisions/chemicals-power/detail.jpg` | An AEES-style industrial rack-mount power supply on a test bench next to a row of sealed chemical drums (plain, unlabelled) — clean, soft studio light. `--ar 5:4` |
+| `assets/images/sections/divisions/chemicals-power/detail.jpg` | A row of Yuasa-style sealed lead-acid standby battery banks in a clean industrial UPS room next to sealed chemical drums (plain, unlabelled) — clean, soft studio light. `--ar 5:4` |
 | `assets/images/sections/divisions/road-safety/detail.jpg` | Flat-lay of a full-body safety harness, helmet and pair of leather gloves on a linen background with a gold border detail. `--ar 5:4` |
 | `assets/images/sections/divisions/office-equipment/detail.jpg` | Modern UAE office desk still-life: a Brother-style multifunction printer, a GBC-style binder, stack of Avery folders and a PaperOne ream — clean, bright, shallow depth of field, logos not readable. `--ar 5:4` |
 

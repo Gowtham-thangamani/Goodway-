@@ -5,7 +5,7 @@ on the Goodway static site. No Docker, no build step, no ORM — just Express + 
 
 ## What it does
 
-1. **Principals** — full CRUD for the 12 brands shown on `/principals.html` (name, country, category, description, chips, division link, sort order, publish toggle).
+1. **Principals** — full CRUD for the 9 brands shown on `/principals.html` (name, country, category, description, chips, division link, sort order, publish toggle).
 2. **Sectors** — full CRUD for the 8 industries shown on `/industries.html` (title, tier, lede, products, key principals, icon SVG, publish toggle).
 3. **Leads** — receives `POST /api/leads` submissions from the static site's quote form, with filter, search, status workflow (new → in_progress → quoted → won/lost/archived) and CSV export.
 4. **Publish** — regenerates `principals.html` + `industries.html` from the database, rewriting **only** the content between the `<!-- GW-PRINCIPALS-START -->` / `<!-- GW-INDUSTRIES-START -->` markers. Hero, footer, scripts and metadata are preserved exactly.

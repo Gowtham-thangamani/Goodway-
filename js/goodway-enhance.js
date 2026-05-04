@@ -1070,9 +1070,9 @@
         title: 'Electrical',
         facts: [
           'ABB · Siemens · Westinghouse · WEG',
-          '9 switchgear & control OEMs',
+          '8 switchgear & control OEMs',
           'HV & MV motor supply',
-          'Ex-protected fixtures (Cooper Crouse-Hinds)'
+          'Industrial cabling & wiring (Lütze)'
         ]
       },
       'divisions/instrumentation.html': {
@@ -1099,9 +1099,9 @@
         eyebrow: 'Division · 06',
         title: 'Chemicals & Power Solutions',
         facts: [
-          'AEES · REP · Arbochim · Yuasa',
-          'Explosion-protected lighting (Cooper)',
-          'DC/AC supplies · emergency lighting',
+          'AEES · Yuasa',
+          'DC/AC power supplies & emergency lighting',
+          'Sealed lead-acid standby batteries',
           'Authorised UAE distributor since 2014'
         ]
       },
@@ -1119,7 +1119,7 @@
         eyebrow: 'Division · 08',
         title: 'Road & Industrial Safety',
         facts: [
-          'McMaster-Carr · Cooper Crouse-Hinds',
+          'McMaster-Carr · UAE fabricators',
           '15+ SKU families · PPE & fall-arrest',
           'Barriers, cones, reflective workwear',
           'Lead time · 1–4 weeks'
