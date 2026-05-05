@@ -30,7 +30,8 @@ check('CSS braces balanced', function () {
 const htmlFiles = fs.readdirSync(ROOT).filter(f => f.endsWith('.html'))
   .concat(fs.readdirSync(path.join(ROOT, 'divisions')).map(f => 'divisions/' + f))
   .concat(fs.readdirSync(path.join(ROOT, 'industries')).filter(f => f.endsWith('.html')).map(f => 'industries/' + f))
-  .concat(fs.readdirSync(path.join(ROOT, 'journal')).filter(f => f.endsWith('.html')).map(f => 'journal/' + f));
+  .concat(fs.readdirSync(path.join(ROOT, 'journal')).filter(f => f.endsWith('.html')).map(f => 'journal/' + f))
+  .concat(fs.existsSync(path.join(ROOT, 'principals')) ? fs.readdirSync(path.join(ROOT, 'principals')).filter(f => f.endsWith('.html')).map(f => 'principals/' + f) : []);
 
 check('Every HTML has canonical + og:image + no w-form', function () {
   for (const f of htmlFiles) {

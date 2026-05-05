@@ -31,6 +31,8 @@
 /industries/hospitality                      /industries/hospitality.html                 200
 /industries/manufacturing                    /industries/manufacturing.html               200
 /journal/civil-defence-fire-door-compliance  /journal/civil-defence-fire-door-compliance.html  200
+/principals/herma                            /principals/herma.html                       200
+/principals/fraste                           /principals/fraste.html                      200
 
 # 2) 301 legacy .html URLs to the clean form — settles canonical for
 #    Google + bookmarks + external backlinks. The `!` flag forces the
@@ -64,6 +66,8 @@
 /industries/hospitality.html                 /industries/hospitality                      301!
 /industries/manufacturing.html               /industries/manufacturing                    301!
 /journal/civil-defence-fire-door-compliance.html  /journal/civil-defence-fire-door-compliance  301!
+/principals/herma.html                       /principals/herma                            301!
+/principals/fraste.html                      /principals/fraste                           301!
 
 # 3) Friendly aliases (kept from previous config, repointed at clean URLs).
 /home                                        /                                            301
