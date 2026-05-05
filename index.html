@@ -565,10 +565,13 @@
           <div class="paragraph bold-lime-green">// FAQ</div>
           <h3 class="h3-default dark-grey">Frequently Asked Questions</h3>
         </div>
-        <!-- FAQ accordion — vanilla, zero-dep, WCAG-compliant. The JS
-             accordion toggles `aria-expanded` on each card on click/tap/
-             keyboard Enter. Schema injector in goodway-enhance.js reads
-             the Q&A text from these .faq-card nodes for FAQPage JSON-LD. -->
+        <!-- Framer FAQ component mounts here. The original .faq-content
+             markup remains as graceful fallback: the schema injector in
+             goodway-enhance.js still reads the Q&A text for FAQPage
+             JSON-LD before Framer hydrates, and the native <details>
+             continue to render if the Framer module fails to load
+             (slow network, blocked CDN, JS disabled). -->
+        <div id="gw-faq-framer" class="gw-framer-mount gw-framer-mount--faq">
         <div class="faq-content gw-faq">
           <details class="faq-card">
             <summary class="faq-text">
@@ -599,6 +602,22 @@
             <div class="paragraph faq-answer">Use our <a href="contact.html#quote">Request a Quote</a> form, email <strong>gwayuae@outlook.com</strong>, or call <strong>+971 2 245 0497</strong> (office) / <strong>+971 56 442 3539</strong> (mobile).</div>
           </details>
         </div>
+        </div><!-- /#gw-faq-framer -->
+        <script type="module">
+          try {
+            const [Mod, React, ReactDOM] = await Promise.all([
+              import('https://framer.com/m/FAQ-vCoC.js@cfOy7dW5O34bPIU4H0Vn'),
+              import('https://esm.sh/react@18'),
+              import('https://esm.sh/react-dom@18/client')
+            ]);
+            const FAQ = Mod.default || Mod;
+            const root = ReactDOM.createRoot(document.getElementById('gw-faq-framer'));
+            root.render(React.createElement(FAQ));
+          } catch (e) {
+            // Framer FAQ failed to load — original <details> fallback remains in place.
+            console.warn('Framer FAQ module failed to load:', e);
+          }
+        </script>
       </div>
     </div>
   </section>
